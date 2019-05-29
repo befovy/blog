@@ -1,8 +1,7 @@
 baseURL = "http://localhost:1313/"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"                             # en / zh-cn / ... (This field determines which i18n file to use)
-# title = "白帅的博客 | baishuai blog"
-title = "白帅的博客"
+title = "Befovy 的博客 | Befovy blog"
 preserveTaxonomyNames = true
 enableRobotsTXT = true
 enableEmoji = true
@@ -22,7 +21,7 @@ googleAnalytics = ""      # UA-XXXXXXXX-X
 copyright = ""            # default: author.name ↓        # 默认为下面配置的author.name ↓
 
 [author]                  # essential                     # 必需
-  name = "baishuai"
+  name = "Befovy"
 
 [sitemap]                 # essential                     # 必需
   changefreq = "monthly"
@@ -60,9 +59,9 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   gitRepo = ""
 
   # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
-  logoTitle = "Better"        # default: the title value    # 默认值: 上面设置的title值
+  logoTitle = "Befovy"      # default: the title value    # 默认值: 上面设置的title值
   # keywords = ["", "theme","even"]
-  description = "白帅的博客站点"
+  description = "Befovy 的博客站点"
 
   # paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
   archivePaginate = 10
@@ -170,7 +169,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     # d-facebook = "http://localhost:1313"
     # e-linkedin = "http://localhost:1313"
     # f-google = "http://localhost:1313"
-    g-github = "https://github.com/baishuai"
+    g-github = "https://github.com/befovy"
     # h-weibo = "http://localhost:1313"
     # i-zhihu = "http://localhost:1313"
     # j-douban = "http://localhost:1313"
