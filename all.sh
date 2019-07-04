@@ -1,6 +1,6 @@
 #!/bin/bash
 
-go run github.com/befovy/mirror/app -config ./mirror.yaml
+../../Projects/mirror/main -config ./mirror.yaml
 
 hugo
 
@@ -11,6 +11,8 @@ cd public
 git status
 
 git add -u
+
+git add post/.
 
 git commit -m "hugo build"
 
