@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://befovy.com/sitemap.xml

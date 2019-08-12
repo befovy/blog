@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Befovy 的博客 | Befovy blog</title>
+    <link>https://befovy.com/</link>
+    <description>Recent content on Befovy 的博客 | Befovy blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 30 Jun 2019 15:26:52 +0000</lastBuildDate>
+    
+	<atom:link href="https://befovy.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用 CMake 为 ijkplayer 增加 android native debug 支持</title>
+      <link>https://befovy.com/post/issue_20190630_3/</link>
+      <pubDate>Sun, 30 Jun 2019 15:26:52 +0000</pubDate>
+      
+      <guid>https://befovy.com/post/issue_20190630_3/</guid>
+      <description>给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端</description>
+    </item>
+    
+    <item>
+      <title>用 CMake 为 ijkplayer 增加 android native debug 支持</title>
+      <link>https://befovy.com/post/issue_20190630_5/</link>
+      <pubDate>Sun, 30 Jun 2019 15:26:52 +0000</pubDate>
+      
+      <guid>https://befovy.com/post/issue_20190630_5/</guid>
+      <description>给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端</description>
+    </item>
+    
+    <item>
+      <title>使用 mirror 和 hugo 实现 github issue 的博客自动同步</title>
+      <link>https://befovy.com/post/issue_20190630_2/</link>
+      <pubDate>Sun, 30 Jun 2019 13:53:30 +0000</pubDate>
+      
+      <guid>https://befovy.com/post/issue_20190630_2/</guid>
+      <description>一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。</description>
+    </item>
+    
+    <item>
+      <title>使用 mirror 和 hugo 实现 github issue 的博客自动同步</title>
+      <link>https://befovy.com/post/issue_20190630_6/</link>
+      <pubDate>Sun, 30 Jun 2019 13:53:30 +0000</pubDate>
+      
+      <guid>https://befovy.com/post/issue_20190630_6/</guid>
+      <description>一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。</description>
+    </item>
+    
+  </channel>
+</rss>
