@@ -6,10 +6,37 @@
     <description>Recent content in Posts on Befovy 的博客 | Befovy blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 23 Nov 2019 16:46:38 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 23 Nov 2019 19:02:45 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.befovy.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>我的 gitee 图床，自动上传、压缩、获取图片 url</title>
+      <link>https://blog.befovy.com/2019/11/gitee-image-bed/</link>
+      <pubDate>Sat, 23 Nov 2019 19:02:45 +0800</pubDate>
+      
+      <guid>https://blog.befovy.com/2019/11/gitee-image-bed/</guid>
+      <description>&lt;p&gt;之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
+今天又花功夫用 gitee 和其他的工具给自己做了一个图床。&lt;/p&gt;
+
+&lt;p&gt;gitee 做图床的优点：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;访问速度快&lt;/li&gt;
+&lt;li&gt;ddd&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;结合本文提供的一套工具组合可以实现：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;图片选中一键上传&lt;/li&gt;
+&lt;li&gt;剪贴板图片一键上传&lt;/li&gt;
+&lt;li&gt;上传完成后复制图片网址到剪贴板&lt;/li&gt;
+&lt;li&gt;图片上传自动压缩&lt;/li&gt;
+&lt;li&gt;依然完全免费&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>手把手带你写 Flutter 系统音量插件</title>
