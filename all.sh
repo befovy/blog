@@ -15,8 +15,8 @@ replaceCdn(){
 replaceCdn /manifest.json https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/manifest.json
 replaceCdn https://gitee.com/befovy/images/raw/master https://cdn.jsdelivr.net/gh/befovy/images@master
 replaceCdn \"/dist/ \"https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/dist/
-replaceCdn favicon-32x32.png https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-32x32.png
-replaceCdn favicon-16x16.png https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-16x16.png
+replaceCdn /favicon-32x32.png https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-32x32.png
+replaceCdn /favicon-16x16.png https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-16x16.png
 
 hugo serve
 
