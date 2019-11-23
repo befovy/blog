@@ -10,7 +10,6 @@ draft: false
 gitee 做图床的优点：
 
 * 访问速度快
-* ddd
 
 结合本文提供的一套工具组合可以实现：
 
@@ -113,7 +112,9 @@ jobs:
 PicGo 支持 github、新浪、七牛等多种图床。也可以安装插件支持 gitee 图床，但是 gitee 上不能配置图片自动压缩，所以我在 github 绕了一圈，图片在 github 压缩后再同步到 gitee。
 
 PicGo 设置如图， 我用了 githubPlus 插件，其实用默认的 github 图床功能就行。
+
 ![](https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123201205.png)
+
 图中用到的 token 在 https://github.com/settings/tokens 页面生成。
 
 自己修改一下 PicGo 的上传图片快捷键，选择一张图片上传。上传完成后 url 会自动复制到剪切板。 等 github actions 执行完成后，就可以通过剪贴板中的 url 访问到保存在 gitee 的图片了， gitee 的图片访问确实很快。
@@ -158,15 +159,11 @@ jobs:
 
 现在的流程是：
 
-
-
 1. 电脑中 PicGo 客户端自动上传图片到 github 仓库。
 2. master 分支的 push 操作触发 actions 将仓库同步到 gitee。
 3. ImgBot 稍后会发起 pull request 合并经过压缩的图片
 4. pull request 触发 actions 自动进行分支合并，并 push 到目标分支(master)
 5. master 分支 push 操作再次触发 actions 将仓库同步到 gitee。
-
-
 
 手动触发步骤1后，其余步骤完全自动化运行。进一步步骤2还可以省去一些环境。
 
