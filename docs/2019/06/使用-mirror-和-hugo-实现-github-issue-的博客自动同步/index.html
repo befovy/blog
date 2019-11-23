@@ -16,7 +16,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Befovy" /><meta name="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。" />
+<meta name="author" content="Befovy" /><meta name="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。
+Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。
+我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 mirror 这个工具。
+mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。
+使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。
+ mirror mirror 通过 github 提供的 graphql 进行 Issues 内容抓取。
+通过一些自定义规则，实现 Issues 内容的分类提取，并整理输出博客内容。
+mirror 规则
+mirror 配置文件 mirror 的配置文件使用 yaml 格式， 参考 conf.yaml
+默认查找运行目录下的mirror.yaml 作为输入配置文件
+配置文件中可定义多个内容来源。 每一种不同的内容来源，都有其具体的配置项。
+内容来源 &amp;ldquo;issues&amp;rdquo; 具体的配置内容有
+ token: github token, 需要有 issue 读取权限 login: github username repo: 要抓取的 issue 所在的 repo 名称 prefix: 输出文件名的统一前缀 output: 转换成 hugo 博客内容后的本地输出目录，建议指定为 hugo 博客的 content 目录  内容来源 Issue 的抓取规则" />
 
 
 
@@ -26,7 +38,7 @@
 <meta name="generator" content="Hugo 0.53 with even 4.0.0" />
 
 
-<link rel="canonical" href="https://befovy.com/post/issue_20190630_6/" />
+<link rel="canonical" href="https://blog.befovy.com/2019/06/%E4%BD%BF%E7%94%A8-mirror-%E5%92%8C-hugo-%E5%AE%9E%E7%8E%B0-github-issue-%E7%9A%84%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,25 +51,61 @@
 
 
 <meta property="og:title" content="使用 mirror 和 hugo 实现 github issue 的博客自动同步" />
-<meta property="og:description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。" />
+<meta property="og:description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。
+Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。
+我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 mirror 这个工具。
+mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。
+使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。
+ mirror mirror 通过 github 提供的 graphql 进行 Issues 内容抓取。
+通过一些自定义规则，实现 Issues 内容的分类提取，并整理输出博客内容。
+mirror 规则
+mirror 配置文件 mirror 的配置文件使用 yaml 格式， 参考 conf.yaml
+默认查找运行目录下的mirror.yaml 作为输入配置文件
+配置文件中可定义多个内容来源。 每一种不同的内容来源，都有其具体的配置项。
+内容来源 &ldquo;issues&rdquo; 具体的配置内容有
+ token: github token, 需要有 issue 读取权限 login: github username repo: 要抓取的 issue 所在的 repo 名称 prefix: 输出文件名的统一前缀 output: 转换成 hugo 博客内容后的本地输出目录，建议指定为 hugo 博客的 content 目录  内容来源 Issue 的抓取规则" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://befovy.com/post/issue_20190630_6/" /><meta property="article:published_time" content="2019-06-30T13:53:30&#43;00:00"/>
+<meta property="og:url" content="https://blog.befovy.com/2019/06/%E4%BD%BF%E7%94%A8-mirror-%E5%92%8C-hugo-%E5%AE%9E%E7%8E%B0-github-issue-%E7%9A%84%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E5%90%8C%E6%AD%A5/" /><meta property="article:published_time" content="2019-06-30T13:53:30&#43;00:00"/>
 <meta property="article:modified_time" content="2019-08-12T02:14:12&#43;00:00"/>
 
 <meta itemprop="name" content="使用 mirror 和 hugo 实现 github issue 的博客自动同步">
-<meta itemprop="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。">
+<meta itemprop="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。
+Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。
+我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 mirror 这个工具。
+mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。
+使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。
+ mirror mirror 通过 github 提供的 graphql 进行 Issues 内容抓取。
+通过一些自定义规则，实现 Issues 内容的分类提取，并整理输出博客内容。
+mirror 规则
+mirror 配置文件 mirror 的配置文件使用 yaml 格式， 参考 conf.yaml
+默认查找运行目录下的mirror.yaml 作为输入配置文件
+配置文件中可定义多个内容来源。 每一种不同的内容来源，都有其具体的配置项。
+内容来源 &ldquo;issues&rdquo; 具体的配置内容有
+ token: github token, 需要有 issue 读取权限 login: github username repo: 要抓取的 issue 所在的 repo 名称 prefix: 输出文件名的统一前缀 output: 转换成 hugo 博客内容后的本地输出目录，建议指定为 hugo 博客的 content 目录  内容来源 Issue 的抓取规则">
 
 
 <meta itemprop="datePublished" content="2019-06-30T13:53:30&#43;00:00" />
 <meta itemprop="dateModified" content="2019-08-12T02:14:12&#43;00:00" />
-<meta itemprop="wordCount" content="1364">
+<meta itemprop="wordCount" content="232">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用 mirror 和 hugo 实现 github issue 的博客自动同步"/>
-<meta name="twitter:description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。"/>
+<meta name="twitter:description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。
+Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。
+我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 mirror 这个工具。
+mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。
+使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。
+ mirror mirror 通过 github 提供的 graphql 进行 Issues 内容抓取。
+通过一些自定义规则，实现 Issues 内容的分类提取，并整理输出博客内容。
+mirror 规则
+mirror 配置文件 mirror 的配置文件使用 yaml 格式， 参考 conf.yaml
+默认查找运行目录下的mirror.yaml 作为输入配置文件
+配置文件中可定义多个内容来源。 每一种不同的内容来源，都有其具体的配置项。
+内容来源 &ldquo;issues&rdquo; 具体的配置内容有
+ token: github token, 需要有 issue 读取权限 login: github username repo: 要抓取的 issue 所在的 repo 名称 prefix: 输出文件名的统一前缀 output: 转换成 hugo 博客内容后的本地输出目录，建议指定为 hugo 博客的 content 目录  内容来源 Issue 的抓取规则"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -82,14 +130,12 @@
 </div>
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
   <ul class="mobile-menu-list">
-    <a href="/">
+    <a href="/posts">
         <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
+      </a><a href="/posts/">
         <li class="mobile-menu-item">Archives</li>
       </a><a href="/tags/">
         <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
       </a>
   </ul>
 </nav>
@@ -102,13 +148,11 @@
 <nav class="site-navbar">
   <ul id="menu" class="menu">
     <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
+        <a class="menu-item-link" href="/posts">Home</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
+        <a class="menu-item-link" href="/posts/">Archives</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
       </li>
   </ul>
 </nav>
@@ -118,36 +162,8 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <article class="post">
+  <div class="post-content">
     
-    <header class="post-header">
-      <h1 class="post-title">使用 mirror 和 hugo 实现 github issue 的博客自动同步</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2019-06-30 </span>
-        
-          <span class="more-meta"> 约 1364 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#mirror">mirror</a>
-<ul>
-<li><a href="#mirror-配置文件">mirror 配置文件</a></li>
-</ul></li>
-<li><a href="#hugo">hugo</a></li>
-<li><a href="#完整步骤">完整步骤</a></li>
-</ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      
 
 <p>一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。</p>
 
@@ -217,14 +233,9 @@
 <ol>
 <li><p>生成项目
 在当前目录下创建 blog 目录，并在其中生成hugo 项目的基本配置</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">hugo new site ./blog</pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code>hugo new site ./blog
+</code></pre></li>
 
 <li><p>创建博客所需的github项目
 github 上存在一个特殊的仓库名，可以自动生成静态站点方文仓库中的 html 文件。
@@ -239,43 +250,27 @@ github 上存在一个特殊的仓库名，可以自动生成静态站点方文�
 <li><p>使用 mirror 工具自动抓去 issues 内容到 hugo 项目中
 mirror 工具使用 go语言编写，目前没有提供直接可用的二进制包，需要从源码安装运行。
 配置好 go 环境后，安装mirror</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">go get -u -v github.com/befovy/mirror
-cd $GOPATH/src/github.com/befovy/mirror</pre></td></tr></table>
-</div>
-</div>
+
+<pre><code>go get -u -v github.com/befovy/mirror
+cd $GOPATH/src/github.com/befovy/mirror
+</code></pre>
+
 <p>按照 readme 中的说明设置所需配置文件，并运行程序</p></li>
 
 <li><p>安装 hugo 主题
 在hugo 主题中挑选一个自己喜欢的风格，安装到本地hugo项目中。
 这里安装 even 主题作为示例。
 安装主题后使用主题提供的默认hugo 项目配置</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">git clone https://github.com/olOwOlo/hugo-theme-even themes/even
-cp themes/even/exampleSite/config.toml ./</pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code>git clone https://github.com/olOwOlo/hugo-theme-even themes/even
+cp themes/even/exampleSite/config.toml ./
+</code></pre></li>
 
 <li><p>生成网站
 运行 hugo 命令生成静态内容，注意这里需要设置 baseUrl。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">hugo --theme=even --baseUrl=&#34;https://befovy.github.io/&#34;</pre></td></tr></table>
-</div>
-</div></li>
+
+<pre><code>hugo --theme=even --baseUrl=&quot;https://befovy.github.io/&quot;
+</code></pre></li>
 
 <li><p>提交至 github
 上一步命令中会在 public 文件夹下生成静态博客网站所需要的全部内容。
@@ -289,35 +284,8 @@ cp themes/even/exampleSite/config.toml ./</pre></td></tr></table>
 <p>本文通过 mirror 和 hugo 生成，原始地址 <a href="https://github.com/befovy/blogback/issues/6">https://github.com/befovy/blogback/issues/6</a></p>
 </blockquote>
 
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Befovy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2019-08-12
-        
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/issue_20190630_5/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">用 CMake 为 ijkplayer 增加 android native debug 支持</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        
-      </nav>
-    </footer>
-  </article>
+  </div>
+</article>
         </div>
         
 
@@ -327,7 +295,7 @@ cp themes/even/exampleSite/config.toml ./</pre></td></tr></table>
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="https://github.com/befovy" class="iconfont icon-github" title="github"></a>
-  <a href="https://befovy.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://blog.befovy.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">

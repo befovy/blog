@@ -2,31 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Befovy 的博客 | Befovy blog</title>
-    <link>https://befovy.com/post/</link>
+    <link>https://blog.befovy.com/post/</link>
     <description>Recent content in Posts on Befovy 的博客 | Befovy blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 30 Jun 2019 15:26:52 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 Nov 2019 16:46:38 +0800</lastBuildDate>
     
-	<atom:link href="https://befovy.com/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.befovy.com/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>手把手带你写 Flutter 系统音量插件</title>
+      <link>https://blog.befovy.com/2019/11/flutter-plugin-volume/</link>
+      <pubDate>Sat, 23 Nov 2019 16:46:38 +0800</pubDate>
+      
+      <guid>https://blog.befovy.com/2019/11/flutter-plugin-volume/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;认真读完本文就能掌握编写一个 Flutter 系统音量插件的技能，支持调节系统音量以及监听系统音量变化。
+如有不当之处敬请指正。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p style=&#34;text-align:center;&#34;&gt;
+&lt;img src=https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123170646.gif/&gt;
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>用 CMake 为 ijkplayer 增加 android native debug 支持</title>
-      <link>https://befovy.com/post/issue_20190630_5/</link>
+      <link>https://blog.befovy.com/2019/06/issue_20190630_5/</link>
       <pubDate>Sun, 30 Jun 2019 15:26:52 +0000</pubDate>
       
-      <guid>https://befovy.com/post/issue_20190630_5/</guid>
-      <description>给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端</description>
+      <guid>https://blog.befovy.com/2019/06/issue_20190630_5/</guid>
+      <description>&lt;p&gt;给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。&lt;br /&gt;
+直接上手请前往 &lt;a href=&#34;https://github.com/befovy/ijkplayer#build-android-via-cmake&#34;&gt;https://github.com/befovy/ijkplayer#build-android-via-cmake&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果想了解一下整个过程请继续阅读本文。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>使用 mirror 和 hugo 实现 github issue 的博客自动同步</title>
-      <link>https://befovy.com/post/issue_20190630_6/</link>
+      <link>https://blog.befovy.com/2019/06/issue_20190630_6/</link>
       <pubDate>Sun, 30 Jun 2019 13:53:30 +0000</pubDate>
       
-      <guid>https://befovy.com/post/issue_20190630_6/</guid>
-      <description>一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。</description>
+      <guid>https://blog.befovy.com/2019/06/issue_20190630_6/</guid>
+      <description>&lt;p&gt;一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。&lt;/p&gt;
+
+&lt;p&gt;Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。&lt;/p&gt;
+
+&lt;p&gt;我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 &lt;a href=&#34;https://github.com/befovy/mirror&#34;&gt;mirror&lt;/a&gt;  这个工具。&lt;/p&gt;
+
+&lt;p&gt;mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。&lt;/p&gt;
+
+&lt;p&gt;使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。&lt;/p&gt;</description>
     </item>
     
   </channel>

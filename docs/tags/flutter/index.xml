@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flutter on Befovy 的博客 | Befovy blog</title>
+    <link>https://blog.befovy.com/tags/flutter/</link>
+    <description>Recent content in Flutter on Befovy 的博客 | Befovy blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 23 Nov 2019 16:46:38 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.befovy.com/tags/flutter/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>手把手带你写 Flutter 系统音量插件</title>
+      <link>https://blog.befovy.com/2019/11/flutter-plugin-volume/</link>
+      <pubDate>Sat, 23 Nov 2019 16:46:38 +0800</pubDate>
+      
+      <guid>https://blog.befovy.com/2019/11/flutter-plugin-volume/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;认真读完本文就能掌握编写一个 Flutter 系统音量插件的技能，支持调节系统音量以及监听系统音量变化。
+如有不当之处敬请指正。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p style=&#34;text-align:center;&#34;&gt;
+&lt;img src=https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123170646.gif/&gt;
+&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
