@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang on Befovy 的博客 | Befovy blog</title>
+    <link>https://blog.befovy.com/tags/golang/</link>
+    <description>Recent content in golang on Befovy 的博客 | Befovy blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 04 Dec 2019 22:04:46 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.befovy.com/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Modules : v2 及更高版本</title>
+      <link>https://blog.befovy.com/2019/12/v2-go-modules/</link>
+      <pubDate>Wed, 04 Dec 2019 22:04:46 +0800</pubDate>
+      
+      <guid>https://blog.befovy.com/2019/12/v2-go-modules/</guid>
+      <description>&lt;p&gt;本文是一篇翻译文章: &lt;a href=&#34;https://blog.golang.org/v2-go-modules&#34;&gt;https://blog.golang.org/v2-go-modules&lt;/a&gt;&lt;br /&gt;
+原文作者：&lt;a href=&#34;https://blog.golang.org/&#34;&gt;Jean de Klerk 和 Tyler Bui-Palsu&lt;/a&gt;  译者：&lt;a href=&#34;https://github.com/befovy&#34;&gt;befovy&lt;/a&gt;   校对：&lt;a href=&#34;https://github.com/polaris1119&#34;&gt;polaris1119&lt;/a&gt;&lt;br /&gt;
+译文由 &lt;a href=&#34;https://github.com/studygolang/GCTT&#34;&gt;GCTT&lt;/a&gt; 原创编译，&lt;a href=&#34;https://studygolang.com/articles/25130&#34;&gt;Go语言中文网&lt;/a&gt; 荣誉推出&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;本文是 Go modules 系统的第四部分&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Part 1: &lt;a href=&#34;https://blog.golang.org/using-go-modules&#34;&gt;使用 Go Modules&lt;/a&gt;  &lt;a href=&#34;https://studygolang.com/articles/19334&#34;&gt;译文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Part 2: &lt;a href=&#34;https://blog.golang.org/migrating-to-go-modules&#34;&gt;迁移到 Go Modules&lt;/a&gt;  &lt;a href=&#34;https://studygolang.com/articles/23133&#34;&gt;译文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Part 3: &lt;a href=&#34;https://blog.golang.org/publishing-go-modules&#34;&gt;发布 Go Modules&lt;/a&gt; &lt;a href=&#34;https://studygolang.com/articles/25129&#34;&gt;译文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Part 4: &lt;a href=&#34;https://blog.golang.org/v2-go-modules&#34;&gt;Go Modules : v2 及更高版本&lt;/a&gt; (本文) &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
