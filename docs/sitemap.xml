@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.befovy.com/2019/12/v2-go-modules/</loc>
+    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.befovy.com/2019/11/gitee-image-bed/</loc>
     <lastmod>2019-11-23T19:02:45+08:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -32,7 +39,7 @@
   
   <url>
     <loc>https://blog.befovy.com/</loc>
-    <lastmod>2019-11-23T19:02:45+08:00</lastmod>
+    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
@@ -52,7 +59,7 @@
   
   <url>
     <loc>https://blog.befovy.com/post/</loc>
-    <lastmod>2019-11-23T19:02:45+08:00</lastmod>
+    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
@@ -60,6 +67,13 @@
   <url>
     <loc>https://blog.befovy.com/tags/</loc>
     <lastmod>2019-11-23T16:46:38+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/tags/golang/</loc>
+    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
