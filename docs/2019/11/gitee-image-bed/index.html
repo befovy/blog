@@ -23,10 +23,11 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <meta name="description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
-gitee 做图床的优点：
- 访问速度快  结合本文提供的一套工具组合可以实现：
- 图片选中一键上传 剪贴板图片一键上传 上传完成后复制图片网址到剪贴板 图片上传自动压缩 依然完全免费 " />
+  <meta name="description" content="20191205 更新 经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。 jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
+你对比下这俩地址
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
+https://github.com/befovy/blogback/tree/master/docs
+" />
   <meta name="generator" content="Hugo 0.60.0 with theme pure" />
   <title>我的 gitee 图床，自动上传、压缩、获取图片 url - 半岛铁匠铺</title>
   
@@ -34,61 +35,37 @@ gitee 做图床的优点：
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/css/style.css">
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
   <meta property="og:title" content="我的 gitee 图床，自动上传、压缩、获取图片 url" />
-<meta property="og:description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
-今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
-gitee 做图床的优点：
-
-访问速度快
-
-结合本文提供的一套工具组合可以实现：
-
-图片选中一键上传
-剪贴板图片一键上传
-上传完成后复制图片网址到剪贴板
-图片上传自动压缩
-依然完全免费
-" />
+<meta property="og:description" content="20191205 更新
+经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
+你对比下这俩地址
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
+https://github.com/befovy/blogback/tree/master/docs" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.befovy.com/2019/11/gitee-image-bed/" />
 <meta property="article:published_time" content="2019-11-23T19:02:45+08:00" />
 <meta property="article:modified_time" content="2019-11-23T19:02:45+08:00" />
 <meta itemprop="name" content="我的 gitee 图床，自动上传、压缩、获取图片 url">
-<meta itemprop="description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
-今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
-gitee 做图床的优点：
-
-访问速度快
-
-结合本文提供的一套工具组合可以实现：
-
-图片选中一键上传
-剪贴板图片一键上传
-上传完成后复制图片网址到剪贴板
-图片上传自动压缩
-依然完全免费
-">
+<meta itemprop="description" content="20191205 更新
+经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
+你对比下这俩地址
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
+https://github.com/befovy/blogback/tree/master/docs">
 <meta itemprop="datePublished" content="2019-11-23T19:02:45&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-23T19:02:45&#43;08:00" />
-<meta itemprop="wordCount" content="1847">
+<meta itemprop="wordCount" content="1940">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="我的 gitee 图床，自动上传、压缩、获取图片 url"/>
-<meta name="twitter:description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
-今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
-gitee 做图床的优点：
-
-访问速度快
-
-结合本文提供的一套工具组合可以实现：
-
-图片选中一键上传
-剪贴板图片一键上传
-上传完成后复制图片网址到剪贴板
-图片上传自动压缩
-依然完全免费
-"/>
+<meta name="twitter:description" content="20191205 更新
+经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
+你对比下这俩地址
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
+https://github.com/befovy/blogback/tree/master/docs"/>
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -264,6 +241,7 @@ gitee 做图床的优点：
         <h3 class="toc-title">文章目录</h3>
         <div class="toc-content always-active"><nav id="TableOfContents">
   <ul>
+    <li><a href="#20191205-">20191205 更新</a></li>
     <li><a href="#heading">文中用到的工具</a></li>
     <li><a href="#heading1">搭建步骤</a>
       <ul>
@@ -308,12 +286,20 @@ gitee 做图床的优点：
 	</span>
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/gitee-image-bed/#comments"
             class="article-comment-link">评论</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:1847字</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:1940字</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:4分 </span>
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
-      <p>之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
+      <h2 id="20191205-">20191205 更新</h2>
+<p>经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。</p>
+<p>你对比下这俩地址</p>
+<p><a href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/">https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/</a></p>
+<p><a href="https://github.com/befovy/blogback/tree/master/docs">https://github.com/befovy/blogback/tree/master/docs</a></p>
+<hr>
+<p><strong>本文中的内容除了自动压缩图片，其他都已经过时。</strong></p>
+<p>之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。</p>
 <p>gitee 做图床的优点：</p>
 <ul>

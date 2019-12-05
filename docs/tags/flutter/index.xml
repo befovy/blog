@@ -46,20 +46,12 @@
       <pubDate>Sat, 23 Nov 2019 19:02:45 +0800</pubDate>
       
       <guid>https://blog.befovy.com/2019/11/gitee-image-bed/</guid>
-      <description>&lt;p&gt;之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
-今天又花功夫用 gitee 和其他的工具给自己做了一个图床。&lt;/p&gt;
-&lt;p&gt;gitee 做图床的优点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;访问速度快&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;结合本文提供的一套工具组合可以实现：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;图片选中一键上传&lt;/li&gt;
-&lt;li&gt;剪贴板图片一键上传&lt;/li&gt;
-&lt;li&gt;上传完成后复制图片网址到剪贴板&lt;/li&gt;
-&lt;li&gt;图片上传自动压缩&lt;/li&gt;
-&lt;li&gt;依然完全免费&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description>&lt;h2 id=&#34;20191205-&#34;&gt;20191205 更新&lt;/h2&gt;
+&lt;p&gt;经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。&lt;/p&gt;
+&lt;p&gt;你对比下这俩地址&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/&#34;&gt;https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/befovy/blogback/tree/master/docs&#34;&gt;https://github.com/befovy/blogback/tree/master/docs&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

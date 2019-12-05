@@ -4,6 +4,23 @@ date: 2019-11-23T19:02:45+08:00
 draft: false
 ---
 
+## 20191205 更新
+
+经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
+
+你对比下这俩地址
+
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
+
+https://github.com/befovy/blogback/tree/master/docs
+
+<!--more-->
+
+----
+
+**本文中的内容除了自动压缩图片，其他都已经过时。**
+
 之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
 
@@ -18,8 +35,6 @@ gitee 做图床的优点：
 * 上传完成后复制图片网址到剪贴板
 * 图片上传自动压缩
 * 依然完全免费
-
-<!--more-->
 
 
 ## 文中用到的工具
