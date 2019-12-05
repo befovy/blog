@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<?xml-stylesheet type="text/xsl" href="https://blog.befovy.com/sitemap.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://blog.befovy.com/about/</loc>
+    <lastmod>2019-12-05T16:46:38+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/</loc>
+    <lastmod>2019-12-05T16:46:38+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   
   <url>
     <loc>https://blog.befovy.com/2019/12/v2-go-modules/</loc>
@@ -10,8 +24,36 @@
   </url>
   
   <url>
+    <loc>https://blog.befovy.com/tags/golang/</loc>
+    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/posts/</loc>
+    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/tags/</loc>
+    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.befovy.com/2019/11/gitee-image-bed/</loc>
     <lastmod>2019-11-23T19:02:45+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/tags/flutter/</loc>
+    <lastmod>2019-11-23T16:46:38+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -38,51 +80,15 @@
   </url>
   
   <url>
-    <loc>https://blog.befovy.com/</loc>
-    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.befovy.com/categories/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0</priority>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.befovy.com/tags/flutter/</loc>
-    <lastmod>2019-11-23T16:46:38+08:00</lastmod>
+    <loc>https://blog.befovy.com/series/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.befovy.com/post/</loc>
-    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.befovy.com/tags/</loc>
-    <lastmod>2019-11-23T16:46:38+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.befovy.com/tags/golang/</loc>
-    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.befovy.com/tags/ijkplayer/</loc>
-    <lastmod>2019-08-12T02:13:44+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0</priority>
+    <priority>0.5</priority>
   </url>
   
 </urlset>

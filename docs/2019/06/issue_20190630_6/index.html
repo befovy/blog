@@ -1,205 +1,283 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-<head>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        使用 mirror 和 hugo 实现 github issue 的博客自动同步 - 半岛铁匠铺
+      </title>
+    <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>使用 mirror 和 hugo 实现 github issue 的博客自动同步 - Befovy 的博客 | Befovy blog</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。" />
+  <meta name="generator" content="Hugo 0.60.0 with theme pure" />
+  <title>使用 mirror 和 hugo 实现 github issue 的博客自动同步 - 半岛铁匠铺</title>
+  
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="Befovy" /><meta name="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。
-Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。
-我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 mirror 这个工具。
-mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。
-使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。
-" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
-
-
-<link rel="canonical" href="https://blog.befovy.com/2019/06/issue_20190630_6/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-16x16.png">
-<link rel="manifest" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="使用 mirror 和 hugo 实现 github issue 的博客自动同步" />
-<meta property="og:description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。
-
-Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。
-
-我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 mirror  这个工具。
-
-mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。
-
-使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。" />
+  <link rel="stylesheet" href="https://blog.befovy.com/css/style.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+  <meta property="og:title" content="使用 mirror 和 hugo 实现 github issue 的博客自动同步" />
+<meta property="og:description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.befovy.com/2019/06/issue_20190630_6/" /><meta property="article:published_time" content="2019-06-30T13:53:30&#43;00:00"/>
-<meta property="article:modified_time" content="2019-08-12T02:14:12&#43;00:00"/>
-
+<meta property="og:url" content="https://blog.befovy.com/2019/06/issue_20190630_6/" />
+<meta property="article:published_time" content="2019-06-30T13:53:30+00:00" />
+<meta property="article:modified_time" content="2019-08-12T02:14:12+00:00" />
 <meta itemprop="name" content="使用 mirror 和 hugo 实现 github issue 的博客自动同步">
-<meta itemprop="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。
-
-Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。
-
-我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 mirror  这个工具。
-
-mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。
-
-使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。">
-
-
+<meta itemprop="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。">
 <meta itemprop="datePublished" content="2019-06-30T13:53:30&#43;00:00" />
 <meta itemprop="dateModified" content="2019-08-12T02:14:12&#43;00:00" />
-<meta itemprop="wordCount" content="232">
+<meta itemprop="wordCount" content="1359">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用 mirror 和 hugo 实现 github issue 的博客自动同步"/>
-<meta name="twitter:description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。
+<meta name="twitter:description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。"/>
 
-Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
 
-我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 mirror  这个工具。
-
-mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。
-
-使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
 
 </head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Befovy</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  </head>
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://github.com/befovy" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.befovy.com/avatar.jpg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">半岛打铁匠</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">befovy</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Beijing, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Befovy</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">使用 mirror 和 hugo 实现 github issue 的博客自动同步</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2019-06-30 </span>
-        
-          <span class="more-meta"> 约 232 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       </div>
-    </header>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/flutter/" class="tag-list-link">flutter</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/golang/" class="tag-list-link">golang</a><span
+                    class="tag-list-count">1</span></li>
+            
+        </ul>
 
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#mirror">mirror</a>
-<ul>
-<li><a href="#mirror-配置文件">mirror 配置文件</a></li>
-</ul></li>
-<li><a href="#hugo">hugo</a></li>
-<li><a href="#完整步骤">完整步骤</a></li>
-</ul>
-</nav>
-  </div>
+    </div>
 </div>
-    <div class="post-content">
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/12/v2-go-modules/" class="title">Go Modules : v2 及更高版本</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-12-04 22:04:46 &#43;0800 CST" itemprop="datePublished">2019-12-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/11/gitee-image-bed/" class="title">我的 gitee 图床，自动上传、压缩、获取图片 url</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-11-23 19:02:45 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/11/flutter-plugin-volume/" class="title">手把手带你写 Flutter 系统音量插件</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-11-23 16:46:38 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/06/issue_20190630_5/" class="title">用 CMake 为 ijkplayer 增加 android native debug 支持</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-06-30 15:26:52 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/06/issue_20190630_6/" class="title">使用 mirror 和 hugo 实现 github issue 的博客自动同步</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-06-30 13:53:30 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+  <aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+    <div class="slimContent">
+      <nav id="toc" class="article-toc">
+        <h3 class="toc-title">文章目录</h3>
+        <div class="toc-content always-active"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#mirror-">mirror 配置文件</a></li>
+  </ul>
+</nav>
+        </div>
+      </nav>
+    </div>
+  </aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2019/06/issue_20190630_6/"
+    >使用 mirror 和 hugo 实现 github issue 的博客自动同步</a
+  >
+</h1>
+
+      <div class="article-meta">
+        <span class="article-date">
+  <i class="icon icon-calendar-check"></i>
+<a href="https://blog.befovy.com/2019/06/issue_20190630_6/" class="article-date">
+  <time datetime="2019-06-30 13:53:30 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
+</a>
+</span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/06/issue_20190630_6/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:1359字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:3分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
       <p>一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。</p>
-
 <p>Issue 适合记录博客，但我觉得直接以 Issue 的形式将内容展示给读者还是缺少了博客本来的样子。毕竟Issue不支持自定义主题。</p>
-
 <p>我青睐的形式是：通过 Issue 进行写作，然后自动发布到博客站点。 所以就产生了 <a href="https://github.com/befovy/mirror">mirror</a>  这个工具。</p>
-
 <p>mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。</p>
-
 <p>使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。</p>
-
-<!--mirror-->
-
+<!-- raw HTML omitted -->
 <h1 id="mirror">mirror</h1>
-
-<p><a href="https://github.com/befovy/mirror">mirror</a> 通过 github 提供的 graphql 进行 Issues 内容抓取。<br />
+<p><a href="https://github.com/befovy/mirror">mirror</a> 通过 github 提供的 graphql 进行 Issues 内容抓取。<br>
 通过一些自定义规则，实现 Issues 内容的分类提取，并整理输出博客内容。</p>
-
 <p>mirror 规则</p>
-
-<h2 id="mirror-配置文件">mirror 配置文件</h2>
-
-<p>mirror 的配置文件使用 yaml 格式， 参考 <a href="./conf.yaml">conf.yaml</a><br />
+<h2 id="mirror-">mirror 配置文件</h2>
+<p>mirror 的配置文件使用 yaml 格式， 参考 <a href="./conf.yaml">conf.yaml</a>  
 默认查找运行目录下的mirror.yaml 作为输入配置文件</p>
-
 <p>配置文件中可定义多个内容来源。 每一种不同的内容来源，都有其具体的配置项。</p>
-
 <p>内容来源 &ldquo;issues&rdquo; 具体的配置内容有</p>
-
 <ul>
 <li>token: github token, 需要有 issue 读取权限</li>
 <li>login: github username</li>
@@ -207,197 +285,256 @@ mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持�
 <li>prefix: 输出文件名的统一前缀</li>
 <li>output: 转换成 hugo 博客内容后的本地输出目录，建议指定为 hugo 博客的 content 目录</li>
 </ul>
-
 <p>内容来源 Issue 的抓取规则</p>
-
 <ol>
 <li>draft</li>
 </ol>
-
 <p>打开的Issue 视为博客草稿，不抓取。只抓取已经关闭的 Issue 内容。</p>
-
-<ol>
+<ol start="2">
 <li>content</li>
 </ol>
-
 <p>issue 本身有 body 和 comment。 新建issue时的内容是body， 之后所有项目本人和其它 githuber 的追加的内容都是评论。</p>
-
 <p>Mirror 支持将 Issue body 和 comment 都抓取下来余与body部分拼接合并作为完整博客内容。</p>
-
 <p>由于 Issue 都是公开的，可能会被别人评论，作者还可能回复提问者。
 为了区分这种情况，mirror 只拼接 comment 作者是项目作者本人， 且在 comment 开头有一句 html <code>&lt;!--mirror--&gt;</code> 注释语句的comment。</p>
-
-<!--mirror-->
-
+<!-- raw HTML omitted -->
 <h1 id="hugo">hugo</h1>
-
 <p><a href="https://gohugo.io/">hugo</a> 是一个非常棒的静态页面生成器，可以把 markdown 内容，搭配各种主题生成你想要的静态博客内容。  这些内容托管在 github pages 上博客就部署好了。</p>
-
-<!--mirror-->
-
-<h1 id="完整步骤">完整步骤</h1>
-
+<!-- raw HTML omitted -->
+<h1 id="heading">完整步骤</h1>
 <ol>
-<li><p>生成项目
+<li>
+<p>生成项目
 在当前目录下创建 blog 目录，并在其中生成hugo 项目的基本配置</p>
-
 <pre><code>hugo new site ./blog
 </code></pre></li>
-
-<li><p>创建博客所需的github项目
+<li>
+<p>创建博客所需的github项目
 github 上存在一个特殊的仓库名，可以自动生成静态站点方文仓库中的 html 文件。
-这个仓库的具体命名规则是， &lt;你的github账号&gt;.github.io<br />
+这个仓库的具体命名规则是， &lt;你的github账号&gt;.github.io<br>
 比如 <a href="https://github.com/befovy/befovy.github.io">befovy.github.io</a>
-对应自动生成网站的网址就是这个仓库的名称，<a href="https://befovy.github.io">https://befovy.github.io</a></p></li>
-
-<li><p>在第二步的github 仓库中创建博客内容
+对应自动生成网站的网址就是这个仓库的名称，https://befovy.github.io</p>
+</li>
+<li>
+<p>在第二步的github 仓库中创建博客内容
 新建 issue ，记录你的想法，完成之后关闭 issue。
-如果想让一些issue 评论在最终生成的博客页面中也可见，在 issue 的评论开始输入 <!---> 即可。</p></li>
-
-<li><p>使用 mirror 工具自动抓去 issues 内容到 hugo 项目中
+如果想让一些issue 评论在最终生成的博客页面中也可见，在 issue 的评论开始输入 &lt;!&mdash;&gt; 即可。</p>
+</li>
+<li>
+<p>使用 mirror 工具自动抓去 issues 内容到 hugo 项目中
 mirror 工具使用 go语言编写，目前没有提供直接可用的二进制包，需要从源码安装运行。
 配置好 go 环境后，安装mirror</p>
-
 <pre><code>go get -u -v github.com/befovy/mirror
 cd $GOPATH/src/github.com/befovy/mirror
-</code></pre>
-
-<p>按照 readme 中的说明设置所需配置文件，并运行程序</p></li>
-
-<li><p>安装 hugo 主题
+</code></pre><p>按照 readme 中的说明设置所需配置文件，并运行程序</p>
+</li>
+<li>
+<p>安装 hugo 主题
 在hugo 主题中挑选一个自己喜欢的风格，安装到本地hugo项目中。
 这里安装 even 主题作为示例。
 安装主题后使用主题提供的默认hugo 项目配置</p>
-
 <pre><code>git clone https://github.com/olOwOlo/hugo-theme-even themes/even
 cp themes/even/exampleSite/config.toml ./
 </code></pre></li>
-
-<li><p>生成网站
+<li>
+<p>生成网站
 运行 hugo 命令生成静态内容，注意这里需要设置 baseUrl。</p>
-
 <pre><code>hugo --theme=even --baseUrl=&quot;https://befovy.github.io/&quot;
 </code></pre></li>
-
-<li><p>提交至 github
+<li>
+<p>提交至 github 
 上一步命令中会在 public 文件夹下生成静态博客网站所需要的全部内容。
-将 public 目录中的内容全部提交到第二步创建的github仓库就大功告成了。
-👏</p></li>
+将 public 目录中的内容全部提交到第二步创建的github仓库就大功告成了。 
+👏</p>
+</li>
 </ol>
-
 <p>如果有兴趣和精力，还可以用 github 提供的 webhooks，自行配置服务器并利用 hooks 自动触发这些过程的执行，可实现博客的自动更新。</p>
-
 <blockquote>
 <p>本文通过 mirror 和 hugo 生成，原始地址 <a href="https://github.com/befovy/blogback/issues/6">https://github.com/befovy/blogback/issues/6</a></p>
 </blockquote>
+
     </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.befovy.com/2019/06/issue_20190630_6/" title="使用 mirror 和 hugo 实现 github issue 的博客自动同步" target="_blank" rel="external">https://blog.befovy.com/2019/06/issue_20190630_6/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+      &nbsp; 转载敬请在正文中标注并保留原文链接和作者等信息
+    </li>
+  </ul>
+</blockquote>
 
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Befovy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2019-08-12
-        
-    </span>
-  </p>
-  
-  
-</div>
-<div class="post-reward">
-  <input type="checkbox" name="reward" id="reward" hidden />
-  <label class="reward-button" for="reward">赞赏支持</label>
-  <div class="qr-code">
-    
-    <label class="qr-code-image" for="reward">
-        <img class="image" src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/wechat-qr-code.jpeg">
-        <span>微信打赏</span>
-      </label>
-    <label class="qr-code-image" for="reward">
-        <img class="image" src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/alipay-qr-code.jpeg">
-        <span>支付宝打赏</span>
-      </label>
-  </div>
-</div><footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/2019/06/issue_20190630_5/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">用 CMake 为 ijkplayer 增加 android native debug 支持</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/befovy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.befovy.com/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://github.com/befovy" class="iconfont icon-github" title="github"></a>
-  <a href="https://blog.befovy.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/befovy" target="_blank"><span class="text-dark">半岛打铁匠</span><small class="ml-1x">befovy</small></a></h3>
+        <div>专注于音视频领域，Go、Rust 爱好者，爱写代码但更爱老婆</div>
+      </div>
+    </figure>
   </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2018 - 
-    2019
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">Befovy</span>
-  </span>
 </div>
-    </footer>
 
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
+    </div>
+  </article>
+<section id="comments">
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="next">
+                <a href="https://blog.befovy.com/2019/06/issue_20190630_5/"
+                    title="用 CMake 为 ijkplayer 增加 android native debug 支持"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+        
+        <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal"
+            data-target="#donateModal"><span>赏</span></button>
+        
+        
+        <ul class="pager pull-right">
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content donate">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="donate-box">
+                    <div class="donate-head">
+                        <p>感谢您的支持,我会继续努力的!</p>
+                    </div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="wechatpay">
+                            <div class="donate-payimg">
+                                <img src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/wechat-qr-code.jpeg"
+                                    alt="扫码支持" title="扫一扫" />
+                                </div>
+                            <p class="text-muted mv">扫码打赏, 多少你说了算~</p>
+                            <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="alipay">
+                            <div class="donate-payimg">
+                                <img src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/alipay-qr-code.jpeg"
+                                    alt="扫码支持" title="扫一扫" />
+                            </div>
+                            <p class="text-muted mv">扫码打赏, 多少你说了算~</p>
+                            <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦~</p>
+                        </div>
+                    </div>
+                    <div class="donate-footer">
+                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab"
+                                    aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i>
+                                    微信赞赏</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay"
+                                    aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/befovy" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.befovy.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2018  -
+    2019
+    <div class="publishby">
+        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>. <br>
+        Theme <a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
     </div>
   </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/dist/even.26188efa.min.js"></script>
+</footer>
 
-<script id="baidu_analytics">
-  var _hmt = _hmt || [];
-  (function() {
-    if (window.location.hostname === 'localhost') return;
-    var hm = document.createElement("script"); hm.async = true;
-    hm.src = "https://hm.baidu.com/hm.js?92addb450ecf9417a02f971789533f13";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+   window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/rust.min.js"></script>
+<script type="text/javascript"
+   src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script>
+hljs.configure({
+  tabReplace: '    ', 
+  classPrefix: ''     
+                      
+})
+hljs.initHighlightingOnLoad();
+</script>
+<script type="text/javascript" src="https://blog.befovy.com/js/application.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/plugin.js"></script>
+<script>
+      (function (window) {
+          var INSIGHT_CONFIG = {
+              TRANSLATION: {
+                  POSTS: '文章',
+                  PAGES: '页面',
+                  CATEGORIES: '分类',
+                  TAGS: '标签',
+                  UNTITLED: '(未命名)',
+              },
+              ROOT_URL: 'https:\/\/blog.befovy.com\/',
+              CONTENT_URL: 'https:\/\/blog.befovy.com\/\/searchindex.json ',
+          };
+          window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+      })(window);
+      </script>
+<script type="text/javascript" src="https://blog.befovy.com/js/insight.js"></script>
 
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-
-
-</body>
+  </body>
 </html>

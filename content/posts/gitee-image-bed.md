@@ -22,7 +22,7 @@ gitee 做图床的优点：
 <!--more-->
 
 
-# 文中用到的工具
+## 文中用到的工具
 
 * 码云 [gitee](https://gitee.com/) ，使用码云中的公开仓库作为图床，可以外链访问
 * github，图片自动上传到 github 公开仓库
@@ -32,7 +32,7 @@ gitee 做图床的优点：
 * [PicGo](https://github.com/Molunerfinn/PicGo) 图片自动上传 
 
 
-# 搭建步骤
+## 搭建步骤
 
 搭建步骤中是有一些问题费了些时间，但是有了我帮你踩了所有的坑并且总结这篇教程后，看到这里的你一定能够顺利搭建自己的免费好用的图床。
 
@@ -40,7 +40,7 @@ gitee 做图床的优点：
 ![](https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123192701.png)
 
 
-## github 仓库和设置
+### github 仓库和设置
 
 首先需要创建一个 github 仓库，比如 https://github.com/befovy/images ，创建步骤略过。
 
@@ -53,7 +53,7 @@ gitee 做图床的优点：
 <img src=https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123193909.png  width="350"/>
 </p>
 
-## 使用 github actions 自动同步到 gitee
+### 使用 github actions 自动同步到 gitee
 
 在 gitee 也上创建一个仓库用来保存图床图片。然后为 gitee 新建一个 ssh key。并把公钥增加在 gitee 账户的设置中。
 
@@ -106,7 +106,7 @@ jobs:
 注意，github actions 中的 checkout 检出当前内容后，git 是在一个游离状态，没有分支名。需要先 `git switch -c master` 设置当前为 master 分支。
 
 
-## PicGo 配置
+### PicGo 配置
 
 [PicGo](https://github.com/Molunerfinn/PicGo) 是用 Electron-Vue 开发的一个图片自动上传至图床的工具。先下载安装 PicGo 到电脑中。
 PicGo 支持 github、新浪、七牛等多种图床。也可以安装插件支持 gitee 图床，但是 gitee 上不能配置图片自动压缩，所以我在 github 绕了一圈，图片在 github 压缩后再同步到 gitee。
@@ -119,7 +119,7 @@ PicGo 设置如图， 我用了 githubPlus 插件，其实用默认的 github �
 
 自己修改一下 PicGo 的上传图片快捷键，选择一张图片上传。上传完成后 url 会自动复制到剪切板。 等 github actions 执行完成后，就可以通过剪贴板中的 url 访问到保存在 gitee 的图片了， gitee 的图片访问确实很快。
 
-## github actions 自动合并 ImgBot 的 pr
+### github actions 自动合并 ImgBot 的 pr
 
 上传图片后，很快 ImgBot 就会对图片进行压缩，并在 github 的仓库中发起一个 pull request。手动点击合并按钮对我来说实在是太麻烦了，能不能自动搞呢。有了 actions 没啥不能的，
 

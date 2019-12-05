@@ -1,41 +1,96 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Befovy 的博客 | Befovy blog</title>
+    <title>Tags on 半岛铁匠铺</title>
     <link>https://blog.befovy.com/tags/</link>
-    <description>Recent content in Tags on Befovy 的博客 | Befovy blog</description>
+    <description>Recent content in Tags on 半岛铁匠铺</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Sat, 23 Nov 2019 16:46:38 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 04 Dec 2019 22:04:46 +0800</lastBuildDate>
     
-	<atom:link href="https://blog.befovy.com/tags/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://blog.befovy.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Flutter</title>
-      <link>https://blog.befovy.com/tags/flutter/</link>
-      <pubDate>Sat, 23 Nov 2019 16:46:38 +0800</pubDate>
+      <title>关于自己</title>
+      <link>https://blog.befovy.com/about/</link>
+      <pubDate>Thu, 05 Dec 2019 16:46:38 +0800</pubDate>
       
-      <guid>https://blog.befovy.com/tags/flutter/</guid>
-      <description></description>
+      <guid>https://blog.befovy.com/about/</guid>
+      <description>半岛打铁匠 我是半岛打铁匠，ID befovy，这个博客站和我的个人公众号都叫做半岛铁匠铺。 为啥叫半岛打铁匠呢，下班路上我听着周董的“半岛铁盒”</description>
     </item>
     
     <item>
-      <title>golang</title>
-      <link>https://blog.befovy.com/tags/golang/</link>
+      <title>Go Modules : v2 及更高版本</title>
+      <link>https://blog.befovy.com/2019/12/v2-go-modules/</link>
       <pubDate>Wed, 04 Dec 2019 22:04:46 +0800</pubDate>
       
-      <guid>https://blog.befovy.com/tags/golang/</guid>
-      <description></description>
+      <guid>https://blog.befovy.com/2019/12/v2-go-modules/</guid>
+      <description>&lt;p&gt;本文是一篇翻译文章: &lt;a href=&#34;https://blog.golang.org/v2-go-modules&#34;&gt;https://blog.golang.org/v2-go-modules&lt;/a&gt; 
+原文作者：&lt;a href=&#34;https://blog.golang.org/&#34;&gt;Jean de Klerk 和 Tyler Bui-Palsu&lt;/a&gt;  译者：&lt;a href=&#34;https://github.com/befovy&#34;&gt;befovy&lt;/a&gt;   校对：&lt;a href=&#34;https://github.com/polaris1119&#34;&gt;polaris1119&lt;/a&gt; 
+译文由 &lt;a href=&#34;https://github.com/studygolang/GCTT&#34;&gt;GCTT&lt;/a&gt; 原创编译，&lt;a href=&#34;https://studygolang.com/articles/25130&#34;&gt;Go语言中文网&lt;/a&gt; 荣誉推出&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;heading&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;本文是 Go modules 系统的第四部分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Part 1: &lt;a href=&#34;https://blog.golang.org/using-go-modules&#34;&gt;使用 Go Modules&lt;/a&gt;  &lt;a href=&#34;https://studygolang.com/articles/19334&#34;&gt;译文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Part 2: &lt;a href=&#34;https://blog.golang.org/migrating-to-go-modules&#34;&gt;迁移到 Go Modules&lt;/a&gt;  &lt;a href=&#34;https://studygolang.com/articles/23133&#34;&gt;译文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Part 3: &lt;a href=&#34;https://blog.golang.org/publishing-go-modules&#34;&gt;发布 Go Modules&lt;/a&gt; &lt;a href=&#34;https://studygolang.com/articles/25129&#34;&gt;译文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Part 4: &lt;a href=&#34;https://blog.golang.org/v2-go-modules&#34;&gt;Go Modules : v2 及更高版本&lt;/a&gt; (本文) &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>ijkplayer</title>
-      <link>https://blog.befovy.com/tags/ijkplayer/</link>
+      <title>我的 gitee 图床，自动上传、压缩、获取图片 url</title>
+      <link>https://blog.befovy.com/2019/11/gitee-image-bed/</link>
+      <pubDate>Sat, 23 Nov 2019 19:02:45 +0800</pubDate>
+      
+      <guid>https://blog.befovy.com/2019/11/gitee-image-bed/</guid>
+      <description>&lt;p&gt;之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
+今天又花功夫用 gitee 和其他的工具给自己做了一个图床。&lt;/p&gt;
+&lt;p&gt;gitee 做图床的优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;访问速度快&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结合本文提供的一套工具组合可以实现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;图片选中一键上传&lt;/li&gt;
+&lt;li&gt;剪贴板图片一键上传&lt;/li&gt;
+&lt;li&gt;上传完成后复制图片网址到剪贴板&lt;/li&gt;
+&lt;li&gt;图片上传自动压缩&lt;/li&gt;
+&lt;li&gt;依然完全免费&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>手把手带你写 Flutter 系统音量插件</title>
+      <link>https://blog.befovy.com/2019/11/flutter-plugin-volume/</link>
+      <pubDate>Sat, 23 Nov 2019 16:46:38 +0800</pubDate>
+      
+      <guid>https://blog.befovy.com/2019/11/flutter-plugin-volume/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;认真读完本文就能掌握编写一个 Flutter 系统音量插件的技能，支持调节系统音量以及监听系统音量变化。
+如有不当之处敬请指正。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
+    </item>
+    
+    <item>
+      <title>用 CMake 为 ijkplayer 增加 android native debug 支持</title>
+      <link>https://blog.befovy.com/2019/06/issue_20190630_5/</link>
       <pubDate>Sun, 30 Jun 2019 15:26:52 +0000</pubDate>
       
-      <guid>https://blog.befovy.com/tags/ijkplayer/</guid>
-      <description></description>
+      <guid>https://blog.befovy.com/2019/06/issue_20190630_5/</guid>
+      <description>给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端</description>
+    </item>
+    
+    <item>
+      <title>使用 mirror 和 hugo 实现 github issue 的博客自动同步</title>
+      <link>https://blog.befovy.com/2019/06/issue_20190630_6/</link>
+      <pubDate>Sun, 30 Jun 2019 13:53:30 +0000</pubDate>
+      
+      <guid>https://blog.befovy.com/2019/06/issue_20190630_6/</guid>
+      <description>一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。</description>
     </item>
     
   </channel>

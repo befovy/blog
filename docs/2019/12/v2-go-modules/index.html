@@ -1,260 +1,348 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-<head>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Go Modules : v2 及更高版本 - 半岛铁匠铺
+      </title>
+    <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Go Modules : v2 及更高版本 - Befovy 的博客 | Befovy blog</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="Befovy" /><meta name="description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules
-原文作者：Jean de Klerk 和 Tyler Bui-Palsu 译者：befovy 校对：polaris1119
-译文由 GCTT 原创编译，Go语言中文网 荣誉推出
-简介 本文是 Go modules 系统的第四部分
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules 原文作者：Jean de Klerk 和 Tyler Bui-Palsu 译者：befovy 校对：polaris1119 译文由 GCTT 原创编译，Go语言中文网 荣誉推出
+ 简介 本文是 Go modules 系统的第四部分
  Part 1: 使用 Go Modules 译文 Part 2: 迁移到 Go Modules 译文 Part 3: 发布 Go Modules 译文 Part 4: Go Modules : v2 及更高版本 (本文)   随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。
 " />
+  <meta name="generator" content="Hugo 0.60.0 with theme pure" />
+  <title>Go Modules : v2 及更高版本 - 半岛铁匠铺</title>
+  
 
-
-
-
-
-
-<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
-
-
-<link rel="canonical" href="https://blog.befovy.com/2019/12/v2-go-modules/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-16x16.png">
-<link rel="manifest" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="Go Modules : v2 及更高版本" />
-<meta property="og:description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules
-原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119
+  <link rel="stylesheet" href="https://blog.befovy.com/css/style.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+  <meta property="og:title" content="Go Modules : v2 及更高版本" />
+<meta property="og:description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules 
+原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119 
 译文由 GCTT 原创编译，Go语言中文网 荣誉推出
 
-
-
 简介
-
 本文是 Go modules 系统的第四部分
-
 
 Part 1: 使用 Go Modules  译文
 Part 2: 迁移到 Go Modules  译文
 Part 3: 发布 Go Modules 译文
 Part 4: Go Modules : v2 及更高版本 (本文) 
-
 
 随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.befovy.com/2019/12/v2-go-modules/" /><meta property="article:published_time" content="2019-12-04T22:04:46&#43;08:00"/>
-<meta property="article:modified_time" content="2019-12-04T22:04:46&#43;08:00"/>
-
+<meta property="og:url" content="https://blog.befovy.com/2019/12/v2-go-modules/" />
+<meta property="article:published_time" content="2019-12-04T22:04:46+08:00" />
+<meta property="article:modified_time" content="2019-12-04T22:04:46+08:00" />
 <meta itemprop="name" content="Go Modules : v2 及更高版本">
-<meta itemprop="description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules
-原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119
+<meta itemprop="description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules 
+原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119 
 译文由 GCTT 原创编译，Go语言中文网 荣誉推出
 
-
-
 简介
-
 本文是 Go modules 系统的第四部分
-
 
 Part 1: 使用 Go Modules  译文
 Part 2: 迁移到 Go Modules  译文
 Part 3: 发布 Go Modules 译文
 Part 4: Go Modules : v2 及更高版本 (本文) 
-
 
 随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。">
-
-
 <meta itemprop="datePublished" content="2019-12-04T22:04:46&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-04T22:04:46&#43;08:00" />
-<meta itemprop="wordCount" content="380">
+<meta itemprop="wordCount" content="1945">
 
 
 
-<meta itemprop="keywords" content="golang," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="golang," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go Modules : v2 及更高版本"/>
-<meta name="twitter:description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules
-原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119
+<meta name="twitter:description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules 
+原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119 
 译文由 GCTT 原创编译，Go语言中文网 荣誉推出
 
-
-
 简介
-
 本文是 Go modules 系统的第四部分
-
 
 Part 1: 使用 Go Modules  译文
 Part 2: 迁移到 Go Modules  译文
 Part 3: 发布 Go Modules 译文
 Part 4: Go Modules : v2 及更高版本 (本文) 
-
 
 随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。"/>
 
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
 
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
 
 </head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Befovy</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  </head>
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://github.com/befovy" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.befovy.com/avatar.jpg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">半岛打铁匠</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">befovy</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Beijing, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Befovy</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Go Modules : v2 及更高版本</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2019-12-04 </span>
-        
-          <span class="more-meta"> 约 380 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       </div>
-    </header>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/flutter/" class="tag-list-link">flutter</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/golang/" class="tag-list-link">golang</a><span
+                    class="tag-list-count">1</span></li>
+            
+        </ul>
 
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#简介">简介</a></li>
-<li><a href="#主版本和模块路径">主版本和模块路径</a></li>
-<li><a href="#主版本策略">主版本策略</a></li>
-<li><a href="#发布-v2-及更高版本">发布 v2 及更高版本</a></li>
-<li><a href="#总结">总结</a></li>
-<li><a href="#相关文章">相关文章</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
+    </div>
 </div>
-    <div class="post-content">
-      <p>本文是一篇翻译文章: <a href="https://blog.golang.org/v2-go-modules">https://blog.golang.org/v2-go-modules</a><br />
-原文作者：<a href="https://blog.golang.org/">Jean de Klerk 和 Tyler Bui-Palsu</a>  译者：<a href="https://github.com/befovy">befovy</a>   校对：<a href="https://github.com/polaris1119">polaris1119</a><br />
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/12/v2-go-modules/" class="title">Go Modules : v2 及更高版本</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-12-04 22:04:46 &#43;0800 CST" itemprop="datePublished">2019-12-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/11/gitee-image-bed/" class="title">我的 gitee 图床，自动上传、压缩、获取图片 url</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-11-23 19:02:45 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/11/flutter-plugin-volume/" class="title">手把手带你写 Flutter 系统音量插件</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-11-23 16:46:38 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/06/issue_20190630_5/" class="title">用 CMake 为 ijkplayer 增加 android native debug 支持</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-06-30 15:26:52 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/06/issue_20190630_6/" class="title">使用 mirror 和 hugo 实现 github issue 的博客自动同步</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-06-30 13:53:30 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+  <aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+    <div class="slimContent">
+      <nav id="toc" class="article-toc">
+        <h3 class="toc-title">文章目录</h3>
+        <div class="toc-content always-active"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading">简介</a></li>
+    <li><a href="#heading1">主版本和模块路径</a></li>
+    <li><a href="#heading2">主版本策略</a></li>
+    <li><a href="#-v2-">发布 v2 及更高版本</a></li>
+    <li><a href="#heading3">总结</a></li>
+    <li><a href="#heading4">相关文章</a></li>
+  </ul>
+</nav>
+        </div>
+      </nav>
+    </div>
+  </aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2019/12/v2-go-modules/"
+    >Go Modules : v2 及更高版本</a
+  >
+</h1>
+
+      <div class="article-meta">
+        <span class="article-date">
+  <i class="icon icon-calendar-check"></i>
+<a href="https://blog.befovy.com/2019/12/v2-go-modules/" class="article-date">
+  <time datetime="2019-12-04 22:04:46 &#43;0800 CST" itemprop="datePublished">2019-12-04</time>
+</a>
+</span>  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+    <a class="article-tag-link" href="/tags/golang/"> golang </a>
+  </span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/12/v2-go-modules/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:1945字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:4分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      <p>本文是一篇翻译文章: <a href="https://blog.golang.org/v2-go-modules">https://blog.golang.org/v2-go-modules</a> 
+原文作者：<a href="https://blog.golang.org/">Jean de Klerk 和 Tyler Bui-Palsu</a>  译者：<a href="https://github.com/befovy">befovy</a>   校对：<a href="https://github.com/polaris1119">polaris1119</a> 
 译文由 <a href="https://github.com/studygolang/GCTT">GCTT</a> 原创编译，<a href="https://studygolang.com/articles/25130">Go语言中文网</a> 荣誉推出</p>
-
-<hr />
-
-<h2 id="简介">简介</h2>
-
+<hr>
+<h2 id="heading">简介</h2>
 <p>本文是 Go modules 系统的第四部分</p>
-
 <ul>
 <li>Part 1: <a href="https://blog.golang.org/using-go-modules">使用 Go Modules</a>  <a href="https://studygolang.com/articles/19334">译文</a></li>
 <li>Part 2: <a href="https://blog.golang.org/migrating-to-go-modules">迁移到 Go Modules</a>  <a href="https://studygolang.com/articles/23133">译文</a></li>
 <li>Part 3: <a href="https://blog.golang.org/publishing-go-modules">发布 Go Modules</a> <a href="https://studygolang.com/articles/25129">译文</a></li>
 <li>Part 4: <a href="https://blog.golang.org/v2-go-modules">Go Modules : v2 及更高版本</a> (本文) </li>
 </ul>
-
 <p>随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。</p>
-
 <p>对于还在早期开发阶段的项目（主版本号是 <code>v0</code>），用户会期望偶尔的重大变更。对于声称已经稳定的项目（主版本是 <code>v1</code> 或者更高版本），必须在新的主版本进行重大变更。这篇文章探讨了主版本语义、如何创建并发布新的主版本以及如何维护一个 Go Modules 的多个主版本。</p>
-
-<h2 id="主版本和模块路径">主版本和模块路径</h2>
-
+<h2 id="heading1">主版本和模块路径</h2>
 <p>模块在 Go 中确定了一个重要的原则，即 “<a href="https://research.swtch.com/vgo-import">导入兼容性规则</a>”</p>
-
 <blockquote>
 <p>如果旧包和新包的导入路径相同，新包必须向后兼容旧的包</p>
 </blockquote>
-
 <p>根据这条原则，一个软件包新的主版本没有向后兼容以前的版本。这意味着这个软件包新的主版本必须使用和之前版本不同的模块路径。从 <code>v2</code> 开始，主版本号必须出现在模块路径的结尾（在 go.mod 文件的 <code>module</code> 语句中声明）。例如，当模块 <code>github.com/googleapis/gax-go</code> 的开发者们开发完 <code>v2</code> ，他们用了新的模块路径 <code>github.com/googleapis/gax-go/v2</code> 。想要使用 <code>v2</code> 的用户必须把他们的包导入和模块要求更改为 <code>github.com/googleapis/gax-go/v2</code> </p>
-
 <p>需要主版本号后缀是 Go 模块和大多数其他依赖管理系统不同的方式之一。后缀用于解决<a href="https://research.swtch.com/vgo-import#dependency_story">菱形依赖问题</a>。在 Go 模块之前，<a href="http://gopkg.in/">gopkg.in</a> 允许软件包维护者遵循我们现在称为导入兼容性规则的内容。使用 gopkg.in 时，如果你依赖一个导入了 <code>gopkg.in/yaml.v1</code> 的包以及另一个导入了 <code>gopkg.in/yaml.v2</code> 的包，这不会发生冲突，因为两个 <code>yaml</code> 包有着不同的导入路径（它们使用和 Go Modules 类似的版本后缀）。由于 gopkg.in 和 Go Modules 共享相同的版本号后缀方法，因此 Go 命令接受 <code>gopkg.in/yaml.v2</code> 中的 <code>.v2</code> 作为有效的版本号。这是一个为了和 gopkg.in 兼容的特殊情况，在其他域托管的模块需要使用像 <code>/v2</code> 这样的斜杠后缀。</p>
-
-<h2 id="主版本策略">主版本策略</h2>
-
+<h2 id="heading2">主版本策略</h2>
 <p>推荐的策略是在以主版本后缀命名的目录中开发 <code>v2+</code> 模块。</p>
-
-<pre><code class="language-bash">github.com/googleapis/gax-go @ master branch
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">github.com/googleapis/gax-go @ master branch
 /go.mod    → module github.com/googleapis/gax-go
 /v2/go.mod → module github.com/googleapis/gax-go/v2
-</code></pre>
-
-<p>这种方式与不支持 Go Modules 的一些工具兼容：仓库中的文件路径与 <code>GOPATH</code> 模式下 <code>go get</code> 命令预期的路径匹配。这一策略也允许所有的主版本一起在不同的目录中开发。</p>
-
+</code></pre></div><p>这种方式与不支持 Go Modules 的一些工具兼容：仓库中的文件路径与 <code>GOPATH</code> 模式下 <code>go get</code> 命令预期的路径匹配。这一策略也允许所有的主版本一起在不同的目录中开发。</p>
 <p>其他的策略可能是将主版本放置在单独的分支上。然而，如果 <code>v2+</code> 的源代码在仓库的默认分支上（一般是 master），不支持版本的工具（包括 GOPATH 模式下的 Go 命令）可能无法区分不同的主版本。</p>
-
 <p>本文中的示例遵循主版本子目录策略，所以提供了最大的兼容性。我们建议模块的作者遵循这种策略，只要他们还有用户在使用 <code>GOPATH</code> 模式开发。</p>
-
-<h2 id="发布-v2-及更高版本">发布 v2 及更高版本</h2>
-
+<h2 id="-v2-">发布 v2 及更高版本</h2>
 <p>这篇文章以 <code>github.com/googleapis/gax-go</code> 为例：</p>
-
-<pre><code class="language-bash">$ pwd
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pwd
 /tmp/gax-go
 $ ls
 CODE_OF_CONDUCT.md  call_option.go  internal
@@ -267,72 +355,50 @@ module github.com/googleapis/gax-go
 
 go 1.9
 
-require (
+require <span style="color:#f92672">(</span>
     github.com/golang/protobuf v1.3.1
     golang.org/x/exp v0.0.0-20190221220918-438050ddec5e
     golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3
     golang.org/x/tools v0.0.0-20190114222345-bf090417da8b
     google.golang.org/grpc v1.19.0
     honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099
-)
+<span style="color:#f92672">)</span>
 $
-</code></pre>
-
-<p>要开始开发 <code>github.com/googleapis/gax-go</code> 的 <code>v2</code> 版本，我们将创建一个新的 <code>v2/</code> 目录并将包的内容复制到该目录中。</p>
-
-<pre><code class="language-bash">$ mkdir v2
+</code></pre></div><p>要开始开发 <code>github.com/googleapis/gax-go</code> 的 <code>v2</code> 版本，我们将创建一个新的 <code>v2/</code> 目录并将包的内容复制到该目录中。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir v2
 $ cp *.go v2/
-building file list ... done
+building file list ... <span style="color:#66d9ef">done</span>
 call_option.go
 gax.go
 header.go
 invoke.go
 tools.go
 
-sent 10588 bytes  received 130 bytes  21436.00 bytes/sec
-total size is 10208  speedup is 0.95
+sent <span style="color:#ae81ff">10588</span> bytes  received <span style="color:#ae81ff">130</span> bytes  21436.00 bytes/sec
+total size is <span style="color:#ae81ff">10208</span>  speedup is 0.95
 $
-</code></pre>
-
-<p>现在，我们通过复制当前的 <code>go.mod</code> 文件并且在 module 路径上添加 <code>/v2</code> 后缀来创建属于 v2 的 <code>go.mod</code> 文件。</p>
-
-<pre><code class="language-bash">$ cp go.mod v2/go.mod
+</code></pre></div><p>现在，我们通过复制当前的 <code>go.mod</code> 文件并且在 module 路径上添加 <code>/v2</code> 后缀来创建属于 v2 的 <code>go.mod</code> 文件。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cp go.mod v2/go.mod
 $ go mod edit -module github.com/googleapis/gax-go/v2 v2/go.mod
 $
-</code></pre>
-
-<p>注意： <code>v2</code> 版本被视为与 <code>v0 / v1</code> 版本分开的模块，两者可以共存于同一构建中。因此，如果你的 <code>v2+</code> 模块具有多个软件包，你应该更新它们使用新的 <code>/v2</code> 导入路径，否则，你的 <code>v2+</code> 模块会依赖你的 <code>v0 / v1</code> 模块。要升级所有 <code>github.com/my/project</code> 为 <code>github.com/my/project/v2</code> ，可以使用 <code>find</code> 和 <code>sed</code> 命令：</p>
-
-<pre><code class="language-bash">$ find . -type f \
-    -name '*.go' \
-    -exec sed -i -e 's,github.com/my/project,github.com/my/project/v2,g' {} \;
+</code></pre></div><p>注意： <code>v2</code> 版本被视为与 <code>v0 / v1</code> 版本分开的模块，两者可以共存于同一构建中。因此，如果你的 <code>v2+</code> 模块具有多个软件包，你应该更新它们使用新的 <code>/v2</code> 导入路径，否则，你的 <code>v2+</code> 模块会依赖你的 <code>v0 / v1</code> 模块。要升级所有 <code>github.com/my/project</code> 为 <code>github.com/my/project/v2</code> ，可以使用 <code>find</code> 和 <code>sed</code> 命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ find . -type f <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -name <span style="color:#e6db74">&#39;*.go&#39;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -exec sed -i -e <span style="color:#e6db74">&#39;s,github.com/my/project,github.com/my/project/v2,g&#39;</span> <span style="color:#f92672">{</span><span style="color:#f92672">}</span> <span style="color:#ae81ff">\;</span>
 $
-</code></pre>
-
-<p>现在我们有了一个 <code>v2</code> 模块，但是我们要在版本发布之前进行实验并进行修改。在我们发布 <code>v2.0.0</code> （或者其他没有预发布后缀的版本）之前，我们可以进行开发并且可以做出重大变更，就如同我们决定实现新 API 一样。  如果我们希望用户能够在正式发布新 API 之前对其进行试验，可以选择发布 <code>v2</code> 预发布版本：</p>
-
-<pre><code class="language-bash">$ git tag v2.0.0-alpha.1
+</code></pre></div><p>现在我们有了一个 <code>v2</code> 模块，但是我们要在版本发布之前进行实验并进行修改。在我们发布 <code>v2.0.0</code> （或者其他没有预发布后缀的版本）之前，我们可以进行开发并且可以做出重大变更，就如同我们决定实现新 API 一样。  如果我们希望用户能够在正式发布新 API 之前对其进行试验，可以选择发布 <code>v2</code> 预发布版本：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git tag v2.0.0-alpha.1
 $ git push origin v2.0.0-alpha.1
 $
-</code></pre>
-
-<p>一旦我们对 <code>v2</code> API 感到满意并且确定不会再有别的重大变更，我们可以打上 Git 标记 <code>v2.0.0</code> 。</p>
-
-<pre><code class="language-bash">$ git tag v2.0.0
+</code></pre></div><p>一旦我们对 <code>v2</code> API 感到满意并且确定不会再有别的重大变更，我们可以打上 Git 标记 <code>v2.0.0</code> 。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git tag v2.0.0
 $ git push origin v2.0.0
 $
-</code></pre>
-
-<p>到那时，就有两个主版本需要维护。向后兼容的更改和错误修复使用新的次版本或者补丁版本发布（比如 <code>v1.1.0</code> ， <code>v2.0.1</code> 等）。</p>
-
-<h2 id="总结">总结</h2>
-
+</code></pre></div><p>到那时，就有两个主版本需要维护。向后兼容的更改和错误修复使用新的次版本或者补丁版本发布（比如 <code>v1.1.0</code> ， <code>v2.0.1</code> 等）。</p>
+<h2 id="heading3">总结</h2>
 <p>主版本变更会带来开发和维护的开销，并且需要下游用户的额外付出才能迁移。越大的项目中这种主版本变更的开销就越大。只有在确定了令人信服的理由之后，才应该进行主版本变更。一旦确定了令人信服的重大变更原因，我们建议在 master 分支进行多个主版本的开发，因为这样能与各种现有工具兼容。</p>
-
 <p>对 <code>v1+</code> 模块的重大变更应该始终发生在新的 <code>vN+1</code> 模块中。一个新模块发布时，对于维护者和需要迁移到这个新软件包的用户来说意味着更多的工作。因此，维护人员应该在发布稳定版本之前对其 API 进行验证，并仔细考虑在 <code>v1</code> 版本之后是否确有必要进行重大变更。</p>
-
-<h2 id="相关文章">相关文章</h2>
-
+<h2 id="heading4">相关文章</h2>
 <ul>
 <li><a href="https://blog.golang.org/publishing-go-modules">发布 Go Modules</a></li>
 <li><a href="https://blog.golang.org/module-mirror-launch">启用模块镜像和校验数据库</a></li>
@@ -345,115 +411,192 @@ $
 <li><a href="https://blog.golang.org/organizing-go-code">组织 Go 代码</a></li>
 </ul>
     </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.befovy.com/2019/12/v2-go-modules/" title="Go Modules : v2 及更高版本" target="_blank" rel="external">https://blog.befovy.com/2019/12/v2-go-modules/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+      &nbsp; 转载敬请在正文中标注并保留原文链接和作者等信息
+    </li>
+  </ul>
+</blockquote>
 
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Befovy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2019-12-04
-        
-    </span>
-  </p>
-  
-  
-</div>
-<div class="post-reward">
-  <input type="checkbox" name="reward" id="reward" hidden />
-  <label class="reward-button" for="reward">赞赏支持</label>
-  <div class="qr-code">
-    
-    <label class="qr-code-image" for="reward">
-        <img class="image" src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/wechat-qr-code.jpeg">
-        <span>微信打赏</span>
-      </label>
-    <label class="qr-code-image" for="reward">
-        <img class="image" src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/alipay-qr-code.jpeg">
-        <span>支付宝打赏</span>
-      </label>
-  </div>
-</div><footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/golang/">golang</a>
-          </div>
-      <nav class="post-nav">
-        
-        <a class="next" href="/2019/11/gitee-image-bed/">
-            <span class="next-text nav-default">我的 gitee 图床，自动上传、压缩、获取图片 url</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/befovy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.befovy.com/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://github.com/befovy" class="iconfont icon-github" title="github"></a>
-  <a href="https://blog.befovy.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/befovy" target="_blank"><span class="text-dark">半岛打铁匠</span><small class="ml-1x">befovy</small></a></h3>
+        <div>专注于音视频领域，Go、Rust 爱好者，爱写代码但更爱老婆</div>
+      </div>
+    </figure>
   </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2018 - 
-    2019
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">Befovy</span>
-  </span>
 </div>
-    </footer>
 
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
+    </div>
+  </article>
+<section id="comments">
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.befovy.com/2019/11/gitee-image-bed/" title="我的 gitee 图床，自动上传、压缩、获取图片 url"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.befovy.com/about/"
+                    title="关于自己"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+        
+        <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal"
+            data-target="#donateModal"><span>赏</span></button>
+        
+        
+        <ul class="pager pull-right">
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content donate">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="donate-box">
+                    <div class="donate-head">
+                        <p>感谢您的支持,我会继续努力的!</p>
+                    </div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="wechatpay">
+                            <div class="donate-payimg">
+                                <img src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/wechat-qr-code.jpeg"
+                                    alt="扫码支持" title="扫一扫" />
+                                </div>
+                            <p class="text-muted mv">扫码打赏, 多少你说了算~</p>
+                            <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="alipay">
+                            <div class="donate-payimg">
+                                <img src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/alipay-qr-code.jpeg"
+                                    alt="扫码支持" title="扫一扫" />
+                            </div>
+                            <p class="text-muted mv">扫码打赏, 多少你说了算~</p>
+                            <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦~</p>
+                        </div>
+                    </div>
+                    <div class="donate-footer">
+                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab"
+                                    aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i>
+                                    微信赞赏</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay"
+                                    aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/befovy" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.befovy.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2018  -
+    2019
+    <div class="publishby">
+        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>. <br>
+        Theme <a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
     </div>
   </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/dist/even.26188efa.min.js"></script>
+</footer>
 
-<script id="baidu_analytics">
-  var _hmt = _hmt || [];
-  (function() {
-    if (window.location.hostname === 'localhost') return;
-    var hm = document.createElement("script"); hm.async = true;
-    hm.src = "https://hm.baidu.com/hm.js?92addb450ecf9417a02f971789533f13";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+   window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/rust.min.js"></script>
+<script type="text/javascript"
+   src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script>
+hljs.configure({
+  tabReplace: '    ', 
+  classPrefix: ''     
+                      
+})
+hljs.initHighlightingOnLoad();
+</script>
+<script type="text/javascript" src="https://blog.befovy.com/js/application.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/plugin.js"></script>
+<script>
+      (function (window) {
+          var INSIGHT_CONFIG = {
+              TRANSLATION: {
+                  POSTS: '文章',
+                  PAGES: '页面',
+                  CATEGORIES: '分类',
+                  TAGS: '标签',
+                  UNTITLED: '(未命名)',
+              },
+              ROOT_URL: 'https:\/\/blog.befovy.com\/',
+              CONTENT_URL: 'https:\/\/blog.befovy.com\/\/searchindex.json ',
+          };
+          window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+      })(window);
+      </script>
+<script type="text/javascript" src="https://blog.befovy.com/js/insight.js"></script>
 
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-
-
-</body>
+  </body>
 </html>

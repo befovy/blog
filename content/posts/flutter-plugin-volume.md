@@ -14,21 +14,17 @@ Tags: ["Flutter"]
 
 <!--more-->
 
-<a name="e36T6"></a>
-# 0、背景
+## 0、背景
 我最近在做一个 Flutter 视频播放器插件 fijkplayer，感兴趣可以看我的 [github](https://github.com/befovy/fijkplayer)。在 0.1.0 版本之后考虑增加调节系统音量功能。google 一番，找到了相关的 Flutter 插件（Flutter 的生态真的是建立挺快的）。但仔细了解插件的功能之后，感觉有些不满足我的需求，同时由于我的 fijkplayer 本身就是一个插件，想尽量避免依赖额外的插件，所以我干嘛不自己动手造一个？这可比播放器插件简单多了。<br />本文写作时播放器插件 fijkplayer 上已经完成了音量调节和监控的功能，为了文档内容清晰，把相关的代码又单独抽出来作为一个小项目 [flutter_volume](https://github.com/befovy/flutter_volume) 。
 
-<a name="5Kih4"></a>
-# 1、环境介绍
+## 1、环境介绍
 搭建 Flutter 环境这里不专门讲了。直接从 Flutter 插件的开发环境入手。<br />本文使用的 Flutter 版本和环境是 <br />`[✓] Flutter is fully installed. (Channel stable, v1.9.1+hotfix.2, on Mac OS X 10.14.6 18G95, locale zh-Hans-CN)` 
 
-<a name="2jybX"></a>
 ### 创建插件
 新建一个叫做 flutter_volume 的 Flutter 插件：`flutter create --org com.befovy -t plugin -i objc flutter_volume` 。<br />`flutter create` 命令使用参数 `-t` 选择模版，可选值为 `app`  `package`  `plugin`，分别用于创建 Flutter 应用程序，Flutter 包（纯 dart 代码实现的功能）， Flutter 插件（和主机系统交互）。
 
 我在开始写 fijkplayer 的时候，默认插件语言还是 java 和 objc，现在1.9 版本，都已经默认使用 kotlin 和 swift 了。Swift 我还不太熟悉，kotlin 了解一些，并且 Android studio 的 java 转换 kotlin 很强大，我这里新的小项目 flutter_volume 就也使用 kotlin 和 objc 了。如果要修改创建 Flutter 插件使用的编程语言，可以使用参数 `-i` 和 `-a` 。<br />例如 `flutter create -t plugin -a java -i swift flutter_volume`
 
-<a name="ccZ5B"></a>
 ### 插件目录结构
 先在 Android Studio 中安装  Flutter 插件和 Dart 插件。
 ![](https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123170737.png)
@@ -54,11 +50,11 @@ Tags: ["Flutter"]
 
 这种 Flutter 工具自动生成的插件目录结构确实对程序员非常友好，写了插件立马就能在 demo 中看到效果。
 
-<a name="HiAAZ"></a>
-# 2、Flutter Native 通信方式
+## 2、Flutter Native 通信方式
 Flutter 应用可以在 iOS 和 Android 平台运行，肯定要和原生系统进行各种各样的交互。交互的部分主要是在 flutter engine 中，以及大量的 flutter 插件中。
-<a name="9FyR2"></a>
+
 ### MethodChannel
+
 Flutter 框架提供了这样的交互方式。消息通过 Method Channel 在客户端（UI）和主机（platform）之间传递。<br />官方文档这里使用的是 platform channels，翻译的时候我使用了更具体直接的表述 Method Channel<br />见下图（图片来源 [https://flutter.dev/docs/development/platform-integration/platform-channels](https://flutter.dev/docs/development/platform-integration/platform-channels)）
 
 ![](https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123171847.png)
@@ -71,8 +67,9 @@ Flutter 框架提供了这样的交互方式。消息通过 Method Channel 在�
 上图形象表达了 Flutter 发送消息到 native 端的过程。<br />同时，我们需要注意，这个过程可以反过来从 native 端主动发送消息到 Flutter 端。即在 native 端创建 MethodChannel 并进行方法调用，Flutter 端进行方法处理并且发送会方法调用结果。实际中更常用的是对于这个模式的更高一层封装 EventChannel。Native 端进行 event 发送，Flutter 端进行 event 响应。<br />MethodChannel 和 EventChannel 都会在后面实战环节使用到，一看即会。
 
 在 Flutter 客户端和 native 平台方面传递数据都是需要经过编码再解码。<br />编码的方式默认的是用`StandardMethodCodec`，此外还有 `JSONMethodCodec` 。`StandardMethodCodec`<br />编解码效率更高。
-<a name="qUL8R"></a>
+
 ### 编码数据类型
+
 MethodCodec 支持的数据类型以及在 dart 、iOS 和 Android 中的对应关系如下表。
 
 | Dart | Android | iOS |
@@ -90,9 +87,8 @@ MethodCodec 支持的数据类型以及在 dart 、iOS 和 Android 中的对应�
 | List | java.util.ArrayList | NSArray |
 | Map | java.util.HashMap | NSDictionary |
 
-<br />
-<a name="Mj3Jt"></a>
-# 3、Volume 接口
+## 3、Volume 接口
+
 前面提到是要在一个视频播放器插件中调整系统的音量。经过梳理，先整理出初步需要的接口。主要有增大音量、减小音量、静音、获取音量、设置音量。同时还有激活音量变化监听、设置音量变化监听、关闭音量变化监听。为了使用方便，还增加了一个 VolumeWatcher 的 Widget，在其中成对使用了新增音量变化监听，取消音量变化监听接口。
 
 部分代码如下，完整代码请 [点击链接查看](https://github.com/befovy/flutter_volume/blob/6965560892/lib/flutter_volume.dart) 。
@@ -176,9 +172,8 @@ class VolumeWatcher extends StatefulWidget {
 
 完整的代码变更可以看github 上这个提交。<br />[https://github.com/befovy/flutter_volume/commit/c8ff0f583b3372d22f764bcaf377f1a6bc64cf39](https://github.com/befovy/flutter_volume/commit/c8ff0f583b3372d22f764bcaf377f1a6bc64cf39)
 
-<a name="GHEEm"></a>
-# 4、iOS 功能实现
-<a name="PRJVi"></a>
+## 4、iOS 功能实现
+
 ### FlutterPluginRegistrar
 FlutterPluginRegistrar 是 flutter 插件在 iOS 环境中的上下文，提供插件上下文信息，以及 App 回调事件信息。<br />FlutterPluginRegistrar 的实例对象需要保存在 Plugin class 的成员变量中，方便后续使用。<br />将 FlutterVolumePlugin 的无参 init 函数调整为 initWithRegistrar 。
 ```objectivec
@@ -203,7 +198,6 @@ FlutterPluginRegistrar 是 flutter 插件在 iOS 环境中的上下文，提供�
 @end
 ```
 
-<a name="28ny0"></a>
 ### iOS 监听音量变化
 ios 系统通知中心有关于音量变化的广播，监听音量变化只需要在通知中心注册通知即可。<br />根据接口设计，监听系统音量变化，有两个接口调用控制功能开启或者关闭。<br />音量监听的主要代码实现如下：
 ```objectivec
@@ -260,7 +254,6 @@ ios 系统通知中心有关于音量变化的广播，监听音量变化只需�
 
 enableWatch 中在通知中心注册关于音量变化的处理函数。然后构造 FlutterEventChannel 并且设置 handler。<br />disableWatch 中移除在通知中心注册的回调，然后删除 EventChannel 的 handler，并删除 eventChannel 对象。<br />需要注意的是，dart中 `EventChannel('xxx').receiveBroadcastStream()` 的调用一定要在 native 端执行完成 `FlutterEventChannel setStreamHandler` 方法之后，否则会出现 `onListen` 方法找不到的错误。
 
-<a name="LhOfy"></a>
 ### 系统音量修改
 iOS 中没有公开的修改系统音量接口，但是还有其他途径实现音量修改。目前使用最广泛的就是在 UI 中插入一个不可见的 MPVolumeView，然后模拟 UI 操作调整其中的 MPVolumeSlider。
 
@@ -314,10 +307,10 @@ iOS 中没有公开的修改系统音量接口，但是还有其他途径实现�
 @end
 ```
 完整 iOS 插件代码 [点我查看](https://github.com/befovy/flutter_volume/blob/e933f97c4bb64988300aeb71211dee3fd08cd59f/ios/Classes/FlutterVolumePlugin.m)
-<a name="tLWN7"></a>
-# 5、Android 功能实现
+
+## 5、Android 功能实现
 Android Flutter 插件开发离不开 flutter engine 中的接口 Registrar。通过 Registrar 的方法可以获取 activity、 context 等 Android 开发中重要对象。
-<a name="kpAjs"></a>
+
 ### Registrar
 ```java
  public interface Registrar {
@@ -355,7 +348,6 @@ class FlutterVolumePlugin(registrar: Registrar): MethodCallHandler {
 
 Android 中音量调节功能的实现主要就是 AudioManager 的 API 调用，以及对 flutter onMethodCall 方法的处理。详细的内容请[点击查看源代码](https://github.com/befovy/flutter_volume/blob/d3bef08778/android/src/main/kotlin/com/befovy/flutter_volume/FlutterVolumePlugin.kt)。
 
-<a name="vaOZJ"></a>
 ### 监听音量的变化
 Android 系统中使用广播通知 BroadcastReceiver 获取音量变化。<br />根据接口设计，监听系统音量变化，有两个接口调用控制功能开启或者关闭。<br />在 `enableWatch` 方法中，先修改标记变量 `mWatching` ， 然后创建 `EventChannel` 并且调用 `setStreamHandler` 方法。最后，注册广播接收器，接受系统音量变化的通知。<br />需要注意的是，dart中 `EventChannel('xxx').receiveBroadcastStream()`的调用一定要在 native 端执行完成 `setStreamHandler` 方法之后，否则会出现 `onListen` 方法找不到的错误。
 ```kotlin
@@ -422,12 +414,11 @@ class FlutterVolumePlugin(registrar: Registrar) : MethodCallHandler {
 }
 ```
 详细的内容请[点击查看源代码](https://github.com/befovy/flutter_volume/blob/d3bef08778/android/src/main/kotlin/com/befovy/flutter_volume/FlutterVolumePlugin.kt)。
-<a name="qJsbH"></a>
+
 ### 音量区间映射
 在 Android 系统中，音量最大值有可能不一样，范围不是 [0, 1]。此插件获取音量最大值后，将音量又线性映射到 [0, 1] 的范围中。另一点需要注意，android 音量调节不是无级调节，有一个调节的最小单元，将这个最小单元映射到 [0, 1] 范围中的一个 delta 值，并保证调节音量 step 值大于等于这个最小单元 delta 值，否则音量调节无效。<br />在插件的 API 实现中，如果调用 `up` 或 `down` 接口， `step` 参数值小于 `delta` ，则会被修改为 `delta`  的值，保证 `up` 或 `down` 接口的调用都是有效的。
 
-<a name="mNUA7"></a>
-# 6、插件 Demo
+## 6、插件 Demo
 
 flutter 插件创建的默认目录中都包含一个 example 文件夹。里面是一个完整的 flutter app 工程目录，使用相对路径的方式引用了外层文件夹中的 flutter 插件。
 ```yaml
@@ -440,8 +431,7 @@ dev_dependencies:
 
 然后简单写几个按钮，在 onPressed 中调用 flutter_volume.dart 中的API 就可以完整插件的示例 App。<br />详细内容请看完整的源代码  [example/lib/main.dart](https://github.com/befovy/flutter_volume/blob/080d45cf0ba5596418450836e4f31551fe1b4e8f/example/lib/main.dart)
 
-<a name="egbp7"></a>
-# 7、发布插件
+## 7、发布插件
 完成了插件或者 dart 包的开发测试之后，可以将其发布到 [Pub](https://pub.dartlang.org/) 上，这样其他开发人员就可以快捷方便地使用它。<br />Flutter 的依赖管理 pubspec 支持通过本地路径和 Git 导入依赖，但使用 pub 可以更方便进行插件版本管理。
 
 > volume   flutter_volume 这几个名字都已经被占坑了，我就暂时不发布到 pub 了

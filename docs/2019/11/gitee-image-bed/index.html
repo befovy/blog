@@ -1,58 +1,46 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-<head>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        我的 gitee 图床，自动上传、压缩、获取图片 url - 半岛铁匠铺
+      </title>
+    <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>我的 gitee 图床，自动上传、压缩、获取图片 url - Befovy 的博客 | Befovy blog</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="Befovy" /><meta name="description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
 gitee 做图床的优点：
  访问速度快  结合本文提供的一套工具组合可以实现：
  图片选中一键上传 剪贴板图片一键上传 上传完成后复制图片网址到剪贴板 图片上传自动压缩 依然完全免费 " />
+  <meta name="generator" content="Hugo 0.60.0 with theme pure" />
+  <title>我的 gitee 图床，自动上传、压缩、获取图片 url - 半岛铁匠铺</title>
+  
 
-
-
-
-
-
-<meta name="generator" content="Hugo 0.53 with even 4.0.0" />
-
-
-<link rel="canonical" href="https://blog.befovy.com/2019/11/gitee-image-bed/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-16x16.png">
-<link rel="manifest" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="我的 gitee 图床，自动上传、压缩、获取图片 url" />
+  <link rel="stylesheet" href="https://blog.befovy.com/css/style.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
+  <meta property="og:title" content="我的 gitee 图床，自动上传、压缩、获取图片 url" />
 <meta property="og:description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
-
 gitee 做图床的优点：
-
 
 访问速度快
 
-
 结合本文提供的一套工具组合可以实现：
-
 
 图片选中一键上传
 剪贴板图片一键上传
@@ -61,21 +49,17 @@ gitee 做图床的优点：
 依然完全免费
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.befovy.com/2019/11/gitee-image-bed/" /><meta property="article:published_time" content="2019-11-23T19:02:45&#43;08:00"/>
-<meta property="article:modified_time" content="2019-11-23T19:02:45&#43;08:00"/>
-
+<meta property="og:url" content="https://blog.befovy.com/2019/11/gitee-image-bed/" />
+<meta property="article:published_time" content="2019-11-23T19:02:45+08:00" />
+<meta property="article:modified_time" content="2019-11-23T19:02:45+08:00" />
 <meta itemprop="name" content="我的 gitee 图床，自动上传、压缩、获取图片 url">
 <meta itemprop="description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
-
 gitee 做图床的优点：
-
 
 访问速度快
 
-
 结合本文提供的一套工具组合可以实现：
-
 
 图片选中一键上传
 剪贴板图片一键上传
@@ -83,28 +67,21 @@ gitee 做图床的优点：
 图片上传自动压缩
 依然完全免费
 ">
-
-
 <meta itemprop="datePublished" content="2019-11-23T19:02:45&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-23T19:02:45&#43;08:00" />
-<meta itemprop="wordCount" content="500">
+<meta itemprop="wordCount" content="1847">
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="我的 gitee 图床，自动上传、压缩、获取图片 url"/>
 <meta name="twitter:description" content="之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。
-
 gitee 做图床的优点：
-
 
 访问速度快
 
-
 结合本文提供的一套工具组合可以实现：
-
 
 图片选中一键上传
 剪贴板图片一键上传
@@ -113,103 +90,236 @@ gitee 做图床的优点：
 依然完全免费
 "/>
 
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
 
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
 
 </head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Befovy</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  </head>
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+          <a id="avatar" href="https://github.com/befovy" target="_blank">
+            <img class="img-circle img-rotate" src="https://blog.befovy.com/avatar.jpg" width="200" height="200">
+          </a>
+          <h2 id="name" class="hidden-xs hidden-sm">半岛打铁匠</h2>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md">befovy</h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Beijing, China</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="想要查找什么..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Befovy</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">我的 gitee 图床，自动上传、压缩、获取图片 url</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2019-11-23 </span>
-        
-          <span class="more-meta"> 约 500 字 </span>
-          <span class="more-meta"> 预计阅读 3 分钟 </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
       </div>
-    </header>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> 标签</h3>
+    <div class="widget-body">
+        <ul class="tag-list">
+            
+            
+            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/flutter/" class="tag-list-link">flutter</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/golang/" class="tag-list-link">golang</a><span
+                    class="tag-list-count">1</span></li>
+            
+        </ul>
 
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#文中用到的工具">文中用到的工具</a></li>
-<li><a href="#搭建步骤">搭建步骤</a>
-<ul>
-<li><a href="#github-仓库和设置">github 仓库和设置</a></li>
-<li><a href="#使用-github-actions-自动同步到-gitee">使用 github actions 自动同步到 gitee</a></li>
-<li><a href="#picgo-配置">PicGo 配置</a></li>
-<li><a href="#github-actions-自动合并-imgbot-的-pr">github actions 自动合并 ImgBot 的 pr</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
+    </div>
 </div>
-    <div class="post-content">
+      
+<div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/12/v2-go-modules/" class="title">Go Modules : v2 及更高版本</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-12-04 22:04:46 &#43;0800 CST" itemprop="datePublished">2019-12-04</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/11/gitee-image-bed/" class="title">我的 gitee 图床，自动上传、压缩、获取图片 url</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-11-23 19:02:45 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/11/flutter-plugin-volume/" class="title">手把手带你写 Flutter 系统音量插件</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-11-23 16:46:38 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/06/issue_20190630_5/" class="title">用 CMake 为 ijkplayer 增加 android native debug 支持</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-06-30 15:26:52 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2019/06/issue_20190630_6/" class="title">使用 mirror 和 hugo 实现 github issue 的博客自动同步</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2019-06-30 13:53:30 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+  <aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+    <div class="slimContent">
+      <nav id="toc" class="article-toc">
+        <h3 class="toc-title">文章目录</h3>
+        <div class="toc-content always-active"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading">文中用到的工具</a></li>
+    <li><a href="#heading1">搭建步骤</a>
+      <ul>
+        <li><a href="#github-">github 仓库和设置</a></li>
+        <li><a href="#-github-actions--gitee">使用 github actions 自动同步到 gitee</a></li>
+        <li><a href="#picgo-">PicGo 配置</a></li>
+        <li><a href="#github-actions--imgbot--pr">github actions 自动合并 ImgBot 的 pr</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+      </nav>
+    </div>
+  </aside>
+<main class="main" role="main"><div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2019/11/gitee-image-bed/"
+    >我的 gitee 图床，自动上传、压缩、获取图片 url</a
+  >
+</h1>
+
+      <div class="article-meta">
+        <span class="article-date">
+  <i class="icon icon-calendar-check"></i>
+<a href="https://blog.befovy.com/2019/11/gitee-image-bed/" class="article-date">
+  <time datetime="2019-11-23 19:02:45 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
+</a>
+</span>
+
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/gitee-image-bed/#comments"
+            class="article-comment-link">评论</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:1847字</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:4分 </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
       <p>之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
 今天又花功夫用 gitee 和其他的工具给自己做了一个图床。</p>
-
 <p>gitee 做图床的优点：</p>
-
 <ul>
 <li>访问速度快</li>
 </ul>
-
 <p>结合本文提供的一套工具组合可以实现：</p>
-
 <ul>
 <li>图片选中一键上传</li>
 <li>剪贴板图片一键上传</li>
@@ -217,9 +327,7 @@ gitee 做图床的优点：
 <li>图片上传自动压缩</li>
 <li>依然完全免费</li>
 </ul>
-
-<h1 id="文中用到的工具">文中用到的工具</h1>
-
+<h2 id="heading">文中用到的工具</h2>
 <ul>
 <li>码云 <a href="https://gitee.com/">gitee</a> ，使用码云中的公开仓库作为图床，可以外链访问</li>
 <li>github，图片自动上传到 github 公开仓库</li>
@@ -228,34 +336,21 @@ gitee 做图床的优点：
 <li>github actions 自动合并 ImgBot 发起的图片压缩后的 pull request</li>
 <li><a href="https://github.com/Molunerfinn/PicGo">PicGo</a> 图片自动上传</li>
 </ul>
-
-<h1 id="搭建步骤">搭建步骤</h1>
-
+<h2 id="heading1">搭建步骤</h2>
 <p>搭建步骤中是有一些问题费了些时间，但是有了我帮你踩了所有的坑并且总结这篇教程后，看到这里的你一定能够顺利搭建自己的免费好用的图床。</p>
-
 <p>本文教程使用了 github action，如果你的 github 还有没激活 actions 的话，你可以使用其他的 ci 工具实现。 github 仓库中如果看不到下面这个 actions 图标，就说明还不支持 actions 功能。
-<img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123192701.png" alt="" /></p>
-
-<h2 id="github-仓库和设置">github 仓库和设置</h2>
-
+<img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123192701.png" alt=""></p>
+<h3 id="github-">github 仓库和设置</h3>
 <p>首先需要创建一个 github 仓库，比如 <a href="https://github.com/befovy/images">https://github.com/befovy/images</a> ，创建步骤略过。</p>
-
 <p>为 github 仓库安装 <a href="https://imgbot.net/">ImgBot 机器人</a>。
 打开 ImgBot 网站，点击 【try for free】， ImgBot 声称开源项目能够一直免费使用其服务。
 从 ImgBot 网站跳转到 github 网站后，点击 【Set up a plan】 按钮，在下一步中选择 【Open Source】 这一个免费计划。下一步是【Install it for free】。
 最后到这下图这个步骤，你可以选择为所有仓库开启此功能，也可以只选择为刚刚创建的图床仓库打开 ImgBot。</p>
-
-<p style="text-align:center;">
-<img src=https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123193909.png  width="350"/>
-</p>
-
-<h2 id="使用-github-actions-自动同步到-gitee">使用 github actions 自动同步到 gitee</h2>
-
+<!-- raw HTML omitted -->
+<h3 id="-github-actions--gitee">使用 github actions 自动同步到 gitee</h3>
 <p>在 gitee 也上创建一个仓库用来保存图床图片。然后为 gitee 新建一个 ssh key。并把公钥增加在 gitee 账户的设置中。</p>
-
 <p>在之前创建的 github 图床仓库中编辑 actions 配置文件，新增一个 <a href="https://github.com/befovy/images/blob/master/.github/workflows/gitee.yml">.github/workflows/gitee.yml</a></p>
-
-<pre><code class="language-yml">name: Push to gitee
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">name: Push to gitee
 
 on: 
   push:
@@ -271,54 +366,38 @@ jobs:
       env: 
         SSH_KEY: ${{ secrets.GITEE_SSH_KEY }}
         SSH_KEY_PUB: ${{ secrets.GITEE_SSH_PUB }}
-      run: |
-        mkdir -p ~/.ssh
+      run: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">       </span><span style="color:#e6db74"> </span><span style="color:#e6db74">mkdir -p ~/.ssh</span>
         ssh-keyscan -H gitee.com &gt;&gt; ~/.ssh/known_hosts
         echo ${SSH_KEY} &gt; ~/.ssh/id_rsa
-        sed -i -e &quot;s#\\\\n#\n#g&quot; ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+        sed -i -e <span style="color:#e6db74">&#34;s#\\\\n#\n#g&#34;</span> ~/.ssh/id_rsa
+        chmod <span style="color:#ae81ff">600</span> ~/.ssh/id_rsa
         echo ${SSH_KEY_PUB} &gt; ~/.ssh/id_rsa.pub
-        chmod 600 ~/.ssh/id_rsa.pub
+        chmod <span style="color:#ae81ff">600</span> ~/.ssh/id_rsa.pub
      
     - name: Push to gitee
-      run: |
-        git switch -c master
+      run: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">       </span><span style="color:#e6db74"> </span><span style="color:#e6db74">git switch -c master</span>
         git remote add gitee git@gitee.com:befovy/images.git
         git push --set-upstream gitee master -f 
-</code></pre>
-
-<p>这个 actions 中主要是 checkout 当前仓库文件，配置 gitee 的 ssh 密钥，推送 git 仓库到 gitee。</p>
-
+</code></pre></div><p>这个 actions 中主要是 checkout 当前仓库文件，配置 gitee 的 ssh 密钥，推送 git 仓库到 gitee。</p>
 <p>密钥不能明文写在 actions 配置文件，需要保存在仓库的设置中。 在 github 仓库 设置选项中，选择左侧的 Secrets。把前面生成的 ssh 公钥和私钥都保存起来。注意私钥本身由好多行组成，但是 actions secrets 这里好像换行符会出问题，所以我们先把私钥中所有的换行用 <code>\n</code> 替换掉，替换完后私钥只剩下一行文本。 保存在这个页面的 secrets 可以在 actions 配置中使用。
 我保存的名称分别是 <code>GITEE_SSH_KEY</code> 和 <code>GITEE_SSH_PUB</code> ，在 actions 配置文件中的使用方式是 <code>${{ secrets.GITEE_SSH_KEY }}</code> 。</p>
-
-<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123200528.png" alt="" /></p>
-
+<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123200528.png" alt=""></p>
 <p>在 gitee.yml  中，我从 secrets 中取出私钥，保存在 .ssh/id_rsa 中又通过命令把其中的 <code>\n</code> 全部换成了真正的换行符。 这就是我踩过的一个大坑，不这么做后面 git push 会出错。</p>
-
 <p>配置好 ssh 后，可以通过 git 命令把仓库内容 push 到 gitee 中去。
 注意，github actions 中的 checkout 检出当前内容后，git 是在一个游离状态，没有分支名。需要先 <code>git switch -c master</code> 设置当前为 master 分支。</p>
-
-<h2 id="picgo-配置">PicGo 配置</h2>
-
+<h3 id="picgo-">PicGo 配置</h3>
 <p><a href="https://github.com/Molunerfinn/PicGo">PicGo</a> 是用 Electron-Vue 开发的一个图片自动上传至图床的工具。先下载安装 PicGo 到电脑中。
 PicGo 支持 github、新浪、七牛等多种图床。也可以安装插件支持 gitee 图床，但是 gitee 上不能配置图片自动压缩，所以我在 github 绕了一圈，图片在 github 压缩后再同步到 gitee。</p>
-
 <p>PicGo 设置如图， 我用了 githubPlus 插件，其实用默认的 github 图床功能就行。</p>
-
-<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123201205.png" alt="" /></p>
-
+<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123201205.png" alt=""></p>
 <p>图中用到的 token 在 <a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a> 页面生成。</p>
-
 <p>自己修改一下 PicGo 的上传图片快捷键，选择一张图片上传。上传完成后 url 会自动复制到剪切板。 等 github actions 执行完成后，就可以通过剪贴板中的 url 访问到保存在 gitee 的图片了， gitee 的图片访问确实很快。</p>
-
-<h2 id="github-actions-自动合并-imgbot-的-pr">github actions 自动合并 ImgBot 的 pr</h2>
-
+<h3 id="github-actions--imgbot--pr">github actions 自动合并 ImgBot 的 pr</h3>
 <p>上传图片后，很快 ImgBot 就会对图片进行压缩，并在 github 的仓库中发起一个 pull request。手动点击合并按钮对我来说实在是太麻烦了，能不能自动搞呢。有了 actions 没啥不能的，</p>
-
 <p>在 github actions 配置新增一个文件，<a href="https://github.com/befovy/images/blob/master/.github/workflows/merge.yml">.github/workflow/merge.yml</a></p>
-
-<pre><code class="language-yml">name: Merge Imgbot
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">name: Merge Imgbot
 
 on:
   pull_request:
@@ -335,23 +414,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: automerge
-        uses: &quot;pascalgn/automerge-action@v0.6.1&quot;
+        uses: <span style="color:#e6db74">&#34;pascalgn/automerge-action@v0.6.1&#34;</span>
         env:
-          GITHUB_TOKEN: &quot;${{ secrets.GIT_MERGE_TOKEN }}&quot;
-          MERGE_LABELS: &quot;&quot;
-          MERGE_METHOD: &quot;squash&quot;
-          MERGE_COMMIT_MESSAGE: &quot;pull-request-description&quot;
-          MERGE_FORKS: &quot;false&quot;
-          MERGE_RETRIES: &quot;2&quot;
-          MERGE_RETRY_SLEEP: &quot;10000&quot;
-          UPDATE_METHOD: &quot;rebase&quot;
-</code></pre>
-
-<p>这个 actions 配置中用到了 pascalgn/automerge-action，简化了对于 pull request 的操作。
+          GITHUB_TOKEN: <span style="color:#e6db74">&#34;${{ secrets.GIT_MERGE_TOKEN }}&#34;</span>
+          MERGE_LABELS: <span style="color:#e6db74">&#34;&#34;</span>
+          MERGE_METHOD: <span style="color:#e6db74">&#34;squash&#34;</span>
+          MERGE_COMMIT_MESSAGE: <span style="color:#e6db74">&#34;pull-request-description&#34;</span>
+          MERGE_FORKS: <span style="color:#e6db74">&#34;false&#34;</span>
+          MERGE_RETRIES: <span style="color:#e6db74">&#34;2&#34;</span>
+          MERGE_RETRY_SLEEP: <span style="color:#e6db74">&#34;10000&#34;</span>
+          UPDATE_METHOD: <span style="color:#e6db74">&#34;rebase&#34;</span>
+</code></pre></div><p>这个 actions 配置中用到了 pascalgn/automerge-action，简化了对于 pull request 的操作。
 注意设置 MERGE_LABLES 要留空，否则你必须给 pull request 打上对应的 lable 后，才能自动合并。 这里再一次用到了 secrets 保存了 github token，和上一步配置 PicGo 用到的 token 一样。</p>
-
 <p>现在的流程是：</p>
-
 <ol>
 <li>电脑中 PicGo 客户端自动上传图片到 github 仓库。</li>
 <li>master 分支的 push 操作触发 actions 将仓库同步到 gitee。</li>
@@ -359,134 +434,203 @@ jobs:
 <li>pull request 触发 actions 自动进行分支合并，并 push 到目标分支(master)</li>
 <li>master 分支 push 操作再次触发 actions 将仓库同步到 gitee。</li>
 </ol>
-
 <p>手动触发步骤1后，其余步骤完全自动化运行。进一步步骤2还可以省去一些环境。</p>
-
-<pre><code class="language-yml">    - name: Push to gitee
-      run: |
-        git switch -c master
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">    - name: Push to gitee
+      run: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">       </span><span style="color:#e6db74"> </span><span style="color:#e6db74">git switch -c master</span>
         git remote add gitee git@gitee.com:befovy/images.git
-        imgbot=`git rev-parse HEAD | git show -s --format='%ae' | grep imgbot` || echo &quot;no imgbot&quot;
-        [[ ! -z &quot;$imgbot&quot; ]] &amp;&amp; git push --set-upstream gitee master -f || echo &quot;Ingore push&quot;
-</code></pre>
-
-<p>判断提交作者是否是 imgbot，如果不是，不进行 push 到 gitee 的操作。</p>
-
-<hr />
-
+        imgbot=`git rev-parse HEAD | git show -s --format=<span style="color:#e6db74">&#39;%ae&#39;</span> | grep imgbot` || echo <span style="color:#e6db74">&#34;no imgbot&#34;</span>
+        [[ ! -z <span style="color:#e6db74">&#34;$imgbot&#34;</span> ]] <span style="color:#75715e">&amp;&amp;</span> git push --set-upstream gitee master -f || echo <span style="color:#e6db74">&#34;Ingore push&#34;</span>
+</code></pre></div><p>判断提交作者是否是 imgbot，如果不是，不进行 push 到 gitee 的操作。</p>
+<hr>
 <p>完结</p>
     </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接: </strong>
+      <a href="https://blog.befovy.com/2019/11/gitee-image-bed/" title="我的 gitee 图床，自动上传、压缩、获取图片 url" target="_blank" rel="external">https://blog.befovy.com/2019/11/gitee-image-bed/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
+      &nbsp; 转载敬请在正文中标注并保留原文链接和作者等信息
+    </li>
+  </ul>
+</blockquote>
 
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">Befovy</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2019-11-23
-        
-    </span>
-  </p>
-  
-  
-</div>
-<div class="post-reward">
-  <input type="checkbox" name="reward" id="reward" hidden />
-  <label class="reward-button" for="reward">赞赏支持</label>
-  <div class="qr-code">
-    
-    <label class="qr-code-image" for="reward">
-        <img class="image" src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/wechat-qr-code.jpeg">
-        <span>微信打赏</span>
-      </label>
-    <label class="qr-code-image" for="reward">
-        <img class="image" src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/alipay-qr-code.jpeg">
-        <span>支付宝打赏</span>
-      </label>
-  </div>
-</div><footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/2019/12/v2-go-modules/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Go Modules : v2 及更高版本</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/2019/11/flutter-plugin-volume/">
-            <span class="next-text nav-default">手把手带你写 Flutter 系统音量插件</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/befovy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://blog.befovy.com/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="https://github.com/befovy" class="iconfont icon-github" title="github"></a>
-  <a href="https://blog.befovy.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/befovy" target="_blank"><span class="text-dark">半岛打铁匠</span><small class="ml-1x">befovy</small></a></h3>
+        <div>专注于音视频领域，Go、Rust 爱好者，爱写代码但更爱老婆</div>
+      </div>
+    </figure>
   </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2018 - 
-    2019
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">Befovy</span>
-  </span>
 </div>
-    </footer>
 
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
+    </div>
+  </article>
+<section id="comments">
+</section>
+
+</div><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://blog.befovy.com/2019/11/flutter-plugin-volume/" title="手把手带你写 Flutter 系统音量插件"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
+            </li>
+            <li class="next">
+                <a href="https://blog.befovy.com/2019/12/v2-go-modules/"
+                    title="Go Modules : v2 及更高版本"><span>上一篇&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+        
+        <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal"
+            data-target="#donateModal"><span>赏</span></button>
+        
+        
+        <ul class="pager pull-right">
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="文章目录" role="button">
+                    <span>[&nbsp;</span><span>文章目录</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="bar-right">
+            <div class="share-component" data-sites="weibo,qq,wechat,twitter"
+                data-mobile-sites="weibo,qq,qzone"></div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content donate">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="donate-box">
+                    <div class="donate-head">
+                        <p>感谢您的支持,我会继续努力的!</p>
+                    </div>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="wechatpay">
+                            <div class="donate-payimg">
+                                <img src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/wechat-qr-code.jpeg"
+                                    alt="扫码支持" title="扫一扫" />
+                                </div>
+                            <p class="text-muted mv">扫码打赏, 多少你说了算~</p>
+                            <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="alipay">
+                            <div class="donate-payimg">
+                                <img src="https://cdn.jsdelivr.net/gh/befovy/images@master/assets/alipay-qr-code.jpeg"
+                                    alt="扫码支持" title="扫一扫" />
+                            </div>
+                            <p class="text-muted mv">扫码打赏, 多少你说了算~</p>
+                            <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦~</p>
+                        </div>
+                    </div>
+                    <div class="donate-footer">
+                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab"
+                                    aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i>
+                                    微信赞赏</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay"
+                                    aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/befovy" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://blog.befovy.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+</ul>
+  <div class="copyright">
+    &copy;2018  -
+    2019
+    <div class="publishby">
+        Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>. <br>
+        Theme <a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
     </div>
   </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/dist/even.26188efa.min.js"></script>
+</footer>
 
-<script id="baidu_analytics">
-  var _hmt = _hmt || [];
-  (function() {
-    if (window.location.hostname === 'localhost') return;
-    var hm = document.createElement("script"); hm.async = true;
-    hm.src = "https://hm.baidu.com/hm.js?92addb450ecf9417a02f971789533f13";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+   window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/rust.min.js"></script>
+<script type="text/javascript"
+   src="https://cdn.staticfile.org/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script>
+hljs.configure({
+  tabReplace: '    ', 
+  classPrefix: ''     
+                      
+})
+hljs.initHighlightingOnLoad();
+</script>
+<script type="text/javascript" src="https://blog.befovy.com/js/application.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/plugin.js"></script>
+<script>
+      (function (window) {
+          var INSIGHT_CONFIG = {
+              TRANSLATION: {
+                  POSTS: '文章',
+                  PAGES: '页面',
+                  CATEGORIES: '分类',
+                  TAGS: '标签',
+                  UNTITLED: '(未命名)',
+              },
+              ROOT_URL: 'https:\/\/blog.befovy.com\/',
+              CONTENT_URL: 'https:\/\/blog.befovy.com\/\/searchindex.json ',
+          };
+          window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+      })(window);
+      </script>
+<script type="text/javascript" src="https://blog.befovy.com/js/insight.js"></script>
 
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-
-
-</body>
+  </body>
 </html>
