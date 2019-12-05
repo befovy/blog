@@ -21,7 +21,7 @@ replaceCdn https://blog.befovy.com/css/ https://cdn.jsdelivr.net/gh/befovy/blogb
 replaceCdn https://blog.befovy.com/js/ https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/js/
 replaceCdn https://blog.befovy.com/images/ https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/images/
 replaceCdn https://blog.befovy.com/favicon.ico https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon.ico
-replaceCdn https:\/\/blog.befovy.com\/\/searchindex.json https:\/\/cdn.jsdelivr.net\/gh\/befovy\/blogback@master\/docs\/searchindex.json
+replaceCdn https:\\\\/\\\\/blog.befovy.com\\\\/\\\\/searchindex.json  https:\\\\/\\\\/cdn.jsdelivr.net\\\\/gh\\\\/befovy\\\\/blogback@master\\\\/docs\\\\/searchindex.json
 
 hugo serve
 
