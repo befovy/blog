@@ -84,7 +84,7 @@ params:
   # profile
   profile:
     enabled: true # Whether to show profile bar
-    avatar: avatar.jpg
+    avatar: images/avatar.jpg
     gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
     author: 半岛打铁匠
     author_title: befovy
