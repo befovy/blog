@@ -296,33 +296,33 @@ ijkplayer 最低竟然支持 sdk version 9，确实感谢 B 站项目组初期�
 <li>android studio 中的 c 代码没有语法高亮。</li>
 </ol>
 <p>对于问题1，我找到的解决方案是：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gradle" data-lang="gradle"><span style="color:#75715e">//NOTE:: run `./gradlew ideaModule` to apply exclude dirs
-</span><span style="color:#75715e"></span>apply plugin: <span style="color:#e6db74">&#39;idea&#39;</span>
+<div class="highlight"><pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="c1">//NOTE:: run `./gradlew ideaModule` to apply exclude dirs
+</span><span class="c1"></span><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;idea&#39;</span>
 
-idea<span style="color:#f92672">.</span><span style="color:#a6e22e">module</span> <span style="color:#f92672">{</span>
-    excludeDirs <span style="color:#f92672">+</span><span style="color:#f92672">=</span> file<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;ijkplayer-armv7a/src/&#39;</span><span style="color:#f92672">)</span>
-    excludeDirs <span style="color:#f92672">+</span><span style="color:#f92672">=</span> file<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;ijkplayer-arm64/src/&#39;</span><span style="color:#f92672">)</span>
-    excludeDirs <span style="color:#f92672">+</span><span style="color:#f92672">=</span> file<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;ijkplayer-armv5/src/&#39;</span><span style="color:#f92672">)</span>
-    excludeDirs <span style="color:#f92672">+</span><span style="color:#f92672">=</span> file<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;ijkplayer-x86/src/&#39;</span><span style="color:#f92672">)</span>
-    excludeDirs <span style="color:#f92672">+</span><span style="color:#f92672">=</span> file<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;ijkplayer-x86_64/src/&#39;</span><span style="color:#f92672">)</span>
-<span style="color:#f92672">}</span>
+<span class="n">idea</span><span class="o">.</span><span class="na">module</span> <span class="o">{</span>
+    <span class="n">excludeDirs</span> <span class="o">+</span><span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;ijkplayer-armv7a/src/&#39;</span><span class="o">)</span>
+    <span class="n">excludeDirs</span> <span class="o">+</span><span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;ijkplayer-arm64/src/&#39;</span><span class="o">)</span>
+    <span class="n">excludeDirs</span> <span class="o">+</span><span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;ijkplayer-armv5/src/&#39;</span><span class="o">)</span>
+    <span class="n">excludeDirs</span> <span class="o">+</span><span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;ijkplayer-x86/src/&#39;</span><span class="o">)</span>
+    <span class="n">excludeDirs</span> <span class="o">+</span><span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;ijkplayer-x86_64/src/&#39;</span><span class="o">)</span>
+<span class="o">}</span>
 </code></pre></div><p>在工程根 build.gradle 中增加这样的配置，并执行 <code>./gradlew ideaModule</code>， 就会在搜索结果中排除来自这几个文件夹的内容。</p>
 <p>对于问题2，我当然是用 cmake 解决了，新建一个 module, 取名 fijkplayer-full。换个名字方便和原项目进行区分，同时 f 也表示<code>full</code>, 我在这个 module 中囊括了原来 6 个 module 提供的内容。 f 还有别的含义，有机会在其它地方会提到。
 在 fijkplayer-full 的 build.gradel 中增加 cmake 的配置以及引入 ijkplayer-java module 的 java 源代码。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gradle" data-lang="gradle">android <span style="color:#f92672">{</span>
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-    sourceSets<span style="color:#f92672">.</span><span style="color:#a6e22e">main</span> <span style="color:#f92672">{</span>
-        java<span style="color:#f92672">.</span><span style="color:#a6e22e">srcDirs</span> <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;$rootProject.rootDir/ijkplayer-java/src/main/java/&#34;</span><span style="color:#f92672">]</span>
-        jni<span style="color:#f92672">.</span><span style="color:#a6e22e">srcDirs</span> <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#75715e">// This prevents the auto generation of Android.mk
-</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<div class="highlight"><pre class="chroma"><code class="language-gradle" data-lang="gradle"><span class="n">android</span> <span class="o">{</span>
+    <span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>
+    <span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>
+    <span class="n">sourceSets</span><span class="o">.</span><span class="na">main</span> <span class="o">{</span>
+        <span class="n">java</span><span class="o">.</span><span class="na">srcDirs</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;$rootProject.rootDir/ijkplayer-java/src/main/java/&#34;</span><span class="o">]</span>
+        <span class="n">jni</span><span class="o">.</span><span class="na">srcDirs</span> <span class="o">=</span> <span class="o">[</span><span class="o">]</span> <span class="c1">// This prevents the auto generation of Android.mk
+</span><span class="c1"></span>    <span class="o">}</span>
 
-    externalNativeBuild <span style="color:#f92672">{</span>
-        cmake <span style="color:#f92672">{</span>
-            path <span style="color:#e6db74">&#39;src/main/CMakeLists.txt&#39;</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
+    <span class="n">externalNativeBuild</span> <span class="o">{</span>
+        <span class="n">cmake</span> <span class="o">{</span>
+            <span class="n">path</span> <span class="s1">&#39;src/main/CMakeLists.txt&#39;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div><p>修改后，fijkplayer-full 就成了 &ldquo;六神合体&rdquo; 了。</p>
 <p>对于不同cpu 架构区分不同的 minSdkVersion 可以通过 productFlavors 实现，这一块我还没有具体考虑充分，目前是统一设置了大家用得最多的 minSdkVersion 16。</p>
 <p>此部分修改的完整内容<a href="https://github.com/befovy/ijkplayer/blob/master/android/ijkplayer/fijkplayer-full/build.gradle">点我查看, github.com/befovy/ijkplayer</a></p>
@@ -337,48 +337,48 @@ fijkplayer-full 中 classes.jar 较大是因为包含了 ijkplayer-java module �
 <p><strong>libffmpeg.so 找不到</strong></p>
 <p>libffmpeg.so 是事先通过 shell 命令编译成的，在 ffmpeg build 文件夹中，并且几乎不会改变，除非是要修改 ffmpeg。
 在 CMake 中通过</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake">add_library(<span style="color:#e6db74">ijkffmpeg</span> <span style="color:#e6db74">SHARED</span> <span style="color:#e6db74">IMPORTED</span>)<span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>set_target_properties( <span style="color:#75715e"># Specifies the target library.
-</span><span style="color:#75715e"></span>    <span style="color:#e6db74">ijkffmpeg</span>
-    <span style="color:#e6db74">PROPERTIES</span>
-    <span style="color:#e6db74">IMPORTED_LOCATION</span> <span style="color:#f92672">${</span>FFMPAG_SHARED_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/libijkffmpeg.so</span>
-)<span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="nb">add_library</span><span class="p">(</span><span class="s">ijkffmpeg</span> <span class="s">SHARED</span> <span class="s">IMPORTED</span><span class="p">)</span><span class="err"></span><span class="err">
+</span><span class="err"></span><span class="nb">set_target_properties</span><span class="p">(</span> <span class="c"># Specifies the target library.
+</span><span class="c"></span>    <span class="s">ijkffmpeg</span>
+    <span class="s">PROPERTIES</span>
+    <span class="s">IMPORTED_LOCATION</span> <span class="o">${</span><span class="nv">FFMPAG_SHARED_DIR</span><span class="o">}</span><span class="s">/libijkffmpeg.so</span>
+<span class="p">)</span><span class="err"></span><span class="err">
 </span></code></pre></div><p>引入预编译好的 ijkffmpeg，在编译 ijkplayer 的过程可以顺利完成链接。但是打包运行找不到 libijkffmpeg.so。分析最终的 apk 以及 fijkplayer-full.aar ，发现其中都没有 libijkffmpeg.so 文件，所以是打包 aar 的时候没有将这个文件打包进去。查看工程目录结构，发现编译好的 libijkplayer.so 和 libijksdl.so 都在文件夹 <code>/build/intermediates/cmake/debug/obj/armeabi-v7a</code> 中，所以还需要修改 CMakeLists.txt 在每次编译的时候将 libijkffmpeg.so 复制过去。最后的解决方案是</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake">add_library(<span style="color:#e6db74">ijkffmpeg</span> <span style="color:#e6db74">SHARED</span> <span style="color:#e6db74">IMPORTED</span>)<span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>set_target_properties( <span style="color:#75715e"># Specifies the target library.
-</span><span style="color:#75715e"></span>    <span style="color:#e6db74">ijkffmpeg</span>
-    <span style="color:#e6db74">PROPERTIES</span>
-    <span style="color:#e6db74">IMPORTED_LOCATION</span> <span style="color:#f92672">${</span>FFMPAG_SHARED_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/libijkffmpeg.so</span>
-    )<span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>add_custom_target(<span style="color:#e6db74">cpffmpeg</span>
-    <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">mkdir</span> <span style="color:#e6db74">-p</span> <span style="color:#f92672">${</span>CMAKE_LIBRARY_OUTPUT_DIRECTORY<span style="color:#f92672">}</span><span style="color:#e6db74"></span>
-    <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">cp</span> <span style="color:#f92672">${</span>FFMPAG_SHARED_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/libijkffmpeg.so</span> <span style="color:#f92672">${</span>CMAKE_LIBRARY_OUTPUT_DIRECTORY<span style="color:#f92672">}</span><span style="color:#e6db74"></span>
-)<span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>add_dependencies(<span style="color:#e6db74">ijkffmpeg</span> <span style="color:#e6db74">cpffmpeg</span>)<span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre class="chroma"><code class="language-cmake" data-lang="cmake"><span class="nb">add_library</span><span class="p">(</span><span class="s">ijkffmpeg</span> <span class="s">SHARED</span> <span class="s">IMPORTED</span><span class="p">)</span><span class="err"></span><span class="err">
+</span><span class="err"></span><span class="nb">set_target_properties</span><span class="p">(</span> <span class="c"># Specifies the target library.
+</span><span class="c"></span>    <span class="s">ijkffmpeg</span>
+    <span class="s">PROPERTIES</span>
+    <span class="s">IMPORTED_LOCATION</span> <span class="o">${</span><span class="nv">FFMPAG_SHARED_DIR</span><span class="o">}</span><span class="s">/libijkffmpeg.so</span>
+    <span class="p">)</span><span class="err"></span><span class="err">
+</span><span class="err"></span><span class="err"></span><span class="err">
+</span><span class="err"></span><span class="nb">add_custom_target</span><span class="p">(</span><span class="s">cpffmpeg</span>
+    <span class="s">COMMAND</span> <span class="s">mkdir</span> <span class="s">-p</span> <span class="o">${</span><span class="nv">CMAKE_LIBRARY_OUTPUT_DIRECTORY</span><span class="o">}</span><span class="s"></span>
+    <span class="s">COMMAND</span> <span class="s">cp</span> <span class="o">${</span><span class="nv">FFMPAG_SHARED_DIR</span><span class="o">}</span><span class="s">/libijkffmpeg.so</span> <span class="o">${</span><span class="nv">CMAKE_LIBRARY_OUTPUT_DIRECTORY</span><span class="o">}</span><span class="s"></span>
+<span class="p">)</span><span class="err"></span><span class="err">
+</span><span class="err"></span><span class="err"></span><span class="err">
+</span><span class="err"></span><span class="nb">add_dependencies</span><span class="p">(</span><span class="s">ijkffmpeg</span> <span class="s">cpffmpeg</span><span class="p">)</span><span class="err"></span><span class="err">
 </span></code></pre></div><p>没有找到一条命令能够解决的，所以麻烦了一点多写了点，用两个cmake 命令解决。</p>
 <p><strong>cpufeatures 编译出错</strong></p>
 <p>原项目中用到了 ndk 中的 cpufeatures，我在 CMake 文件中也引入并编译了 cpufeatures，但在编译 x86 以及 x86_64 架构的时候却出现了编译错误，具体是一处未识别的汇编指令。
 最后发现是 ndk r15c 版本中 文件  $ANDROID_NDK/sources/android/cpufeatures/cpu-features.c 中少了几个换行符，补上之后（下面内容）编译就没问题了。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">static</span> __inline__ <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">x86_cpuid</span>(<span style="color:#66d9ef">int</span> func, <span style="color:#66d9ef">int</span> values[<span style="color:#ae81ff">4</span>])
-{
-    <span style="color:#66d9ef">int</span> a, b, c, d;
-    <span style="color:#75715e">/* We need to preserve ebx since we&#39;re compiling PIC code */</span>
-    <span style="color:#75715e">/* this means we can&#39;t use &#34;=b&#34; for the second output register */</span>
-    __asm__ __volatile__ ( <span style="color:#960050;background-color:#1e0010">\</span>
-      <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">push %%ebx</span><span style="color:#e6db74">&#34;</span>
-      <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">cpuid</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#960050;background-color:#1e0010">\</span>
-      <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mov %%ebx, %1</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
-      <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pop %%ebx</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
-      <span style="color:#f92672">:</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">=a</span><span style="color:#e6db74">&#34;</span> (a), <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">=r</span><span style="color:#e6db74">&#34;</span> (b), <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">=c</span><span style="color:#e6db74">&#34;</span> (c), <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">=d</span><span style="color:#e6db74">&#34;</span> (d) <span style="color:#960050;background-color:#1e0010">\</span>
-      <span style="color:#f92672">:</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a</span><span style="color:#e6db74">&#34;</span> (func) <span style="color:#960050;background-color:#1e0010">\</span>
-    );
-    values[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> a;
-    values[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> b;
-    values[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> c;
-    values[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> d;
-}
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">static</span> <span class="n">__inline__</span> <span class="kt">void</span> <span class="nf">x86_cpuid</span><span class="p">(</span><span class="kt">int</span> <span class="n">func</span><span class="p">,</span> <span class="kt">int</span> <span class="n">values</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">;</span>
+    <span class="cm">/* We need to preserve ebx since we&#39;re compiling PIC code */</span>
+    <span class="cm">/* this means we can&#39;t use &#34;=b&#34; for the second output register */</span>
+    <span class="n">__asm__</span> <span class="n">__volatile__</span> <span class="p">(</span> <span class="err">\</span>
+      <span class="sa"></span><span class="s">&#34;</span><span class="s">push %%ebx</span><span class="s">&#34;</span>
+      <span class="sa"></span><span class="s">&#34;</span><span class="s">cpuid</span><span class="se">\n</span><span class="s">&#34;</span> <span class="err">\</span>
+      <span class="sa"></span><span class="s">&#34;</span><span class="s">mov %%ebx, %1</span><span class="se">\n</span><span class="s">&#34;</span>
+      <span class="sa"></span><span class="s">&#34;</span><span class="s">pop %%ebx</span><span class="se">\n</span><span class="s">&#34;</span>
+      <span class="o">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">=a</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">=r</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">=c</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">=d</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="err">\</span>
+      <span class="o">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">a</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="err">\</span>
+    <span class="p">)</span><span class="p">;</span>
+    <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+    <span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div><p>意外的是我最终发现 ijkplayer 项目中没有用到 cpufeatures 的地方，可能是 gpl 协议的 android-ndk-profiler 部分用了吧，但项目中默认使用了一个假的 android-ndk-profiler，此部分没有去深究，性能分析使用 simpleperf 就足够了。
 最后还是去掉 CMake 中 cpufeatures 的部分。</p>
 <p>此部分 CMakeLists.txt 的完整内容请看<br>

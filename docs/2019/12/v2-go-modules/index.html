@@ -334,7 +334,7 @@ Part 4: Go Modules : v2 及更高版本 (本文) 
 <p>需要主版本号后缀是 Go 模块和大多数其他依赖管理系统不同的方式之一。后缀用于解决<a href="https://research.swtch.com/vgo-import#dependency_story">菱形依赖问题</a>。在 Go 模块之前，<a href="http://gopkg.in/">gopkg.in</a> 允许软件包维护者遵循我们现在称为导入兼容性规则的内容。使用 gopkg.in 时，如果你依赖一个导入了 <code>gopkg.in/yaml.v1</code> 的包以及另一个导入了 <code>gopkg.in/yaml.v2</code> 的包，这不会发生冲突，因为两个 <code>yaml</code> 包有着不同的导入路径（它们使用和 Go Modules 类似的版本后缀）。由于 gopkg.in 和 Go Modules 共享相同的版本号后缀方法，因此 Go 命令接受 <code>gopkg.in/yaml.v2</code> 中的 <code>.v2</code> 作为有效的版本号。这是一个为了和 gopkg.in 兼容的特殊情况，在其他域托管的模块需要使用像 <code>/v2</code> 这样的斜杠后缀。</p>
 <h2 id="heading2">主版本策略</h2>
 <p>推荐的策略是在以主版本后缀命名的目录中开发 <code>v2+</code> 模块。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">github.com/googleapis/gax-go @ master branch
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">github.com/googleapis/gax-go @ master branch
 /go.mod    → module github.com/googleapis/gax-go
 /v2/go.mod → module github.com/googleapis/gax-go/v2
 </code></pre></div><p>这种方式与不支持 Go Modules 的一些工具兼容：仓库中的文件路径与 <code>GOPATH</code> 模式下 <code>go get</code> 命令预期的路径匹配。这一策略也允许所有的主版本一起在不同的目录中开发。</p>
@@ -342,7 +342,7 @@ Part 4: Go Modules : v2 及更高版本 (本文) 
 <p>本文中的示例遵循主版本子目录策略，所以提供了最大的兼容性。我们建议模块的作者遵循这种策略，只要他们还有用户在使用 <code>GOPATH</code> 模式开发。</p>
 <h2 id="-v2-">发布 v2 及更高版本</h2>
 <p>这篇文章以 <code>github.com/googleapis/gax-go</code> 为例：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pwd
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">pwd</span>
 /tmp/gax-go
 $ ls
 CODE_OF_CONDUCT.md  call_option.go  internal
@@ -355,43 +355,43 @@ module github.com/googleapis/gax-go
 
 go 1.9
 
-require <span style="color:#f92672">(</span>
+require <span class="o">(</span>
     github.com/golang/protobuf v1.3.1
     golang.org/x/exp v0.0.0-20190221220918-438050ddec5e
     golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3
     golang.org/x/tools v0.0.0-20190114222345-bf090417da8b
     google.golang.org/grpc v1.19.0
     honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099
-<span style="color:#f92672">)</span>
+<span class="o">)</span>
 $
 </code></pre></div><p>要开始开发 <code>github.com/googleapis/gax-go</code> 的 <code>v2</code> 版本，我们将创建一个新的 <code>v2/</code> 目录并将包的内容复制到该目录中。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir v2
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ mkdir v2
 $ cp *.go v2/
-building file list ... <span style="color:#66d9ef">done</span>
+building file list ... <span class="k">done</span>
 call_option.go
 gax.go
 header.go
 invoke.go
 tools.go
 
-sent <span style="color:#ae81ff">10588</span> bytes  received <span style="color:#ae81ff">130</span> bytes  21436.00 bytes/sec
-total size is <span style="color:#ae81ff">10208</span>  speedup is 0.95
+sent <span class="m">10588</span> bytes  received <span class="m">130</span> bytes  21436.00 bytes/sec
+total size is <span class="m">10208</span>  speedup is 0.95
 $
 </code></pre></div><p>现在，我们通过复制当前的 <code>go.mod</code> 文件并且在 module 路径上添加 <code>/v2</code> 后缀来创建属于 v2 的 <code>go.mod</code> 文件。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cp go.mod v2/go.mod
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cp go.mod v2/go.mod
 $ go mod edit -module github.com/googleapis/gax-go/v2 v2/go.mod
 $
 </code></pre></div><p>注意： <code>v2</code> 版本被视为与 <code>v0 / v1</code> 版本分开的模块，两者可以共存于同一构建中。因此，如果你的 <code>v2+</code> 模块具有多个软件包，你应该更新它们使用新的 <code>/v2</code> 导入路径，否则，你的 <code>v2+</code> 模块会依赖你的 <code>v0 / v1</code> 模块。要升级所有 <code>github.com/my/project</code> 为 <code>github.com/my/project/v2</code> ，可以使用 <code>find</code> 和 <code>sed</code> 命令：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ find . -type f <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -name <span style="color:#e6db74">&#39;*.go&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -exec sed -i -e <span style="color:#e6db74">&#39;s,github.com/my/project,github.com/my/project/v2,g&#39;</span> <span style="color:#f92672">{</span><span style="color:#f92672">}</span> <span style="color:#ae81ff">\;</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ find . -type f <span class="se">\
+</span><span class="se"></span>    -name <span class="s1">&#39;*.go&#39;</span> <span class="se">\
+</span><span class="se"></span>    -exec sed -i -e <span class="s1">&#39;s,github.com/my/project,github.com/my/project/v2,g&#39;</span> <span class="o">{</span><span class="o">}</span> <span class="se">\;</span>
 $
 </code></pre></div><p>现在我们有了一个 <code>v2</code> 模块，但是我们要在版本发布之前进行实验并进行修改。在我们发布 <code>v2.0.0</code> （或者其他没有预发布后缀的版本）之前，我们可以进行开发并且可以做出重大变更，就如同我们决定实现新 API 一样。  如果我们希望用户能够在正式发布新 API 之前对其进行试验，可以选择发布 <code>v2</code> 预发布版本：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git tag v2.0.0-alpha.1
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ git tag v2.0.0-alpha.1
 $ git push origin v2.0.0-alpha.1
 $
 </code></pre></div><p>一旦我们对 <code>v2</code> API 感到满意并且确定不会再有别的重大变更，我们可以打上 Git 标记 <code>v2.0.0</code> 。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git tag v2.0.0
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ git tag v2.0.0
 $ git push origin v2.0.0
 $
 </code></pre></div><p>到那时，就有两个主版本需要维护。向后兼容的更改和错误修复使用新的次版本或者补丁版本发布（比如 <code>v1.1.0</code> ， <code>v2.0.1</code> 等）。</p>

@@ -6,6 +6,9 @@ footnoteReturnLinkContents: ↩
 hasCJKLanguage: true
 paginate: 7
 enableEmoji: true
+pygmentsUseClasses: true
+pygmentsCodefences: true
+pygmentsStyle: "colorful"
 googleAnalytics: ""      # UA-XXXXXXXX-X 
 permalinks:
   posts: /:year/:month/:filename/
@@ -60,6 +63,21 @@ menu:
       title: About
       url: /about
       weight: 5
+
+markup:
+  highlight:
+    codeFences: true
+    hl_Lines: ""
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: colorful
+    tabWidth: 4
+
+  tableOfContents:
+    endLevel: 3
+    startLevel: 2
 
 params:
   since: 2018
