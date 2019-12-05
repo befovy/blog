@@ -22,7 +22,7 @@ hugo serve
 
 git status
 
-git add -u
+git add .
 
 git commit -m "hugo build"
 
