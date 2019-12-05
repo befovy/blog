@@ -35,12 +35,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.befovy.com/2019/06/issue_20190630_5/" />
 <meta property="article:published_time" content="2019-06-30T15:26:52+00:00" />
-<meta property="article:modified_time" content="2019-08-12T02:13:44+00:00" />
+<meta property="article:modified_time" content="2019-12-05T15:29:13+00:00" />
 <meta itemprop="name" content="用 CMake 为 ijkplayer 增加 android native debug 支持">
 <meta itemprop="description" content="给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端">
 <meta itemprop="datePublished" content="2019-06-30T15:26:52&#43;00:00" />
-<meta itemprop="dateModified" content="2019-08-12T02:13:44&#43;00:00" />
-<meta itemprop="wordCount" content="2169">
+<meta itemprop="dateModified" content="2019-12-05T15:29:13&#43;00:00" />
+<meta itemprop="wordCount" content="2170">
 
 
 
@@ -220,7 +220,14 @@
     <div class="slimContent">
       <nav id="toc" class="article-toc">
         <h3 class="toc-title">文章目录</h3>
-        <div class="toc-content always-active"><nav id="TableOfContents"></nav>
+        <div class="toc-content always-active"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#ijkplayer-">ijkplayer 简介</a></li>
+    <li><a href="#android-">android 工程结构调整</a></li>
+    <li><a href="#cmakeliststxt">CMakeLists.txt</a></li>
+    <li><a href="#heading">结束语</a></li>
+  </ul>
+</nav>
         </div>
       </nav>
     </div>
@@ -254,7 +261,7 @@
 	</span>
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/06/issue_20190630_5/#comments"
             class="article-comment-link">评论</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:2169字</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:2170字</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:5分 </span>
       </div>
     </div>
@@ -263,7 +270,7 @@
 直接上手请前往 <a href="https://github.com/befovy/ijkplayer#build-android-via-cmake">https://github.com/befovy/ijkplayer#build-android-via-cmake</a></p>
 <p>如果想了解一下整个过程请继续阅读本文。</p>
 <!-- raw HTML omitted -->
-<h1 id="ijkplayer-">ijkplayer 简介</h1>
+<h2 id="ijkplayer-">ijkplayer 简介</h2>
 <p><a href="https://github.com/Bilibili/ijkplayer">ijkplayer</a>  是由 B 站开源的一款移动端播放器。基于 ffmpeg 中 ffplay 开发，并添加 android MediaCodec、iOS VideotTolbox 视频硬解码支持以及 opengles、NativeWindow(android) 渲染，在当前的移动直播热潮中，被大量使用。
 但使用 ijkplayer 进行 android 播放器开发的过程中，调试起来稍微有些麻烦，官方提供了ndk 调试的几个patch 文件，并且有一段描述，是基于 ndk-build android.mk 工具链构建的。说实话由于没有做成开箱即用，我也没认真看过这部分内容。 由于我对 cmake 的了解更多一些，加之 google 官方也逐渐将 ndk 的工具链由 ndk-build 转向 cmake，并在 android studio 中对 cmake 提供了更好的支持。同时 cmake 也是跨平台的构建工具，方便后续将 ijkplayer 扩展至其它平台，所以我用 cmake 重新实现了 ijkplayer 的构建过程。</p>
 <p>只要不是修改 ffmpeg 的源代码，其它内容包括 ijkplayer 的 c 代码修改， java 层修改，都可以在 android studio 中一键运行、调试。</p>
@@ -271,7 +278,7 @@
 <p>题外话：ijkplayer 在 github 上的提交记录自 k0.8.8 版本之后就再也没有了，好多人评论说项目已经放弃维护了，但是细心寻找会发现在另一个项目 <a href="https://github.com/bilibili/FFmpeg/releases">Bilibili/ffmpeg</a> 中，还不断有提交记录。说明项目还是在不断开发，只是重心放在实现新的 ffmpeg protocol 上，没有及时维护 ijkplayer 项目上的 issues。</p>
 <p>下面具体说说一些具体的修改内容。</p>
 <!-- raw HTML omitted -->
-<h1 id="android-">android 工程结构调整</h1>
+<h2 id="android-">android 工程结构调整</h2>
 <p>ijkplayer 的项目本身具有多个 android module。</p>
 <pre><code>ijkplayer-arm64
 ijkplayer-armv5
@@ -320,7 +327,7 @@ idea<span style="color:#f92672">.</span><span style="color:#a6e22e">module</span
 <p>对于不同cpu 架构区分不同的 minSdkVersion 可以通过 productFlavors 实现，这一块我还没有具体考虑充分，目前是统一设置了大家用得最多的 minSdkVersion 16。</p>
 <p>此部分修改的完整内容<a href="https://github.com/befovy/ijkplayer/blob/master/android/ijkplayer/fijkplayer-full/build.gradle">点我查看, github.com/befovy/ijkplayer</a></p>
 <!-- raw HTML omitted -->
-<h1 id="cmakeliststxt">CMakeLists.txt</h1>
+<h2 id="cmakeliststxt">CMakeLists.txt</h2>
 <p>编写 CMakeLists.txt 完全是个翻译工作，将 Android.mk 中的规则翻译过来就行。完成后通过 CMake 方式最终生成的 aar 和原始方式生成的aar 文件大小几乎没什么差别，见下图。
 fijkplayer-full 只编译了 armv7a 架构，和 ijkplayer-armv7a 模块编译结果的对比。
 fijkplayer-full 中 classes.jar 较大是因为包含了 ijkplayer-java module 中的内容。
@@ -380,14 +387,15 @@ fijkplayer-full 中 classes.jar 较大是因为包含了 ijkplayer-java module �
 <a href="https://github.com/befovy/ijkplayer/blob/master/ijkmedia/ijkplayer/CMakeLists.txt">https://github.com/befovy/ijkplayer/blob/master/ijkmedia/ijkplayer/CMakeLists.txt</a><br>
 <a href="https://github.com/befovy/ijkplayer/blob/master/ijkmedia/ijksdl/CMakeLists.txt">https://github.com/befovy/ijkplayer/blob/master/ijkmedia/ijksdl/CMakeLists.txt</a></p>
 <!-- raw HTML omitted -->
-<h1 id="heading">结束语</h1>
+<h2 id="heading">结束语</h2>
 <p>😄 附一张 NDK 断点调试的大图 👏</p>
-<!-- raw HTML omitted -->
+<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/12/05/20191205232707.png" alt=""></p>
 <p>刚开始写博客，可能有些啰嗦，多多包涵。或是没有说明白的地方，请大方的前往<a href="https://github.com/befovy/befovy.github.io/issues/3">原始地址</a>进行评论。</p>
 <p>最近对 Flutter 产生了兴趣，并打算用 ijkplayer 开发一个 Flutter 的播放器 Plugin， 祝我早日完成。</p>
 <blockquote>
 <p>本文通过 mirror 和 hugo 生成，原始地址 <a href="https://github.com/befovy/blogback/issues/5">https://github.com/befovy/blogback/issues/5</a></p>
 </blockquote>
+<p>tps://github.com/befovy/blogback/issues/5</p>
 
     </div>
     <div class="article-footer">

@@ -35,11 +35,11 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.befovy.com/2019/06/issue_20190630_6/" />
 <meta property="article:published_time" content="2019-06-30T13:53:30+00:00" />
-<meta property="article:modified_time" content="2019-08-12T02:14:12+00:00" />
+<meta property="article:modified_time" content="2019-12-05T15:25:31+00:00" />
 <meta itemprop="name" content="使用 mirror 和 hugo 实现 github issue 的博客自动同步">
 <meta itemprop="description" content="一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。">
 <meta itemprop="datePublished" content="2019-06-30T13:53:30&#43;00:00" />
-<meta itemprop="dateModified" content="2019-08-12T02:14:12&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-05T15:25:31&#43;00:00" />
 <meta itemprop="wordCount" content="1359">
 
 
@@ -222,7 +222,13 @@
         <h3 class="toc-title">文章目录</h3>
         <div class="toc-content always-active"><nav id="TableOfContents">
   <ul>
-    <li><a href="#mirror-">mirror 配置文件</a></li>
+    <li><a href="#mirror">mirror</a>
+      <ul>
+        <li><a href="#mirror-">mirror 配置文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#hugo">hugo</a></li>
+    <li><a href="#heading">完整步骤</a></li>
   </ul>
 </nav>
         </div>
@@ -269,11 +275,11 @@
 <p>mirror 能够自动抓取 github 项目里的 issue，并输出为 hugo 支持的构建格式。 通过 hugo 自动生成静态网页，最终通过自动工具实现部署。</p>
 <p>使用 github webhooks 以及很少的自动化脚本就可以实现这个过程的全自动化。</p>
 <!-- raw HTML omitted -->
-<h1 id="mirror">mirror</h1>
+<h2 id="mirror">mirror</h2>
 <p><a href="https://github.com/befovy/mirror">mirror</a> 通过 github 提供的 graphql 进行 Issues 内容抓取。<br>
 通过一些自定义规则，实现 Issues 内容的分类提取，并整理输出博客内容。</p>
 <p>mirror 规则</p>
-<h2 id="mirror-">mirror 配置文件</h2>
+<h3 id="mirror-">mirror 配置文件</h3>
 <p>mirror 的配置文件使用 yaml 格式， 参考 <a href="./conf.yaml">conf.yaml</a>  
 默认查找运行目录下的mirror.yaml 作为输入配置文件</p>
 <p>配置文件中可定义多个内容来源。 每一种不同的内容来源，都有其具体的配置项。</p>
@@ -298,10 +304,10 @@
 <p>由于 Issue 都是公开的，可能会被别人评论，作者还可能回复提问者。
 为了区分这种情况，mirror 只拼接 comment 作者是项目作者本人， 且在 comment 开头有一句 html <code>&lt;!--mirror--&gt;</code> 注释语句的comment。</p>
 <!-- raw HTML omitted -->
-<h1 id="hugo">hugo</h1>
+<h2 id="hugo">hugo</h2>
 <p><a href="https://gohugo.io/">hugo</a> 是一个非常棒的静态页面生成器，可以把 markdown 内容，搭配各种主题生成你想要的静态博客内容。  这些内容托管在 github pages 上博客就部署好了。</p>
 <!-- raw HTML omitted -->
-<h1 id="heading">完整步骤</h1>
+<h2 id="heading">完整步骤</h2>
 <ol>
 <li>
 <p>生成项目
