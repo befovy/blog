@@ -17,6 +17,9 @@ replaceCdn https://gitee.com/befovy/images/raw/master https://cdn.jsdelivr.net/g
 replaceCdn \"/dist/ \"https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/dist/
 replaceCdn /favicon-32x32.png https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-32x32.png
 replaceCdn /favicon-16x16.png https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/favicon-16x16.png
+replaceCdn https://blog.befovy.com/css/ https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/css/
+replaceCdn https://blog.befovy.com/js/ https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/js/
+
 
 hugo serve
 
