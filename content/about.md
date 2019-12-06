@@ -2,6 +2,7 @@
 title: "关于自己"
 date: 2019-12-05T16:46:38+08:00
 draft: false
+layout: page
 ---
 
 #### 半岛打铁匠

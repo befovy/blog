@@ -4,19 +4,17 @@ date: 2019-11-23T19:02:45+08:00
 draft: false
 ---
 
-## 20191205 更新
+20191205 更新
 
 经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
-jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换一下网址即可。
 
-你对比下这俩地址
+对比下这俩地址，一个经过了 cdn 加速，一个是直接访问 github。
 
-https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
-
-https://github.com/befovy/blogback/tree/master/docs
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/    
+https://github.com/befovy/blogback/tree/master/docs    
 
 <!--more-->
-
 ----
 
 **本文中的内容除了自动压缩图片，其他都已经过时。**
