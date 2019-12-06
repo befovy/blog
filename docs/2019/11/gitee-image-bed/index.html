@@ -23,10 +23,10 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <meta name="description" content="20191205 更新 经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。 jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
-你对比下这俩地址
-https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
-https://github.com/befovy/blogback/tree/master/docs
+  <meta name="description" content="20191205 更新
+经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。 jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换一下网址即可。
+对比下这俩地址，一个经过了 cdn 加速，一个是直接访问 github。
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/ https://github.com/befovy/blogback/tree/master/docs
 " />
   <meta name="generator" content="Hugo 0.60.0 with theme pure" />
   <title>我的 gitee 图床，自动上传、压缩、获取图片 url - 半岛铁匠铺</title>
@@ -37,9 +37,9 @@ https://github.com/befovy/blogback/tree/master/docs
   <meta property="og:title" content="我的 gitee 图床，自动上传、压缩、获取图片 url" />
 <meta property="og:description" content="20191205 更新
 经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
-jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
-你对比下这俩地址
-https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换一下网址即可。
+对比下这俩地址，一个经过了 cdn 加速，一个是直接访问 github。
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/ 
 https://github.com/befovy/blogback/tree/master/docs" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.befovy.com/2019/11/gitee-image-bed/" />
@@ -48,13 +48,13 @@ https://github.com/befovy/blogback/tree/master/docs" />
 <meta itemprop="name" content="我的 gitee 图床，自动上传、压缩、获取图片 url">
 <meta itemprop="description" content="20191205 更新
 经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
-jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
-你对比下这俩地址
-https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换一下网址即可。
+对比下这俩地址，一个经过了 cdn 加速，一个是直接访问 github。
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/ 
 https://github.com/befovy/blogback/tree/master/docs">
 <meta itemprop="datePublished" content="2019-11-23T19:02:45&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-23T19:02:45&#43;08:00" />
-<meta itemprop="wordCount" content="2107">
+<meta itemprop="wordCount" content="2130">
 
 
 
@@ -62,9 +62,9 @@ https://github.com/befovy/blogback/tree/master/docs">
 <meta name="twitter:title" content="我的 gitee 图床，自动上传、压缩、获取图片 url"/>
 <meta name="twitter:description" content="20191205 更新
 经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
-jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。
-你对比下这俩地址
-https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换一下网址即可。
+对比下这俩地址，一个经过了 cdn 加速，一个是直接访问 github。
+https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/ 
 https://github.com/befovy/blogback/tree/master/docs"/>
 
   <!--[if lte IE 9]>
@@ -235,28 +235,6 @@ https://github.com/befovy/blogback/tree/master/docs"/>
 
     
     
-  <aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-    <div class="slimContent">
-      <nav id="toc" class="article-toc">
-        <h3 class="toc-title">文章目录</h3>
-        <div class="toc-content always-active"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#20191205-">20191205 更新</a></li>
-    <li><a href="#heading">文中用到的工具</a></li>
-    <li><a href="#heading1">搭建步骤</a>
-      <ul>
-        <li><a href="#github-">github 仓库和设置</a></li>
-        <li><a href="#-github-actions--gitee">使用 github actions 自动同步到 gitee</a></li>
-        <li><a href="#picgo-">PicGo 配置</a></li>
-        <li><a href="#github-actions--imgbot--pr">github actions 自动合并 ImgBot 的 pr</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-        </div>
-      </nav>
-    </div>
-  </aside>
 <main class="main" role="main"><div class="content">
   <article id="-" class="article article-type-" itemscope
     itemtype="http://schema.org/BlogPosting">
@@ -286,17 +264,17 @@ https://github.com/befovy/blogback/tree/master/docs"/>
 	</span>
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/gitee-image-bed/#comments"
             class="article-comment-link">评论</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:2107字</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:2130字</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:5分 </span>
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
-      <h2 id="20191205-">20191205 更新</h2>
+      <p>20191205 更新</p>
 <p>经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
-jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。</p>
-<p>你对比下这俩地址</p>
-<p><a href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/">https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/</a></p>
-<p><a href="https://github.com/befovy/blogback/tree/master/docs">https://github.com/befovy/blogback/tree/master/docs</a></p>
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换一下网址即可。</p>
+<p>对比下这俩地址，一个经过了 cdn 加速，一个是直接访问 github。</p>
+<p><a href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/">https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/</a> <br>
+<a href="https://github.com/befovy/blogback/tree/master/docs">https://github.com/befovy/blogback/tree/master/docs</a></p>
 <hr>
 <p><strong>本文中的内容除了自动压缩图片，其他都已经过时。</strong></p>
 <p>之前在 github pages 上部署的博客图片访问一直很慢，主要是没钱买图床。
@@ -461,6 +439,11 @@ PicGo 支持 github、新浪、七牛等多种图床。也可以安装插件支�
   </div>
 </div>
 
+<button type="button" data-toggle="modal" data-target="#donateModal"
+    class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning">
+    <span>赏</span>
+</button>
+
     </div>
   </article>
 <section id="comments">
@@ -481,21 +464,6 @@ PicGo 支持 github、新浪、七牛等多种图床。也可以安装插件支�
             </li>
         </ul>
         
-        <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal"
-            data-target="#donateModal"><span>赏</span></button>
-        
-        
-        <ul class="pager pull-right">
-            <li class="toggle-toc">
-                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
-                    title="文章目录" role="button">
-                    <span>[&nbsp;</span><span>文章目录</span>
-                    <i class="text-collapsed icon icon-anchor"></i>
-                    <i class="text-in icon icon-close"></i>
-                    <span>]</span>
-                </a>
-            </li>
-        </ul>
 
         <div class="bar-right">
             <div class="share-component" data-sites="weibo,qq,wechat,twitter"
@@ -551,6 +519,7 @@ PicGo 支持 github、新浪、七牛等多种图床。也可以安装插件支�
         </div>
     </div>
 </div>
+
 
 </main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
 <ul class="social-links">

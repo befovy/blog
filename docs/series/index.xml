@@ -45,12 +45,12 @@
       <pubDate>Sat, 23 Nov 2019 19:02:45 +0800</pubDate>
       
       <guid>https://blog.befovy.com/2019/11/gitee-image-bed/</guid>
-      <description>&lt;h2 id=&#34;20191205-&#34;&gt;20191205 更新&lt;/h2&gt;
+      <description>&lt;p&gt;20191205 更新&lt;/p&gt;
 &lt;p&gt;经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
-jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，自需要换一下网址即可。&lt;/p&gt;
-&lt;p&gt;你对比下这俩地址&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/&#34;&gt;https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/befovy/blogback/tree/master/docs&#34;&gt;https://github.com/befovy/blogback/tree/master/docs&lt;/a&gt;&lt;/p&gt;</description>
+jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换一下网址即可。&lt;/p&gt;
+&lt;p&gt;对比下这俩地址，一个经过了 cdn 加速，一个是直接访问 github。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/&#34;&gt;https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/&lt;/a&gt; &lt;br&gt;
+&lt;a href=&#34;https://github.com/befovy/blogback/tree/master/docs&#34;&gt;https://github.com/befovy/blogback/tree/master/docs&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

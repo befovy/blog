@@ -216,22 +216,6 @@
 
     
     
-  <aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-    <div class="slimContent">
-      <nav id="toc" class="article-toc">
-        <h3 class="toc-title">文章目录</h3>
-        <div class="toc-content always-active"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#ijkplayer-">ijkplayer 简介</a></li>
-    <li><a href="#android-">android 工程结构调整</a></li>
-    <li><a href="#cmakeliststxt">CMakeLists.txt</a></li>
-    <li><a href="#heading">结束语</a></li>
-  </ul>
-</nav>
-        </div>
-      </nav>
-    </div>
-  </aside>
 <main class="main" role="main"><div class="content">
   <article id="-" class="article article-type-" itemscope
     itemtype="http://schema.org/BlogPosting">
@@ -428,6 +412,11 @@ fijkplayer-full 中 classes.jar 较大是因为包含了 ijkplayer-java module �
   </div>
 </div>
 
+<button type="button" data-toggle="modal" data-target="#donateModal"
+    class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning">
+    <span>赏</span>
+</button>
+
     </div>
   </article>
 <section id="comments">
@@ -448,21 +437,6 @@ fijkplayer-full 中 classes.jar 较大是因为包含了 ijkplayer-java module �
             </li>
         </ul>
         
-        <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal"
-            data-target="#donateModal"><span>赏</span></button>
-        
-        
-        <ul class="pager pull-right">
-            <li class="toggle-toc">
-                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
-                    title="文章目录" role="button">
-                    <span>[&nbsp;</span><span>文章目录</span>
-                    <i class="text-collapsed icon icon-anchor"></i>
-                    <i class="text-in icon icon-close"></i>
-                    <span>]</span>
-                </a>
-            </li>
-        </ul>
 
         <div class="bar-right">
             <div class="share-component" data-sites="weibo,qq,wechat,twitter"
@@ -518,6 +492,7 @@ fijkplayer-full 中 classes.jar 较大是因为包含了 ijkplayer-java module �
         </div>
     </div>
 </div>
+
 
 </main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
 <ul class="social-links">
