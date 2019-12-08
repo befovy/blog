@@ -30,6 +30,8 @@
   
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/css/syntax.css" />
+
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
   <meta property="og:title" content="手把手带你写 Flutter 系统音量插件" />
 <meta property="og:description" content="
@@ -49,7 +51,7 @@
 ">
 <meta itemprop="datePublished" content="2019-11-23T16:46:38&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-23T16:46:38&#43;08:00" />
-<meta itemprop="wordCount" content="5247">
+<meta itemprop="wordCount" content="5248">
 
 
 
@@ -71,6 +73,7 @@
     <![endif]-->
 
 </head>
+
   </head>
   
 
@@ -262,7 +265,7 @@
 	</span>
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/11/flutter-plugin-volume/#comments"
             class="article-comment-link">评论</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:5247字</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:5248字</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:11分 </span>
       </div>
     </div>
@@ -380,76 +383,76 @@
 <h2 id="3volume-">3、Volume 接口</h2>
 <p>前面提到是要在一个视频播放器插件中调整系统的音量。经过梳理，先整理出初步需要的接口。主要有增大音量、减小音量、静音、获取音量、设置音量。同时还有激活音量变化监听、设置音量变化监听、关闭音量变化监听。为了使用方便，还增加了一个 VolumeWatcher 的 Widget，在其中成对使用了新增音量变化监听，取消音量变化监听接口。</p>
 <p>部分代码如下，完整代码请 <a href="https://github.com/befovy/flutter_volume/blob/6965560892/lib/flutter_volume.dart">点击链接查看</a> 。</p>
-<div class="highlight"><pre class="chroma"><code class="language-dart" data-lang="dart"><span class="kd">class</span> <span class="nc">VolumeVal</span> <span class="p">{</span>
-  <span class="kd">final</span> <span class="kt">double</span> <span class="n">vol</span><span class="p">;</span>
-  <span class="kd">final</span> <span class="kt">int</span> <span class="n">type</span><span class="p">;</span>
-<span class="p">}</span>
+<pre><code>class VolumeVal {
+  final double vol;
+  final int type;
+}
 
-<span class="kd">typedef</span> <span class="n">VolumeCallback</span> <span class="o">=</span> <span class="kt">void</span> <span class="n">Function</span><span class="p">(</span><span class="n">VolumeVal</span> <span class="n">value</span><span class="p">)</span><span class="p">;</span>
+typedef VolumeCallback = void Function(VolumeVal value);
 
-<span class="kd">class</span> <span class="nc">FlutterVolume</span> <span class="p">{</span>
-  <span class="kd">static</span> <span class="kd">const</span> <span class="kt">double</span> <span class="n">_step</span> <span class="o">=</span> <span class="m">1.0</span> <span class="o">/</span> <span class="m">16.0</span><span class="p">;</span>
-  <span class="kd">static</span> <span class="kd">const</span> <span class="n">MethodChannel</span> <span class="n">_channel</span> <span class="o">=</span>
-      <span class="kd">const</span> <span class="n">MethodChannel</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">com.befovy.flutter_volume</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">;</span>
+class FlutterVolume {
+  static const double _step = 1.0 / 16.0;
+  static const MethodChannel _channel =
+      const MethodChannel('com.befovy.flutter_volume');
 
-  <span class="kd">static</span> <span class="n">_VolumeValueNotifier</span> <span class="n">_notifier</span> <span class="o">=</span>
-      <span class="n">_VolumeValueNotifier</span><span class="p">(</span><span class="n">VolumeVal</span><span class="p">(</span><span class="nl">vol:</span> <span class="m">0</span><span class="p">,</span> <span class="nl">type:</span> <span class="m">0</span><span class="p">)</span><span class="p">)</span><span class="p">;</span>
+  static _VolumeValueNotifier _notifier =
+      _VolumeValueNotifier(VolumeVal(vol: 0, type: 0));
 
-  <span class="kd">static</span> <span class="n">StreamSubscription</span> <span class="n">_eventSubs</span><span class="p">;</span>
+  static StreamSubscription _eventSubs;
 
-  <span class="kt">void</span> <span class="n">enableWatcher</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">_eventSubs</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">_eventSubs</span> <span class="o">=</span> <span class="n">EventChannel</span><span class="p">(</span><span class="s1">&#39;</span><span class="s1">com.befovy.flutter_volume/event</span><span class="s1">&#39;</span><span class="p">)</span>
-          <span class="p">.</span><span class="n">receiveBroadcastStream</span><span class="p">(</span><span class="p">)</span>
-          <span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="n">_eventListener</span><span class="p">,</span> <span class="nl">onError:</span> <span class="n">_errorListener</span><span class="p">)</span><span class="p">;</span>
-      <span class="n">_channel</span><span class="p">.</span><span class="n">invokeMethod</span><span class="p">(</span><span class="s2">&#34;</span><span class="s2">enable_watch</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+  void enableWatcher() {
+    if (_eventSubs == null) {
+      _eventSubs = EventChannel('com.befovy.flutter_volume/event')
+          .receiveBroadcastStream()
+          .listen(_eventListener, onError: _errorListener);
+      _channel.invokeMethod(&quot;enable_watch&quot;);
+    }
+  }
 
-  <span class="kt">void</span> <span class="n">disableWatcher</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">_channel</span><span class="p">.</span><span class="n">invokeMethod</span><span class="p">(</span><span class="s2">&#34;</span><span class="s2">disable_watch</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">_eventSubs</span><span class="o">?</span><span class="p">.</span><span class="n">cancel</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-    <span class="n">_eventSubs</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-  <span class="p">}</span>
+  void disableWatcher() {
+    _channel.invokeMethod(&quot;disable_watch&quot;);
+    _eventSubs?.cancel();
+    _eventSubs = null;
+  }
 
-  <span class="kd">static</span> <span class="kt">void</span> <span class="n">_eventListener</span><span class="p">(</span><span class="kt">dynamic</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">final</span> <span class="n">Map</span><span class="o">&lt;</span><span class="kt">dynamic</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="n">event</span><span class="p">;</span>
-    <span class="k">switch</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="s1">&#39;</span><span class="s1">event</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">case</span> <span class="s1">&#39;</span><span class="s1">vol</span><span class="s1">&#39;</span><span class="o">:</span>
-        <span class="kt">double</span> <span class="n">vol</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;</span><span class="s1">v</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">type</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="s1">&#39;</span><span class="s1">t</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">;</span>
-        <span class="n">_notifier</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">VolumeVal</span><span class="p">(</span><span class="nl">vol:</span> <span class="n">vol</span><span class="p">,</span> <span class="nl">type:</span> <span class="n">type</span><span class="p">)</span><span class="p">;</span>
-        <span class="k">break</span><span class="p">;</span>
-      <span class="k">default</span><span class="o">:</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+  static void _eventListener(dynamic event) {
+    final Map&lt;dynamic, dynamic&gt; map = event;
+    switch (map['event']) {
+      case 'vol':
+        double vol = map['v'];
+        int type = map['t'];
+        _notifier.value = VolumeVal(vol: vol, type: type);
+        break;
+      default:
+        break;
+    }
+  }
   
-  <span class="kd">static</span> <span class="n">Future</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">up</span><span class="p">(</span><span class="p">{</span><span class="kt">double</span> <span class="n">step</span> <span class="o">=</span> <span class="n">_step</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span> <span class="o">=</span> <span class="n">STREAM_MUSIC</span><span class="p">}</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">_channel</span><span class="p">.</span><span class="n">invokeMethod</span><span class="p">(</span><span class="s2">&#34;</span><span class="s2">up</span><span class="s2">&#34;</span><span class="p">,</span> <span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">dynamic</span><span class="o">&gt;</span><span class="p">{</span>
-      <span class="s1">&#39;</span><span class="s1">step</span><span class="s1">&#39;</span><span class="o">:</span> <span class="n">step</span><span class="p">,</span>
-      <span class="s1">&#39;</span><span class="s1">type</span><span class="s1">&#39;</span><span class="o">:</span> <span class="n">type</span><span class="p">,</span>
-    <span class="p">}</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span>
+  static Future&lt;double&gt; up({double step = _step, int type = STREAM_MUSIC}) {
+    return _channel.invokeMethod(&quot;up&quot;, &lt;String, dynamic&gt;{
+      'step': step,
+      'type': type,
+    });
+  }
 
-  <span class="kd">static</span> <span class="kt">void</span> <span class="n">addVolListener</span><span class="p">(</span><span class="n">VoidCallback</span> <span class="n">listener</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">_notifier</span><span class="p">.</span><span class="n">addListener</span><span class="p">(</span><span class="n">listener</span><span class="p">)</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+  static void addVolListener(VoidCallback listener) {
+    _notifier.addListener(listener);
+  }
+}
 
-<span class="kd">class</span> <span class="nc">VolumeWatcher</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
-  <span class="kd">final</span> <span class="n">VolumeCallback</span> <span class="n">watcher</span><span class="p">;</span>
-  <span class="kd">final</span> <span class="n">Widget</span> <span class="n">child</span><span class="p">;</span>
+class VolumeWatcher extends StatefulWidget {
+  final VolumeCallback watcher;
+  final Widget child;
 
-  <span class="n">VolumeWatcher</span><span class="p">(</span><span class="p">{</span>
-    <span class="err">@</span><span class="n">required</span> <span class="k">this</span><span class="p">.</span><span class="n">watcher</span><span class="p">,</span>
-    <span class="err">@</span><span class="n">required</span> <span class="k">this</span><span class="p">.</span><span class="n">child</span><span class="p">,</span>
-  <span class="p">}</span><span class="p">)</span><span class="p">;</span>
+  VolumeWatcher({
+    @required this.watcher,
+    @required this.child,
+  });
 
-  <span class="err">@</span><span class="n">override</span>
-  <span class="n">_VolumeWatcherState</span> <span class="n">createState</span><span class="p">(</span><span class="p">)</span> <span class="o">=</span><span class="o">&gt;</span> <span class="n">_VolumeWatcherState</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div><p>这里既使用了 MethodChannel， 也使用了 EventChannel。Flutter 使用 MethodChannel 发送方法调用请求到 native 侧，并获取方法的调用结果。为了避免 UI 卡顿，方法调用都使用异步模式。EventChannel 则是在 Flutter 端处理 native 发送的事件通知。<!-- raw HTML omitted -->在 Flutter 中，所有 Channel 的 name 必须是不重复的，否则消息发送会出错。</p>
+  @override
+  _VolumeWatcherState createState() =&gt; _VolumeWatcherState();
+}
+</code></pre><p>这里既使用了 MethodChannel， 也使用了 EventChannel。Flutter 使用 MethodChannel 发送方法调用请求到 native 侧，并获取方法的调用结果。为了避免 UI 卡顿，方法调用都使用异步模式。EventChannel 则是在 Flutter 端处理 native 发送的事件通知。<!-- raw HTML omitted -->在 Flutter 中，所有 Channel 的 name 必须是不重复的，否则消息发送会出错。</p>
 <ul>
 <li><code>MethodChannel</code>  的使用很简单，使用 name 参数构造一个 <code>MethodChannel</code>  ，并使用 <code>invokeMethod</code>  进行消息和参数的发送，并返回异步的结果。</li>
 <li><code>EventChannel</code> 使用稍微复杂一些，但都是一些样板代码。构造 <code>EventChannel</code> 并监听事件广播，注册事件处理函数和错误处理函数。使用完成后再取消广播订阅。</li>
@@ -590,86 +593,85 @@
     <span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>
  <span class="o">}</span>
 </code></pre></div><p> </p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FlutterVolumePlugin</span><span class="p">(</span><span class="n">registrar</span><span class="p">:</span> <span class="n">Registrar</span><span class="p">)</span><span class="p">:</span> <span class="n">MethodCallHandler</span> <span class="p">{</span>
-  <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
-    <span class="n">@JvmStatic</span>
-    <span class="k">fun</span> <span class="nf">registerWith</span><span class="p">(</span><span class="n">registrar</span><span class="p">:</span> <span class="n">Registrar</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">val</span> <span class="py">channel</span> <span class="p">=</span> <span class="n">MethodChannel</span><span class="p">(</span><span class="n">registrar</span><span class="p">.</span><span class="n">messenger</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="s">&#34;flutter_volume&#34;</span><span class="p">)</span>
-      <span class="n">channel</span><span class="p">.</span><span class="n">setMethodCallHandler</span><span class="p">(</span><span class="n">FlutterVolumePlugin</span><span class="p">(</span><span class="n">registrar</span><span class="p">)</span><span class="p">)</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-  <span class="k">private</span> <span class="k">val</span> <span class="py">mRegistrar</span><span class="p">:</span> <span class="n">Registrar</span> <span class="p">=</span> <span class="n">registrar</span>
-<span class="p">}</span>
-</code></pre></div><p>对自动生成的 Plugin class 进行修改，增加 mRegistrar 成员变量（见上面代码片段），在成员函数 <code>onMethodCall</code> 中处理 method call 的时候就可以获取 activity、context 等重要变量。</p>
+<pre><code>class FlutterVolumePlugin(registrar: Registrar): MethodCallHandler {
+  companion object {
+    @JvmStatic
+    fun registerWith(registrar: Registrar) {
+      val channel = MethodChannel(registrar.messenger(), &quot;flutter_volume&quot;)
+      channel.setMethodCallHandler(FlutterVolumePlugin(registrar))
+    }
+  }
+  private val mRegistrar: Registrar = registrar
+}
+</code></pre><p>对自动生成的 Plugin class 进行修改，增加 mRegistrar 成员变量（见上面代码片段），在成员函数 <code>onMethodCall</code> 中处理 method call 的时候就可以获取 activity、context 等重要变量。</p>
 <p>比如 Android 系统中音量修改使用的 AudioManager 。</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"> <span class="k">class</span> <span class="nc">FlutterVolumePlugin</span><span class="p">(</span><span class="n">registrar</span><span class="p">:</span> <span class="n">Registrar</span><span class="p">)</span><span class="p">:</span> <span class="n">MethodCallHandler</span> <span class="p">{</span>
-   <span class="k">private</span> <span class="k">fun</span> <span class="nf">audioManager</span><span class="p">(</span><span class="p">)</span><span class="p">:</span> <span class="n">AudioManager</span> <span class="p">{</span>
-     <span class="k">val</span> <span class="py">activity</span> <span class="p">=</span> <span class="n">mRegistrar</span><span class="p">.</span><span class="n">activity</span><span class="p">(</span><span class="p">)</span>
-     <span class="k">return</span> <span class="n">activity</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">AUDIO_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">AudioManager</span>
-   <span class="p">}</span>
- <span class="p">}</span>
-</code></pre></div><p>Android 中音量调节功能的实现主要就是 AudioManager 的 API 调用，以及对 flutter onMethodCall 方法的处理。详细的内容请<a href="https://github.com/befovy/flutter_volume/blob/d3bef08778/android/src/main/kotlin/com/befovy/flutter_volume/FlutterVolumePlugin.kt">点击查看源代码</a>。</p>
+<pre><code> class FlutterVolumePlugin(registrar: Registrar): MethodCallHandler {
+   private fun audioManager(): AudioManager {
+     val activity = mRegistrar.activity()
+     return activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+   }
+ }
+</code></pre><p>Android 中音量调节功能的实现主要就是 AudioManager 的 API 调用，以及对 flutter onMethodCall 方法的处理。详细的内容请<a href="https://github.com/befovy/flutter_volume/blob/d3bef08778/android/src/main/kotlin/com/befovy/flutter_volume/FlutterVolumePlugin.kt">点击查看源代码</a>。</p>
 <h3 id="heading4">监听音量的变化</h3>
 <p>Android 系统中使用广播通知 BroadcastReceiver 获取音量变化。<!-- raw HTML omitted -->根据接口设计，监听系统音量变化，有两个接口调用控制功能开启或者关闭。<!-- raw HTML omitted -->在 <code>enableWatch</code> 方法中，先修改标记变量 <code>mWatching</code> ， 然后创建 <code>EventChannel</code> 并且调用 <code>setStreamHandler</code> 方法。最后，注册广播接收器，接受系统音量变化的通知。<!-- raw HTML omitted -->需要注意的是，dart中 <code>EventChannel('xxx').receiveBroadcastStream()</code>的调用一定要在 native 端执行完成 <code>setStreamHandler</code> 方法之后，否则会出现 <code>onListen</code> 方法找不到的错误。</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">FlutterVolumePlugin</span><span class="p">(</span><span class="n">registrar</span><span class="p">:</span> <span class="n">Registrar</span><span class="p">)</span> <span class="p">:</span> <span class="n">MethodCallHandler</span> <span class="p">{</span>
-	<span class="k">private</span> <span class="k">fun</span> <span class="nf">enableWatch</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="p">!</span><span class="n">mWatching</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">mWatching</span> <span class="p">=</span> <span class="k">true</span>
-            <span class="n">mEventChannel</span> <span class="p">=</span> <span class="n">EventChannel</span><span class="p">(</span><span class="n">mRegistrar</span><span class="p">.</span><span class="n">messenger</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="s">&#34;com.befovy.flutter_volume/event&#34;</span><span class="p">)</span>
-            <span class="n">mEventChannel</span><span class="o">!!</span><span class="p">.</span><span class="n">setStreamHandler</span><span class="p">(</span><span class="k">object</span> <span class="err">:</span><span class="err"> </span><span class="nc">EventChannel</span><span class="p">.</span><span class="n">StreamHandler</span> <span class="p">{</span>
-                <span class="k">override</span> <span class="k">fun</span> <span class="nf">onListen</span><span class="p">(</span><span class="n">o</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span><span class="p">,</span> <span class="n">eventSink</span><span class="p">:</span> <span class="n">EventChannel</span><span class="p">.</span><span class="n">EventSink</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">mEventSink</span><span class="p">.</span><span class="n">setDelegate</span><span class="p">(</span><span class="n">eventSink</span><span class="p">)</span>
-                <span class="p">}</span>
+<pre><code>class FlutterVolumePlugin(registrar: Registrar) : MethodCallHandler {
+	private fun enableWatch() {
+        if (!mWatching) {
+            mWatching = true
+            mEventChannel = EventChannel(mRegistrar.messenger(), &quot;com.befovy.flutter_volume/event&quot;)
+            mEventChannel!!.setStreamHandler(object : EventChannel.StreamHandler {
+                override fun onListen(o: Any?, eventSink: EventChannel.EventSink) {
+                    mEventSink.setDelegate(eventSink)
+                }
 
-                <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCancel</span><span class="p">(</span><span class="n">o</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">mEventSink</span><span class="p">.</span><span class="n">setDelegate</span><span class="p">(</span><span class="k">null</span><span class="p">)</span>
-                <span class="p">}</span>
-            <span class="p">}</span><span class="p">)</span>
+                override fun onCancel(o: Any?) {
+                    mEventSink.setDelegate(null)
+                }
+            })
 
-            <span class="n">mVolumeReceiver</span> <span class="p">=</span> <span class="n">VolumeReceiver</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
-            <span class="k">val</span> <span class="py">filter</span> <span class="p">=</span> <span class="n">IntentFilter</span><span class="p">(</span><span class="p">)</span>
-            <span class="n">filter</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">VOLUME_CHANGED_ACTION</span><span class="p">)</span>
-            <span class="n">mRegistrar</span><span class="p">.</span><span class="n">activeContext</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">registerReceiver</span><span class="p">(</span><span class="n">mVolumeReceiver</span><span class="p">,</span> <span class="n">filter</span><span class="p">)</span>
-        <span class="p">}</span>
+            mVolumeReceiver = VolumeReceiver(this)
+            val filter = IntentFilter()
+            filter.addAction(VOLUME_CHANGED_ACTION)
+            mRegistrar.activeContext().registerReceiver(mVolumeReceiver, filter)
+        }
 
-    <span class="p">}</span>
+    }
 
-    <span class="k">private</span> <span class="k">fun</span> <span class="nf">disableWatch</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">mWatching</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">mWatching</span> <span class="p">=</span> <span class="k">false</span>
-            <span class="n">mEventChannel</span><span class="o">!!</span><span class="p">.</span><span class="n">setStreamHandler</span><span class="p">(</span><span class="k">null</span><span class="p">)</span>
-            <span class="n">mEventChannel</span> <span class="p">=</span> <span class="k">null</span>
+    private fun disableWatch() {
+        if (mWatching) {
+            mWatching = false
+            mEventChannel!!.setStreamHandler(null)
+            mEventChannel = null
 
-            <span class="n">mRegistrar</span><span class="p">.</span><span class="n">activeContext</span><span class="p">(</span><span class="p">)</span><span class="p">.</span><span class="n">unregisterReceiver</span><span class="p">(</span><span class="n">mVolumeReceiver</span><span class="p">)</span>
-            <span class="n">mVolumeReceiver</span> <span class="p">=</span> <span class="k">null</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><p>在获取音量变化通知 BroadcastReceiver 的 onReceive 方法中， 使用 EventChannel 发送到事件内容到 flutter 侧。</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin">
-<span class="k">private</span> <span class="k">class</span> <span class="nc">VolumeReceiver</span><span class="p">(</span><span class="n">plugin</span><span class="p">:</span> <span class="n">FlutterVolumePlugin</span><span class="p">)</span> <span class="p">:</span> <span class="n">BroadcastReceiver</span><span class="p">(</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">private</span> <span class="k">var</span> <span class="py">mPlugin</span><span class="p">:</span> <span class="n">WeakReference</span><span class="p">&lt;</span><span class="n">FlutterVolumePlugin</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">WeakReference</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onReceive</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">intent</span><span class="p">:</span> <span class="n">Intent</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">intent</span><span class="p">.</span><span class="n">action</span> <span class="p">=</span><span class="p">=</span> <span class="s">&#34;android.media.VOLUME_CHANGED_ACTION&#34;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">val</span> <span class="py">plugin</span> <span class="p">=</span> <span class="n">mPlugin</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">plugin</span> <span class="p">!</span><span class="p">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">val</span> <span class="py">volume</span> <span class="p">=</span> <span class="n">plugin</span><span class="p">.</span><span class="n">getVolume</span><span class="p">(</span><span class="p">)</span>
-                <span class="k">val</span> <span class="py">event</span><span class="p">:</span> <span class="n">MutableMap</span><span class="p">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Any</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">mutableMapOf</span><span class="p">(</span><span class="p">)</span>
-                <span class="n">event</span><span class="p">[</span><span class="s">&#34;event&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&#34;vol&#34;</span>
-                <span class="n">event</span><span class="p">[</span><span class="s">&#34;v&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="n">volume</span>
-                <span class="n">event</span><span class="p">[</span><span class="s">&#34;t&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="n">AudioManager</span><span class="p">.</span><span class="n">STREAM_MUSIC</span>
-                <span class="n">plugin</span><span class="p">.</span><span class="n">sink</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+            mRegistrar.activeContext().unregisterReceiver(mVolumeReceiver)
+            mVolumeReceiver = null
+        }
+    }
+}
+</code></pre><p>在获取音量变化通知 BroadcastReceiver 的 onReceive 方法中， 使用 EventChannel 发送到事件内容到 flutter 侧。</p>
+<pre><code>private class VolumeReceiver(plugin: FlutterVolumePlugin) : BroadcastReceiver() {
+    private var mPlugin: WeakReference&lt;FlutterVolumePlugin&gt; = WeakReference(plugin)
+    override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action == &quot;android.media.VOLUME_CHANGED_ACTION&quot;) {
+            val plugin = mPlugin.get()
+            if (plugin != null) {
+                val volume = plugin.getVolume()
+                val event: MutableMap&lt;String, Any&gt; = mutableMapOf()
+                event[&quot;event&quot;] = &quot;vol&quot;
+                event[&quot;v&quot;] = volume
+                event[&quot;t&quot;] = AudioManager.STREAM_MUSIC
+                plugin.sink(event)
+            }
+        }
+    }
+}
 
-<span class="k">class</span> <span class="nc">FlutterVolumePlugin</span><span class="p">(</span><span class="n">registrar</span><span class="p">:</span> <span class="n">Registrar</span><span class="p">)</span> <span class="p">:</span> <span class="n">MethodCallHandler</span> <span class="p">{</span>
-    <span class="k">fun</span> <span class="nf">sink</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">mEventSink</span><span class="p">.</span><span class="n">success</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><p>详细的内容请<a href="https://github.com/befovy/flutter_volume/blob/d3bef08778/android/src/main/kotlin/com/befovy/flutter_volume/FlutterVolumePlugin.kt">点击查看源代码</a>。</p>
+class FlutterVolumePlugin(registrar: Registrar) : MethodCallHandler {
+    fun sink(event: Any) {
+        mEventSink.success(event)
+    }
+}
+</code></pre><p>详细的内容请<a href="https://github.com/befovy/flutter_volume/blob/d3bef08778/android/src/main/kotlin/com/befovy/flutter_volume/FlutterVolumePlugin.kt">点击查看源代码</a>。</p>
 <h3 id="heading5">音量区间映射</h3>
 <p>在 Android 系统中，音量最大值有可能不一样，范围不是 [0, 1]。此插件获取音量最大值后，将音量又线性映射到 [0, 1] 的范围中。另一点需要注意，android 音量调节不是无级调节，有一个调节的最小单元，将这个最小单元映射到 [0, 1] 范围中的一个 delta 值，并保证调节音量 step 值大于等于这个最小单元 delta 值，否则音量调节无效。<!-- raw HTML omitted -->在插件的 API 实现中，如果调用 <code>up</code> 或 <code>down</code> 接口， <code>step</code> 参数值小于 <code>delta</code> ，则会被修改为 <code>delta</code>  的值，保证 <code>up</code> 或 <code>down</code> 接口的调用都是有效的。</p>
 <h2 id="6-demo">6、插件 Demo</h2>
