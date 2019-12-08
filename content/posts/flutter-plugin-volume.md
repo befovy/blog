@@ -92,7 +92,8 @@ MethodCodec 支持的数据类型以及在 dart 、iOS 和 Android 中的对应�
 前面提到是要在一个视频播放器插件中调整系统的音量。经过梳理，先整理出初步需要的接口。主要有增大音量、减小音量、静音、获取音量、设置音量。同时还有激活音量变化监听、设置音量变化监听、关闭音量变化监听。为了使用方便，还增加了一个 VolumeWatcher 的 Widget，在其中成对使用了新增音量变化监听，取消音量变化监听接口。
 
 部分代码如下，完整代码请 [点击链接查看](https://github.com/befovy/flutter_volume/blob/6965560892/lib/flutter_volume.dart) 。
-```dart
+
+```
 class VolumeVal {
   final double vol;
   final int type;
@@ -163,6 +164,7 @@ class VolumeWatcher extends StatefulWidget {
   _VolumeWatcherState createState() => _VolumeWatcherState();
 }
 ```
+
 这里既使用了 MethodChannel， 也使用了 EventChannel。Flutter 使用 MethodChannel 发送方法调用请求到 native 侧，并获取方法的调用结果。为了避免 UI 卡顿，方法调用都使用异步模式。EventChannel 则是在 Flutter 端处理 native 发送的事件通知。<br />在 Flutter 中，所有 Channel 的 name 必须是不重复的，否则消息发送会出错。
 
 - `MethodChannel`  的使用很简单，使用 name 参数构造一个 `MethodChannel`  ，并使用 `invokeMethod`  进行消息和参数的发送，并返回异步的结果。
@@ -321,7 +323,7 @@ Android Flutter 插件开发离不开 flutter engine 中的接口 Registrar。�
  }
 ```
  
-```kotlin
+```
 class FlutterVolumePlugin(registrar: Registrar): MethodCallHandler {
   companion object {
     @JvmStatic
@@ -337,7 +339,7 @@ class FlutterVolumePlugin(registrar: Registrar): MethodCallHandler {
 对自动生成的 Plugin class 进行修改，增加 mRegistrar 成员变量（见上面代码片段），在成员函数 `onMethodCall` 中处理 method call 的时候就可以获取 activity、context 等重要变量。
 
 比如 Android 系统中音量修改使用的 AudioManager 。
-```kotlin
+```
  class FlutterVolumePlugin(registrar: Registrar): MethodCallHandler {
    private fun audioManager(): AudioManager {
      val activity = mRegistrar.activity()
@@ -350,7 +352,7 @@ Android 中音量调节功能的实现主要就是 AudioManager 的 API 调用�
 
 ### 监听音量的变化
 Android 系统中使用广播通知 BroadcastReceiver 获取音量变化。<br />根据接口设计，监听系统音量变化，有两个接口调用控制功能开启或者关闭。<br />在 `enableWatch` 方法中，先修改标记变量 `mWatching` ， 然后创建 `EventChannel` 并且调用 `setStreamHandler` 方法。最后，注册广播接收器，接受系统音量变化的通知。<br />需要注意的是，dart中 `EventChannel('xxx').receiveBroadcastStream()`的调用一定要在 native 端执行完成 `setStreamHandler` 方法之后，否则会出现 `onListen` 方法找不到的错误。
-```kotlin
+```
 class FlutterVolumePlugin(registrar: Registrar) : MethodCallHandler {
 	private fun enableWatch() {
         if (!mWatching) {
@@ -388,8 +390,8 @@ class FlutterVolumePlugin(registrar: Registrar) : MethodCallHandler {
 ```
 
 在获取音量变化通知 BroadcastReceiver 的 onReceive 方法中， 使用 EventChannel 发送到事件内容到 flutter 侧。
-```kotlin
 
+```
 private class VolumeReceiver(plugin: FlutterVolumePlugin) : BroadcastReceiver() {
     private var mPlugin: WeakReference<FlutterVolumePlugin> = WeakReference(plugin)
     override fun onReceive(context: Context, intent: Intent) {

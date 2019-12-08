@@ -8,7 +8,8 @@ paginate: 7
 enableEmoji: true
 pygmentsUseClasses: true
 pygmentsCodefences: true
-pygmentsStyle: "colorful"
+pygmentsCodefencesGuessSyntax: true
+pygmentsStyle: "trac"
 googleAnalytics: ""      # UA-XXXXXXXX-X 
 permalinks:
   posts: /:year/:month/:filename/
