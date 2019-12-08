@@ -5,10 +5,19 @@
     <link>https://blog.befovy.com/tags/flutter/</link>
     <description>Recent content in Flutter on 半岛铁匠铺</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 23 Nov 2019 16:46:38 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Dec 2019 18:31:23 +0800</lastBuildDate>
     
         <atom:link href="https://blog.befovy.com/tags/flutter/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go 打造 Flutter 多版本管理工具：fvm</title>
+      <link>https://blog.befovy.com/2019/12/fvm-using-go/</link>
+      <pubDate>Sun, 08 Dec 2019 18:31:23 +0800</pubDate>
+      
+      <guid>https://blog.befovy.com/2019/12/fvm-using-go/</guid>
+      <description>周末时间用 Go 语言完成了 Flutter 多版本管理工具的初个版本 fvm v0.1.0。我必须承认，这个版本完全是在造轮子，而且还是和 leoafarias fvm 一模一样。 为什么造轮子 简单</description>
+    </item>
     
     <item>
       <title>关于自己</title>

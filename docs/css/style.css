@@ -5603,7 +5603,7 @@ pre .js .function {
 pre,
 .highlight {
   background: #fafafa;
-  margin: 2px 0;
+  margin: 2px 0 10px 0;
   padding: 2px 2px;
   overflow: auto;
   font-size: 13px;

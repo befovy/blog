@@ -3,15 +3,50 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://blog.befovy.com/about/</loc>
-    <lastmod>2019-12-05T16:46:38+08:00</lastmod>
+    <loc>https://blog.befovy.com/tags/flutter/</loc>
+    <lastmod>2019-12-08T18:31:23+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/2019/12/fvm-using-go/</loc>
+    <lastmod>2019-12-08T18:31:23+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/tags/golang/</loc>
+    <lastmod>2019-12-08T18:31:23+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/posts/</loc>
+    <lastmod>2019-12-08T18:31:23+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/tags/</loc>
+    <lastmod>2019-12-08T18:31:23+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.befovy.com/</loc>
-    <lastmod>2019-12-05T15:29:13+00:00</lastmod>
+    <lastmod>2019-12-08T18:31:23+08:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.befovy.com/about/</loc>
+    <lastmod>2019-12-05T16:46:38+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,36 +59,8 @@
   </url>
   
   <url>
-    <loc>https://blog.befovy.com/tags/golang/</loc>
-    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.befovy.com/posts/</loc>
-    <lastmod>2019-12-05T15:29:13+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.befovy.com/tags/</loc>
-    <lastmod>2019-12-04T22:04:46+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.befovy.com/2019/11/gitee-image-bed/</loc>
     <lastmod>2019-11-23T19:02:45+08:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.befovy.com/tags/flutter/</loc>
-    <lastmod>2019-11-23T16:46:38+08:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

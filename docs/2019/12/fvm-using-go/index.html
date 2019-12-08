@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Go Modules : v2 及更高版本 - 半岛铁匠铺
+        Go 打造 Flutter 多版本管理工具：fvm - 半岛铁匠铺
       </title>
     <head>
   <meta charset="utf-8">
@@ -23,71 +23,32 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <meta name="description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules 原文作者：Jean de Klerk 和 Tyler Bui-Palsu 译者：befovy 校对：polaris1119 译文由 GCTT 原创编译，Go语言中文网 荣誉推出
- 简介 本文是 Go modules 系统的第四部分
- Part 1: 使用 Go Modules 译文 Part 2: 迁移到 Go Modules 译文 Part 3: 发布 Go Modules 译文 Part 4: Go Modules : v2 及更高版本 (本文)   随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。
-" />
+  <meta name="description" content="周末时间用 Go 语言完成了 Flutter 多版本管理工具的初个版本 fvm v0.1.0。我必须承认，这个版本完全是在造轮子，而且还是和 leoafarias fvm 一模一样。 为什么造轮子 简单" />
   <meta name="generator" content="Hugo 0.60.0 with theme pure" />
-  <title>Go Modules : v2 及更高版本 - 半岛铁匠铺</title>
+  <title>Go 打造 Flutter 多版本管理工具：fvm - 半岛铁匠铺</title>
   
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/css/syntax.css" />
 
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
-  <meta property="og:title" content="Go Modules : v2 及更高版本" />
-<meta property="og:description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules 
-原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119 
-译文由 GCTT 原创编译，Go语言中文网 荣誉推出
-
-简介
-本文是 Go modules 系统的第四部分
-
-Part 1: 使用 Go Modules  译文
-Part 2: 迁移到 Go Modules  译文
-Part 3: 发布 Go Modules 译文
-Part 4: Go Modules : v2 及更高版本 (本文) 
-
-随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。" />
+  <meta property="og:title" content="Go 打造 Flutter 多版本管理工具：fvm" />
+<meta property="og:description" content="周末时间用 Go 语言完成了 Flutter 多版本管理工具的初个版本 fvm v0.1.0。我必须承认，这个版本完全是在造轮子，而且还是和 leoafarias fvm 一模一样。 为什么造轮子 简单" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.befovy.com/2019/12/v2-go-modules/" />
-<meta property="article:published_time" content="2019-12-04T22:04:46+08:00" />
-<meta property="article:modified_time" content="2019-12-04T22:04:46+08:00" />
-<meta itemprop="name" content="Go Modules : v2 及更高版本">
-<meta itemprop="description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules 
-原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119 
-译文由 GCTT 原创编译，Go语言中文网 荣誉推出
-
-简介
-本文是 Go modules 系统的第四部分
-
-Part 1: 使用 Go Modules  译文
-Part 2: 迁移到 Go Modules  译文
-Part 3: 发布 Go Modules 译文
-Part 4: Go Modules : v2 及更高版本 (本文) 
-
-随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。">
-<meta itemprop="datePublished" content="2019-12-04T22:04:46&#43;08:00" />
-<meta itemprop="dateModified" content="2019-12-04T22:04:46&#43;08:00" />
-<meta itemprop="wordCount" content="1945">
+<meta property="og:url" content="https://blog.befovy.com/2019/12/fvm-using-go/" />
+<meta property="article:published_time" content="2019-12-08T18:31:23+08:00" />
+<meta property="article:modified_time" content="2019-12-08T18:31:23+08:00" />
+<meta itemprop="name" content="Go 打造 Flutter 多版本管理工具：fvm">
+<meta itemprop="description" content="周末时间用 Go 语言完成了 Flutter 多版本管理工具的初个版本 fvm v0.1.0。我必须承认，这个版本完全是在造轮子，而且还是和 leoafarias fvm 一模一样。 为什么造轮子 简单">
+<meta itemprop="datePublished" content="2019-12-08T18:31:23&#43;08:00" />
+<meta itemprop="dateModified" content="2019-12-08T18:31:23&#43;08:00" />
+<meta itemprop="wordCount" content="1730">
 
 
 
-<meta itemprop="keywords" content="golang," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go Modules : v2 及更高版本"/>
-<meta name="twitter:description" content="本文是一篇翻译文章: https://blog.golang.org/v2-go-modules 
-原文作者：Jean de Klerk 和 Tyler Bui-Palsu  译者：befovy   校对：polaris1119 
-译文由 GCTT 原创编译，Go语言中文网 荣誉推出
-
-简介
-本文是 Go modules 系统的第四部分
-
-Part 1: 使用 Go Modules  译文
-Part 2: 迁移到 Go Modules  译文
-Part 3: 发布 Go Modules 译文
-Part 4: Go Modules : v2 及更高版本 (本文) 
-
-随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。"/>
+<meta itemprop="keywords" content="Flutter,golang," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go 打造 Flutter 多版本管理工具：fvm"/>
+<meta name="twitter:description" content="周末时间用 Go 语言完成了 Flutter 多版本管理工具的初个版本 fvm v0.1.0。我必须承认，这个版本完全是在造轮子，而且还是和 leoafarias fvm 一模一样。 为什么造轮子 简单"/>
 
   <!--[if lte IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -266,20 +227,21 @@ Part 4: Go Modules : v2 及更高版本 (本文) 
       <h1 itemprop="name">
   <a
     class="article-title"
-    href="/2019/12/v2-go-modules/"
-    >Go Modules : v2 及更高版本</a
+    href="/2019/12/fvm-using-go/"
+    >Go 打造 Flutter 多版本管理工具：fvm</a
   >
 </h1>
 
       <div class="article-meta">
         <span class="article-date">
   <i class="icon icon-calendar-check"></i>
-<a href="https://blog.befovy.com/2019/12/v2-go-modules/" class="article-date">
-  <time datetime="2019-12-04 22:04:46 &#43;0800 CST" itemprop="datePublished">2019-12-04</time>
+<a href="https://blog.befovy.com/2019/12/fvm-using-go/" class="article-date">
+  <time datetime="2019-12-08 18:31:23 &#43;0800 CST" itemprop="datePublished">2019-12-08</time>
 </a>
 </span>  
   <span class="article-tag">
     <i class="icon icon-tags"></i>
+    <a class="article-tag-link" href="/tags/flutter/"> Flutter </a>
     <a class="article-tag-link" href="/tags/golang/"> golang </a>
   </span>
 
@@ -289,119 +251,110 @@ Part 4: Go Modules : v2 及更高版本 (本文) 
 			<span id="busuanzi_value_page_pv">0</span>
 		</span>
 	</span>
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/12/v2-go-modules/#comments"
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/12/fvm-using-go/#comments"
             class="article-comment-link">评论</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:1945字</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:1730字</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:4分 </span>
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
-      <p>本文是一篇翻译文章: <a href="https://blog.golang.org/v2-go-modules">https://blog.golang.org/v2-go-modules</a> 
-原文作者：<a href="https://blog.golang.org/">Jean de Klerk 和 Tyler Bui-Palsu</a>  译者：<a href="https://github.com/befovy">befovy</a>   校对：<a href="https://github.com/polaris1119">polaris1119</a> 
-译文由 <a href="https://github.com/studygolang/GCTT">GCTT</a> 原创编译，<a href="https://studygolang.com/articles/25130">Go语言中文网</a> 荣誉推出</p>
-<hr>
-<h2 id="heading">简介</h2>
-<p>本文是 Go modules 系统的第四部分</p>
+      <p>周末时间用 Go 语言完成了 Flutter 多版本管理工具的初个版本 <a href="https://github.com/befovy/fvm/">fvm v0.1.0</a>。我必须承认，这个版本完全是在造轮子，而且还是和 <a href="https://github.com/leoafarias/fvm/">leoafarias fvm</a> 一模一样。</p>
+<h2 id="heading">为什么造轮子</h2>
+<p>简单说就是有需求：在开发 <a href="https://github.com/befovy/fijkplayer">fijkplayer</a> （一个 Flutter 的媒体播放器）的过程中，我逐渐从开始只有 Android、iOS 的移动端版本，发展到 Flutter 桌面版本。在 fijkplayer 桌面版的开发中，我用的是 <a href="https://github.com/go-flutter-desktop/go-flutter">go-flutter</a> 为 Flutter 提供桌面支持，go-flutter 默认用的是 flutter beta 版本，而移动端 fijkplayer 用的是 Flutter stable 版本。</p>
+<p>最开始每次切换我都很痛苦，flutter 切换 channel 需要下载大量内容，channel 切换完成后再跑 flutter doctor 有需要大量的下载，而且还都是国外服务器，下载非常慢。</p>
+<p>后来我发现了 leoafarias fvm，但这个工具安装第一次没成功，其实我对 dart native 也不太懂，确实没搞定安装问题。另外 dart native 是不是真的二进制我也没有研究，要是还需要 dart 才能跑起来（就像运行 jar 需要 jvm 一样），其实我是不喜欢桌面端这种带有运行时的东西的。我就需要一个小工具而已。</p>
+<p>所以干嘛不自己造（chao）一个呢？</p>
+<p>刚好做 go-flutter 开发的时候对其自带工具 <a href="https://github.com/go-flutter-desktop/hover/pull/59">hover 进行过修改</a> 并合并到了主分支。 hover 也是一个命令行小工具，而且可以直接通过 <code>go get</code> 安装， hover 使用库 <a href="https://github.com/spf13/cobra">spf13/cobra</a> 实现命令行子命令以及参数解析等 “样板代码”，工程结构很简洁、清晰。</p>
+<p>另一方面，我虽然很早就学习过 go 语言，并且也在很多小项目（对，主要是我上学时完成的大作业）中用过 go。用的挺多但是不够系统化，写的代码还仅仅是个 demo。最近打算让自己的 go 语言水平再上一个台阶，一个行动是加入了 <a href="https://studygolang.com/subject/1">GCTT - go 中文翻译组</a> ，翻译一些国外大牛的优质文章，同时我打算认真搞一个 go 项目开源出来。 但是从啥搞起呢， 就从做一个  fvm 开始吧。</p>
+<p>是的， 第一个版本 v0.1.0 完全实现了 leoafarias fvm 中的所有逻辑，是个不折不扣的轮子工程。但是后面的版本就从 leoafarias fvm 脱离了，我要开发中国特色的 fvm。</p>
+<h2 id="cobra--go-">cobra 创建 go 命令行工具</h2>
+<p><a href="https://github.com/spf13/cobra">spf13/cobra</a> 是一个能够帮我们快速创建 go 命令行工具的 go 库，通过提供了一个生成 &ldquo;样本代码&rdquo; 的 go 工具。Go 世界中鼎鼎大名的 Docker、Kubernetes、Hugo 等都用了 cobra 来构建命令。</p>
+<p>首先，安装 cobra 工具：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">› go get -u github.com/spf13/cobra/cobra
+</code></pre></div><p>使用 cobra 创建项目 fvm ，并使用 github.com/befovy/fvm 作为包名：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">› cobra init fvm --pkg-name github.com/befovy/fvm
+</code></pre></div><p>使用 cobra add 需要的子命令：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">› cobra add list
+› cobra add install
+› cobra add remove
+› cobra add flutter
+› cobra add use
+› cobra add config
+</code></pre></div><p>完成这些步骤后我们有了这些文件：</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">› tree ./
+./
+├── LICENSE
+├── cmd
+│   ├── config.go
+│   ├── flutter.go
+│   ├── install.go
+│   ├── list.go
+│   ├── remove.go
+│   ├── root.go
+│   └── use.go
+└── main.go
+</code></pre></div><p>然后我们初始化 go modules ，下载依赖并编译fvm 。</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">› go mod init github.com/befovy/fvm
+› go mod tidy
+› go build
+</code></pre></div><p>编译好的 fvm 出现了，运行一下看看发生什么。</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">› ./fvm
+A longer description that spans multiple lines and likely contains
+examples and usage of using your application. For example:
+
+Cobra is a CLI library <span class="k">for</span> Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.
+
+Usage:
+  fvm <span class="o">[</span>command<span class="o">]</span>
+
+Available Commands:
+  config      A brief description of your <span class="nb">command</span>
+  flutter     A brief description of your <span class="nb">command</span>
+  <span class="nb">help</span>        Help about any <span class="nb">command</span>
+  install     A brief description of your <span class="nb">command</span>
+  list        A brief description of your <span class="nb">command</span>
+  remove      A brief description of your <span class="nb">command</span>
+  use         A brief description of your <span class="nb">command</span>
+
+Flags:
+      --config string   config file <span class="o">(</span>default is <span class="nv">$HOME</span>/.fvm.yaml<span class="o">)</span>
+  -h, --help            <span class="nb">help</span> <span class="k">for</span> fvm
+  -t, --toggle          Help message <span class="k">for</span> toggle
+
+Use <span class="s2">&#34;fvm [command] --help&#34;</span> <span class="k">for</span> more information about a command.
+</code></pre></div><p>cobra 已经构建好了 fvm 的雏形，并且添加好了子命令。接下来就该实现 fvm 的具体逻辑了。</p>
+<h2 id="fvm-">fvm 的功能实现</h2>
+<p>fvm 作为一个 sdk 版本管理工具，让用户能够同时在本地安装并缓存多个 Flutter 版本，并且能够快速在各个版本间切换使用。</p>
+<p>其核心逻辑就是在本地文件夹中缓存多个 Flutter 版本，并为项目创建指定 Flutter 版本的软链接。或者在全局环境创建指定版本的 Flutter 软链接。</p>
+<p>内部主要功能实现都依赖于 go 语言标准库中的 <code>os/exec</code> 包。通过 <code>os/exec</code> 可以创建子进程执行命令，并管理子进程的输入输出。</p>
+<p>fvm 的各个子命令，基本就是查找一些文件、文件夹，执行以下 git 命令并对其输出进行解析。</p>
+<p>具体的实现都在 <a href="https://github.com/befovy/fvm">代码里</a>，这里不啰嗦了。</p>
+<p>实现中要注意检查各种可能的错误，输出错误提示给用户。如果错误影响业务逻辑继续执行，就主动退出程序。</p>
+<p>在 fvm v0.1.0 版本中，这方便处理还不够细致。但仅这些我就感觉到了 go 中烦人的 error。后续还要进行重构，用更优雅的代码对 error 进行处理。</p>
+<h2 id="heading1">收获总结</h2>
+<p>通过实现一个 fvm 我得到了什么呢？</p>
 <ul>
-<li>Part 1: <a href="https://blog.golang.org/using-go-modules">使用 Go Modules</a>  <a href="https://studygolang.com/articles/19334">译文</a></li>
-<li>Part 2: <a href="https://blog.golang.org/migrating-to-go-modules">迁移到 Go Modules</a>  <a href="https://studygolang.com/articles/23133">译文</a></li>
-<li>Part 3: <a href="https://blog.golang.org/publishing-go-modules">发布 Go Modules</a> <a href="https://studygolang.com/articles/25129">译文</a></li>
-<li>Part 4: <a href="https://blog.golang.org/v2-go-modules">Go Modules : v2 及更高版本</a> (本文) </li>
+<li>
+<p>我给自己写了个工具，方便我切换 Fluter 版本。</p>
+</li>
+<li>
+<p>fvm 才只是一个开始，其难度还比不上我以前完成的大作业。但是 fvm 开源了、发布了。恰好刚翻译一片文章，<a href="https://blog.befovy.com/2019/12/v2-go-modules/">Go Modules : v2 及更高版本</a>， 通过持续更新维护 fvm 我也能实践 Go Modules 背后的理念。</p>
+</li>
+<li>
+<p>这个版本的 fvm 还太简单，用到的知识很少。但是如果以后遇到什么相关新的知识、牛逼idel，我也能在 fvm 中快速试水。毕竟每次用 hello world 试水太乏味了。</p>
+</li>
 </ul>
-<p>随着成功的项目逐渐成熟以及新需求的加入，早期的功能和设计决策可能不再适用。 开发者们可能希望通过删除废弃使用的功能、重命名类型或将复杂的程序拆分为可管理的小块来融入他们的经验教训。这种类型的变更要求下游用户进行更改才能将其代码迁移到新的 API，因此在没有认真考虑收益成本比重的情况下，不应进行这种变更。</p>
-<p>对于还在早期开发阶段的项目（主版本号是 <code>v0</code>），用户会期望偶尔的重大变更。对于声称已经稳定的项目（主版本是 <code>v1</code> 或者更高版本），必须在新的主版本进行重大变更。这篇文章探讨了主版本语义、如何创建并发布新的主版本以及如何维护一个 Go Modules 的多个主版本。</p>
-<h2 id="heading1">主版本和模块路径</h2>
-<p>模块在 Go 中确定了一个重要的原则，即 “<a href="https://research.swtch.com/vgo-import">导入兼容性规则</a>”</p>
-<blockquote>
-<p>如果旧包和新包的导入路径相同，新包必须向后兼容旧的包</p>
-</blockquote>
-<p>根据这条原则，一个软件包新的主版本没有向后兼容以前的版本。这意味着这个软件包新的主版本必须使用和之前版本不同的模块路径。从 <code>v2</code> 开始，主版本号必须出现在模块路径的结尾（在 go.mod 文件的 <code>module</code> 语句中声明）。例如，当模块 <code>github.com/googleapis/gax-go</code> 的开发者们开发完 <code>v2</code> ，他们用了新的模块路径 <code>github.com/googleapis/gax-go/v2</code> 。想要使用 <code>v2</code> 的用户必须把他们的包导入和模块要求更改为 <code>github.com/googleapis/gax-go/v2</code> </p>
-<p>需要主版本号后缀是 Go 模块和大多数其他依赖管理系统不同的方式之一。后缀用于解决<a href="https://research.swtch.com/vgo-import#dependency_story">菱形依赖问题</a>。在 Go 模块之前，<a href="http://gopkg.in/">gopkg.in</a> 允许软件包维护者遵循我们现在称为导入兼容性规则的内容。使用 gopkg.in 时，如果你依赖一个导入了 <code>gopkg.in/yaml.v1</code> 的包以及另一个导入了 <code>gopkg.in/yaml.v2</code> 的包，这不会发生冲突，因为两个 <code>yaml</code> 包有着不同的导入路径（它们使用和 Go Modules 类似的版本后缀）。由于 gopkg.in 和 Go Modules 共享相同的版本号后缀方法，因此 Go 命令接受 <code>gopkg.in/yaml.v2</code> 中的 <code>.v2</code> 作为有效的版本号。这是一个为了和 gopkg.in 兼容的特殊情况，在其他域托管的模块需要使用像 <code>/v2</code> 这样的斜杠后缀。</p>
-<h2 id="heading2">主版本策略</h2>
-<p>推荐的策略是在以主版本后缀命名的目录中开发 <code>v2+</code> 模块。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">github.com/googleapis/gax-go @ master branch
-/go.mod    → module github.com/googleapis/gax-go
-/v2/go.mod → module github.com/googleapis/gax-go/v2
-</code></pre></div><p>这种方式与不支持 Go Modules 的一些工具兼容：仓库中的文件路径与 <code>GOPATH</code> 模式下 <code>go get</code> 命令预期的路径匹配。这一策略也允许所有的主版本一起在不同的目录中开发。</p>
-<p>其他的策略可能是将主版本放置在单独的分支上。然而，如果 <code>v2+</code> 的源代码在仓库的默认分支上（一般是 master），不支持版本的工具（包括 GOPATH 模式下的 Go 命令）可能无法区分不同的主版本。</p>
-<p>本文中的示例遵循主版本子目录策略，所以提供了最大的兼容性。我们建议模块的作者遵循这种策略，只要他们还有用户在使用 <code>GOPATH</code> 模式开发。</p>
-<h2 id="-v2-">发布 v2 及更高版本</h2>
-<p>这篇文章以 <code>github.com/googleapis/gax-go</code> 为例：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">pwd</span>
-/tmp/gax-go
-$ ls
-CODE_OF_CONDUCT.md  call_option.go  internal
-CONTRIBUTING.md     gax.go          invoke.go
-LICENSE             go.mod          tools.go
-README.md           go.sum          RELEASING.md
-header.go
-$ cat go.mod
-module github.com/googleapis/gax-go
+<p>最后，希望 fvm 能够得到大家的关注，并且收到反馈。</p>
 
-go 1.9
-
-require <span class="o">(</span>
-    github.com/golang/protobuf v1.3.1
-    golang.org/x/exp v0.0.0-20190221220918-438050ddec5e
-    golang.org/x/lint v0.0.0-20181026193005-c67002cb31c3
-    golang.org/x/tools v0.0.0-20190114222345-bf090417da8b
-    google.golang.org/grpc v1.19.0
-    honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099
-<span class="o">)</span>
-$
-</code></pre></div><p>要开始开发 <code>github.com/googleapis/gax-go</code> 的 <code>v2</code> 版本，我们将创建一个新的 <code>v2/</code> 目录并将包的内容复制到该目录中。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ mkdir v2
-$ cp *.go v2/
-building file list ... <span class="k">done</span>
-call_option.go
-gax.go
-header.go
-invoke.go
-tools.go
-
-sent <span class="m">10588</span> bytes  received <span class="m">130</span> bytes  21436.00 bytes/sec
-total size is <span class="m">10208</span>  speedup is 0.95
-$
-</code></pre></div><p>现在，我们通过复制当前的 <code>go.mod</code> 文件并且在 module 路径上添加 <code>/v2</code> 后缀来创建属于 v2 的 <code>go.mod</code> 文件。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ cp go.mod v2/go.mod
-$ go mod edit -module github.com/googleapis/gax-go/v2 v2/go.mod
-$
-</code></pre></div><p>注意： <code>v2</code> 版本被视为与 <code>v0 / v1</code> 版本分开的模块，两者可以共存于同一构建中。因此，如果你的 <code>v2+</code> 模块具有多个软件包，你应该更新它们使用新的 <code>/v2</code> 导入路径，否则，你的 <code>v2+</code> 模块会依赖你的 <code>v0 / v1</code> 模块。要升级所有 <code>github.com/my/project</code> 为 <code>github.com/my/project/v2</code> ，可以使用 <code>find</code> 和 <code>sed</code> 命令：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ find . -type f <span class="se">\
-</span><span class="se"></span>    -name <span class="s1">&#39;*.go&#39;</span> <span class="se">\
-</span><span class="se"></span>    -exec sed -i -e <span class="s1">&#39;s,github.com/my/project,github.com/my/project/v2,g&#39;</span> <span class="o">{</span><span class="o">}</span> <span class="se">\;</span>
-$
-</code></pre></div><p>现在我们有了一个 <code>v2</code> 模块，但是我们要在版本发布之前进行实验并进行修改。在我们发布 <code>v2.0.0</code> （或者其他没有预发布后缀的版本）之前，我们可以进行开发并且可以做出重大变更，就如同我们决定实现新 API 一样。  如果我们希望用户能够在正式发布新 API 之前对其进行试验，可以选择发布 <code>v2</code> 预发布版本：</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ git tag v2.0.0-alpha.1
-$ git push origin v2.0.0-alpha.1
-$
-</code></pre></div><p>一旦我们对 <code>v2</code> API 感到满意并且确定不会再有别的重大变更，我们可以打上 Git 标记 <code>v2.0.0</code> 。</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ git tag v2.0.0
-$ git push origin v2.0.0
-$
-</code></pre></div><p>到那时，就有两个主版本需要维护。向后兼容的更改和错误修复使用新的次版本或者补丁版本发布（比如 <code>v1.1.0</code> ， <code>v2.0.1</code> 等）。</p>
-<h2 id="heading3">总结</h2>
-<p>主版本变更会带来开发和维护的开销，并且需要下游用户的额外付出才能迁移。越大的项目中这种主版本变更的开销就越大。只有在确定了令人信服的理由之后，才应该进行主版本变更。一旦确定了令人信服的重大变更原因，我们建议在 master 分支进行多个主版本的开发，因为这样能与各种现有工具兼容。</p>
-<p>对 <code>v1+</code> 模块的重大变更应该始终发生在新的 <code>vN+1</code> 模块中。一个新模块发布时，对于维护者和需要迁移到这个新软件包的用户来说意味着更多的工作。因此，维护人员应该在发布稳定版本之前对其 API 进行验证，并仔细考虑在 <code>v1</code> 版本之后是否确有必要进行重大变更。</p>
-<h2 id="heading4">相关文章</h2>
-<ul>
-<li><a href="https://blog.golang.org/publishing-go-modules">发布 Go Modules</a></li>
-<li><a href="https://blog.golang.org/module-mirror-launch">启用模块镜像和校验数据库</a></li>
-<li><a href="https://blog.golang.org/migrating-to-go-modules">迁移到 Go Modules</a></li>
-<li><a href="https://blog.golang.org/using-go-modules">使用 Go Modules</a></li>
-<li><a href="https://blog.golang.org/modules2019">2019 年的 Go Modules</a></li>
-<li><a href="https://blog.golang.org/versioning-proposal">Go 中软件包版本控制的建议</a></li>
-<li><a href="https://blog.golang.org/cover">封面故事</a></li>
-<li><a href="https://blog.golang.org/the-app-engine-sdk-and-workspaces-gopath">App Engine SDK 和工作区</a></li>
-<li><a href="https://blog.golang.org/organizing-go-code">组织 Go 代码</a></li>
-</ul>
     </div>
     <div class="article-footer">
 <blockquote class="mt-2x">
   <ul class="post-copyright list-unstyled">
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接: </strong>
-      <a href="https://blog.befovy.com/2019/12/v2-go-modules/" title="Go Modules : v2 及更高版本" target="_blank" rel="external">https://blog.befovy.com/2019/12/v2-go-modules/</a>
+      <a href="https://blog.befovy.com/2019/12/fvm-using-go/" title="Go 打造 Flutter 多版本管理工具：fvm" target="_blank" rel="external">https://blog.befovy.com/2019/12/fvm-using-go/</a>
     </li>
     <li class="post-copyright-license">
       <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
@@ -440,14 +393,9 @@ $
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://blog.befovy.com/2019/11/gitee-image-bed/" title="我的 gitee 图床，自动上传、压缩、获取图片 url"><i
+                <a href="https://blog.befovy.com/about/" title="关于自己"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
-            </li>
-            <li class="next">
-                <a href="https://blog.befovy.com/about/"
-                    title="关于自己"><span>上一篇&nbsp;&nbsp;</span><i
-                        class="icon icon-angle-right" aria-hidden="true"></i></a>
             </li>
         </ul>
         
