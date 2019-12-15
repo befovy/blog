@@ -32,8 +32,8 @@ https://cdn.jsdelivr.net/gh/befovy/blogback@master/docs/ https://github.com/befo
   <title>我的 gitee 图床，自动上传、压缩、获取图片 url - 半岛铁匠铺</title>
   
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@6892f1b/docs/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@6892f1b/docs/css/syntax.css" />
+  <link rel="stylesheet" href="https://blog.befovy.com/css/style.css">
+  <link rel="stylesheet" href="https://blog.befovy.com/css/syntax.css" />
 
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
   <meta property="og:title" content="我的 gitee 图床，自动上传、压缩、获取图片 url" />
@@ -88,7 +88,7 @@ https://github.com/befovy/blogback/tree/master/docs"/>
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/befovy" target="_blank">
-            <img class="img-circle img-rotate" src="https://cdn.jsdelivr.net/gh/befovy/blogback@6892f1b/docs/images/avatar.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://blog.befovy.com/images/avatar.jpg" width="200" height="200">
           </a>
           <h2 id="name" class="hidden-xs hidden-sm">半岛打铁匠</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">befovy</h3>
@@ -306,7 +306,7 @@ jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换�
 <h2 id="heading1">搭建步骤</h2>
 <p>搭建步骤中是有一些问题费了些时间，但是有了我帮你踩了所有的坑并且总结这篇教程后，看到这里的你一定能够顺利搭建自己的免费好用的图床。</p>
 <p>本文教程使用了 github action，如果你的 github 还有没激活 actions 的话，你可以使用其他的 ci 工具实现。 github 仓库中如果看不到下面这个 actions 图标，就说明还不支持 actions 功能。
-<img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123192701.png" alt=""></p>
+<img src="https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123192701.png" alt=""></p>
 <h3 id="github-">github 仓库和设置</h3>
 <p>首先需要创建一个 github 仓库，比如 <a href="https://github.com/befovy/images">https://github.com/befovy/images</a> ，创建步骤略过。</p>
 <p>为 github 仓库安装 <a href="https://imgbot.net/">ImgBot 机器人</a>。
@@ -350,7 +350,7 @@ jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换�
 </span></code></pre></div><p>这个 actions 中主要是 checkout 当前仓库文件，配置 gitee 的 ssh 密钥，推送 git 仓库到 gitee。</p>
 <p>密钥不能明文写在 actions 配置文件，需要保存在仓库的设置中。 在 github 仓库 设置选项中，选择左侧的 Secrets。把前面生成的 ssh 公钥和私钥都保存起来。注意私钥本身由好多行组成，但是 actions secrets 这里好像换行符会出问题，所以我们先把私钥中所有的换行用 <code>\n</code> 替换掉，替换完后私钥只剩下一行文本。 保存在这个页面的 secrets 可以在 actions 配置中使用。
 我保存的名称分别是 <code>GITEE_SSH_KEY</code> 和 <code>GITEE_SSH_PUB</code> ，在 actions 配置文件中的使用方式是 <code>${{ secrets.GITEE_SSH_KEY }}</code> 。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123200528.png" alt=""></p>
+<p><img src="https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123200528.png" alt=""></p>
 <p>在 gitee.yml  中，我从 secrets 中取出私钥，保存在 .ssh/id_rsa 中又通过命令把其中的 <code>\n</code> 全部换成了真正的换行符。 这就是我踩过的一个大坑，不这么做后面 git push 会出错。</p>
 <p>配置好 ssh 后，可以通过 git 命令把仓库内容 push 到 gitee 中去。
 注意，github actions 中的 checkout 检出当前内容后，git 是在一个游离状态，没有分支名。需要先 <code>git switch -c master</code> 设置当前为 master 分支。</p>
@@ -358,7 +358,7 @@ jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换�
 <p><a href="https://github.com/Molunerfinn/PicGo">PicGo</a> 是用 Electron-Vue 开发的一个图片自动上传至图床的工具。先下载安装 PicGo 到电脑中。
 PicGo 支持 github、新浪、七牛等多种图床。也可以安装插件支持 gitee 图床，但是 gitee 上不能配置图片自动压缩，所以我在 github 绕了一圈，图片在 github 压缩后再同步到 gitee。</p>
 <p>PicGo 设置如图， 我用了 githubPlus 插件，其实用默认的 github 图床功能就行。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123201205.png" alt=""></p>
+<p><img src="https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123201205.png" alt=""></p>
 <p>图中用到的 token 在 <a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a> 页面生成。</p>
 <p>自己修改一下 PicGo 的上传图片快捷键，选择一张图片上传。上传完成后 url 会自动复制到剪切板。 等 github actions 执行完成后，就可以通过剪贴板中的 url 访问到保存在 gitee 的图片了， gitee 的图片访问确实很快。</p>
 <h3 id="github-actions--imgbot--pr">github actions 自动合并 ImgBot 的 pr</h3>
@@ -431,7 +431,7 @@ PicGo 支持 github、新浪、七牛等多种图床。也可以安装插件支�
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/befovy" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://cdn.jsdelivr.net/gh/befovy/blogback@6892f1b/docs/images/avatar.jpg" class="img-rounded w-full" alt="">
+          <img src="https://blog.befovy.com/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -568,8 +568,8 @@ hljs.configure({
 })
 hljs.initHighlightingOnLoad();
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@6892f1b/docs/js/application.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@6892f1b/docs/js/plugin.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/application.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/plugin.js"></script>
 <script>
       (function (window) {
           var INSIGHT_CONFIG = {
@@ -581,12 +581,12 @@ hljs.initHighlightingOnLoad();
                   UNTITLED: '(未命名)',
               },
               ROOT_URL: 'https:\/\/blog.befovy.com\/',
-              CONTENT_URL: 'https:\/\/cdn.jsdelivr.net\/gh\/befovy\/blogback@6892f1b\/docs\/searchindex.json ',
+              CONTENT_URL: 'https:\/\/blog.befovy.com\/\/searchindex.json ',
           };
           window.INSIGHT_CONFIG = INSIGHT_CONFIG;
       })(window);
       </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@6892f1b/docs/js/insight.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/insight.js"></script>
 
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
