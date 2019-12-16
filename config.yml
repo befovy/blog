@@ -107,7 +107,7 @@ params:
     gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
     author: 半岛打铁匠
     author_title: befovy
-    author_description: 专注于音视频领域，Go、Rust 爱好者，爱写代码但更爱老婆
+    author_description: 专注于音视频领域，Go、Rust 爱好者。
     location: Beijing, China
     follow: https://github.com/befovy
     # Social Links
@@ -160,7 +160,7 @@ params:
 
   # Donate
   donate:
-    enable: true
+    enable: false
     # 微信打赏
     wechatpay:
       qrcode: https://cdn.jsdelivr.net/gh/befovy/images@master/assets/wechat-qr-code.jpeg
