@@ -28,8 +28,8 @@
   <title>用 CMake 为 ijkplayer 增加 android native debug 支持 - 半岛铁匠铺</title>
   
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@9abea0f/docs/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@9abea0f/docs/css/syntax.css" />
+  <link rel="stylesheet" href="https://blog.befovy.com/css/style.css">
+  <link rel="stylesheet" href="https://blog.befovy.com/css/syntax.css" />
 
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
   <meta property="og:title" content="用 CMake 为 ijkplayer 增加 android native debug 支持" />
@@ -42,7 +42,7 @@
 <meta itemprop="description" content="给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端">
 <meta itemprop="datePublished" content="2019-06-30T15:26:52&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-09T01:43:36&#43;00:00" />
-<meta itemprop="wordCount" content="2167">
+<meta itemprop="wordCount" content="2168">
 
 
 
@@ -69,9 +69,9 @@
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/befovy" target="_blank">
-            <img class="img-circle img-rotate" src="https://cdn.jsdelivr.net/gh/befovy/blogback@9abea0f/docs/images/avatar.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://blog.befovy.com/images/avatar.jpg" width="200" height="200">
           </a>
-          <h2 id="name" class="hidden-xs hidden-sm">半岛打铁匠</h2>
+          <h2 id="name" class="hidden-xs hidden-sm">半岛铁酱</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">befovy</h3>
           <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>Beijing, China</small>
         </div><div class="search" id="search-form-wrap">
@@ -145,12 +145,20 @@
         <ul class="tag-list">
             
             
+            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/ffmpeg/" class="tag-list-link">ffmpeg</a><span
+                    class="tag-list-count">1</span></li>
+            
+            
             <li class="tag-list-item"><a href="https://blog.befovy.com/tags/flutter/" class="tag-list-link">flutter</a><span
                     class="tag-list-count">2</span></li>
             
             
             <li class="tag-list-item"><a href="https://blog.befovy.com/tags/golang/" class="tag-list-link">golang</a><span
                     class="tag-list-count">2</span></li>
+            
+            
+            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/ijkplayer/" class="tag-list-link">ijkplayer</a><span
+                    class="tag-list-count">1</span></li>
             
         </ul>
 
@@ -161,6 +169,16 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget-body">
         <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/" class="title">ijkplayer 增加 SRT 协议指南与踩坑</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-01-12 10:38:03 &#43;0800 CST" itemprop="datePublished">2020-01-12</time>
+                    </p>
+                </div>
+            </li>
             <li>
                 <div class="item-inner">
                     <p class="item-title">
@@ -201,16 +219,6 @@
                     </p>
                 </div>
             </li>
-            <li>
-                <div class="item-inner">
-                    <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/06/issue_20190630_5/" class="title">用 CMake 为 ijkplayer 增加 android native debug 支持</a>
-                    </p>
-                    <p class="item-date">
-                        <time datetime="2019-06-30 15:26:52 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
-                    </p>
-                </div>
-            </li>
         </ul>
     </div>
 </div>
@@ -248,7 +256,7 @@
 	</span>
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/06/issue_20190630_5/#comments"
             class="article-comment-link">评论</a></span>
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:2167字</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计:2168字</span>
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长:5分 </span>
       </div>
     </div>
@@ -382,6 +390,7 @@ add_dependencies(ijkffmpeg cpffmpeg)
 <blockquote>
 <p>本文通过 mirror 和 hugo 生成，原始地址 <a href="https://github.com/befovy/blogback/issues/5">https://github.com/befovy/blogback/issues/5</a></p>
 </blockquote>
+<p>github.com/befovy/blogback/issues/5</p>
 <p>vy/blogback/issues/5</p>
 <p>tps://github.com/befovy/blogback/issues/5</p>
 
@@ -405,11 +414,11 @@ add_dependencies(ijkffmpeg cpffmpeg)
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/befovy" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://cdn.jsdelivr.net/gh/befovy/blogback@9abea0f/docs/images/avatar.jpg" class="img-rounded w-full" alt="">
+          <img src="https://blog.befovy.com/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/befovy" target="_blank"><span class="text-dark">半岛打铁匠</span><small class="ml-1x">befovy</small></a></h3>
+        <h3 class="media-heading"><a href="https://github.com/befovy" target="_blank"><span class="text-dark">半岛铁酱</span><small class="ml-1x">befovy</small></a></h3>
         <div>专注于音视频领域，Go、Rust 爱好者。</div>
       </div>
     </figure>
@@ -455,7 +464,7 @@ add_dependencies(ijkffmpeg cpffmpeg)
 </ul>
   <div class="copyright">
     &copy;2018  -
-    2019
+    2020
     <div class="publishby">
         Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>. <br>
         Theme <a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
@@ -490,8 +499,8 @@ hljs.configure({
 })
 hljs.initHighlightingOnLoad();
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@9abea0f/docs/js/application.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@9abea0f/docs/js/plugin.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/application.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/plugin.js"></script>
 <script>
       (function (window) {
           var INSIGHT_CONFIG = {
@@ -503,12 +512,12 @@ hljs.initHighlightingOnLoad();
                   UNTITLED: '(未命名)',
               },
               ROOT_URL: 'https:\/\/blog.befovy.com\/',
-              CONTENT_URL: 'https:\/\/cdn.jsdelivr.net\/gh\/befovy\/blogback@9abea0f\/docs\/searchindex.json ',
+              CONTENT_URL: 'https:\/\/blog.befovy.com\/\/searchindex.json ',
           };
           window.INSIGHT_CONFIG = INSIGHT_CONFIG;
       })(window);
       </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@9abea0f/docs/js/insight.js"></script>
+<script type="text/javascript" src="https://blog.befovy.com/js/insight.js"></script>
 
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 

@@ -10,6 +10,15 @@
     
     
     <item>
+      <title>ijkplayer 增加 SRT 协议指南与踩坑</title>
+      <link>https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/</link>
+      <pubDate>Sun, 12 Jan 2020 10:38:03 +0800</pubDate>
+      
+      <guid>https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/</guid>
+      <description>fijkplayer 项目开源也有小半年了，这是我第一个开源项目，作为一个 Flutter 媒体播放插件，fijkplayer 有明确存在的实际使用场景，在项目维护上我也是费了不</description>
+    </item>
+    
+    <item>
       <title>Go 打造 Flutter 多版本管理工具：fvm</title>
       <link>https://blog.befovy.com/2019/12/fvm-using-go/</link>
       <pubDate>Sun, 08 Dec 2019 18:31:23 +0800</pubDate>
@@ -24,7 +33,7 @@
       <pubDate>Thu, 05 Dec 2019 16:46:38 +0800</pubDate>
       
       <guid>https://blog.befovy.com/about/</guid>
-      <description>半岛打铁匠 我是半岛打铁匠，ID befovy，这个博客站和我的个人公众号都叫做半岛铁匠铺。 为啥叫半岛打铁匠呢，下班路上我听着周董的“半岛铁盒”</description>
+      <description>半岛铁酱 我是半岛铁酱，ID befovy，这个博客站和我的个人公众号都叫做半岛铁匠铺。 为啥叫半岛铁酱呢，下班路上我听着周董的“半岛铁盒”和“米</description>
     </item>
     
     <item>

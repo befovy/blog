@@ -105,7 +105,7 @@ params:
     enabled: true # Whether to show profile bar
     avatar: images/avatar.jpg
     gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
-    author: 半岛打铁匠
+    author: 半岛铁酱
     author_title: befovy
     author_description: 专注于音视频领域，Go、Rust 爱好者。
     location: Beijing, China
