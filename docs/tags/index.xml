@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 半岛铁匠铺</title>
-    <link>https://blog.befovy.com/tags/</link>
+    <link>https://befovy.com/tags/</link>
     <description>Recent content in Tags on 半岛铁匠铺</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 12 Jan 2020 10:38:03 +0800</lastBuildDate>
     
-        <atom:link href="https://blog.befovy.com/tags/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://befovy.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>ijkplayer 增加 SRT 协议指南与踩坑</title>
-      <link>https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/</link>
+      <link>https://befovy.com/2020/01/add-libsrt-for-ijkplayer/</link>
       <pubDate>Sun, 12 Jan 2020 10:38:03 +0800</pubDate>
       
-      <guid>https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/</guid>
+      <guid>https://befovy.com/2020/01/add-libsrt-for-ijkplayer/</guid>
       <description>fijkplayer 项目开源也有小半年了，这是我第一个开源项目，作为一个 Flutter 媒体播放插件，fijkplayer 有明确存在的实际使用场景，在项目维护上我也是费了不</description>
     </item>
     
     <item>
       <title>Go 打造 Flutter 多版本管理工具：fvm</title>
-      <link>https://blog.befovy.com/2019/12/fvm-using-go/</link>
+      <link>https://befovy.com/2019/12/fvm-using-go/</link>
       <pubDate>Sun, 08 Dec 2019 18:31:23 +0800</pubDate>
       
-      <guid>https://blog.befovy.com/2019/12/fvm-using-go/</guid>
+      <guid>https://befovy.com/2019/12/fvm-using-go/</guid>
       <description>周末时间用 Go 语言完成了 Flutter 多版本管理工具的初个版本 fvm v0.1.0。我必须承认，这个版本完全是在造轮子，而且还是和 leoafarias fvm 一模一样。 为什么造轮子 简单</description>
     </item>
     
     <item>
       <title>关于自己</title>
-      <link>https://blog.befovy.com/about/</link>
+      <link>https://befovy.com/about/</link>
       <pubDate>Thu, 05 Dec 2019 16:46:38 +0800</pubDate>
       
-      <guid>https://blog.befovy.com/about/</guid>
+      <guid>https://befovy.com/about/</guid>
       <description>半岛铁酱 我是半岛铁酱，ID befovy，这个博客站和我的个人公众号都叫做半岛铁匠铺。 为啥叫半岛铁酱呢，下班路上我听着周董的“半岛铁盒”和“米</description>
     </item>
     
     <item>
       <title>Go Modules : v2 及更高版本</title>
-      <link>https://blog.befovy.com/2019/12/v2-go-modules/</link>
+      <link>https://befovy.com/2019/12/v2-go-modules/</link>
       <pubDate>Wed, 04 Dec 2019 22:04:46 +0800</pubDate>
       
-      <guid>https://blog.befovy.com/2019/12/v2-go-modules/</guid>
-      <description>&lt;p&gt;本文是一篇翻译文章: &lt;a href=&#34;https://blog.golang.org/v2-go-modules&#34;&gt;https://blog.golang.org/v2-go-modules&lt;/a&gt; 
-原文作者：&lt;a href=&#34;https://blog.golang.org/&#34;&gt;Jean de Klerk 和 Tyler Bui-Palsu&lt;/a&gt;  译者：&lt;a href=&#34;https://github.com/befovy&#34;&gt;befovy&lt;/a&gt;   校对：&lt;a href=&#34;https://github.com/polaris1119&#34;&gt;polaris1119&lt;/a&gt; 
+      <guid>https://befovy.com/2019/12/v2-go-modules/</guid>
+      <description>&lt;p&gt;本文是一篇翻译文章: &lt;a href=&#34;https://blog.golang.org/v2-go-modules&#34;&gt;https://blog.golang.org/v2-go-modules&lt;/a&gt;&lt;br&gt;
+原文作者：&lt;a href=&#34;https://blog.golang.org/&#34;&gt;Jean de Klerk 和 Tyler Bui-Palsu&lt;/a&gt;  译者：&lt;a href=&#34;https://github.com/befovy&#34;&gt;befovy&lt;/a&gt;   校对：&lt;a href=&#34;https://github.com/polaris1119&#34;&gt;polaris1119&lt;/a&gt;&lt;br&gt;
 译文由 &lt;a href=&#34;https://github.com/studygolang/GCTT&#34;&gt;GCTT&lt;/a&gt; 原创编译，&lt;a href=&#34;https://studygolang.com/articles/25130&#34;&gt;Go语言中文网&lt;/a&gt; 荣誉推出&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;heading&#34;&gt;简介&lt;/h2&gt;
+&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;本文是 Go modules 系统的第四部分&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Part 1: &lt;a href=&#34;https://blog.golang.org/using-go-modules&#34;&gt;使用 Go Modules&lt;/a&gt;  &lt;a href=&#34;https://studygolang.com/articles/19334&#34;&gt;译文&lt;/a&gt;&lt;/li&gt;
@@ -60,10 +60,10 @@
     
     <item>
       <title>我的 gitee 图床，自动上传、压缩、获取图片 url</title>
-      <link>https://blog.befovy.com/2019/11/gitee-image-bed/</link>
+      <link>https://befovy.com/2019/11/gitee-image-bed/</link>
       <pubDate>Sat, 23 Nov 2019 19:02:45 +0800</pubDate>
       
-      <guid>https://blog.befovy.com/2019/11/gitee-image-bed/</guid>
+      <guid>https://befovy.com/2019/11/gitee-image-bed/</guid>
       <description>&lt;p&gt;20191205 更新&lt;/p&gt;
 &lt;p&gt;经过 v2ex v友提醒，发现了更牛逼更方便的 cdn jsdelivr。
 jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换一下网址即可。&lt;/p&gt;
@@ -74,10 +74,10 @@ jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换�
     
     <item>
       <title>手把手带你写 Flutter 系统音量插件</title>
-      <link>https://blog.befovy.com/2019/11/flutter-plugin-volume/</link>
+      <link>https://befovy.com/2019/11/flutter-plugin-volume/</link>
       <pubDate>Sat, 23 Nov 2019 16:46:38 +0800</pubDate>
       
-      <guid>https://blog.befovy.com/2019/11/flutter-plugin-volume/</guid>
+      <guid>https://befovy.com/2019/11/flutter-plugin-volume/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;认真读完本文就能掌握编写一个 Flutter 系统音量插件的技能，支持调节系统音量以及监听系统音量变化。
 如有不当之处敬请指正。&lt;/p&gt;
@@ -87,19 +87,19 @@ jsdelivr 能自动为 github 仓库内容提供 cdn 加速服务，只需要换�
     
     <item>
       <title>用 CMake 为 ijkplayer 增加 android native debug 支持</title>
-      <link>https://blog.befovy.com/2019/06/issue_20190630_5/</link>
+      <link>https://befovy.com/2019/06/issue_20190630_5/</link>
       <pubDate>Sun, 30 Jun 2019 15:26:52 +0000</pubDate>
       
-      <guid>https://blog.befovy.com/2019/06/issue_20190630_5/</guid>
+      <guid>https://befovy.com/2019/06/issue_20190630_5/</guid>
       <description>给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端</description>
     </item>
     
     <item>
       <title>使用 mirror 和 hugo 实现 github issue 的博客自动同步</title>
-      <link>https://blog.befovy.com/2019/06/issue_20190630_6/</link>
+      <link>https://befovy.com/2019/06/issue_20190630_6/</link>
       <pubDate>Sun, 30 Jun 2019 13:53:30 +0000</pubDate>
       
-      <guid>https://blog.befovy.com/2019/06/issue_20190630_6/</guid>
+      <guid>https://befovy.com/2019/06/issue_20190630_6/</guid>
       <description>一直觉得 Issue 是个特别好用的记录工具，看到很多人也直接把 Issue 作为个人博客。 Issue 可以碎片化的记录一些东西，然后在进行整理，最终形成一篇不错的博客内容。</description>
     </item>
     

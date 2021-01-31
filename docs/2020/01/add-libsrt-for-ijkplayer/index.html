@@ -6,6 +6,9 @@
     <title>
         ijkplayer 增加 SRT 协议指南与踩坑 - 半岛铁匠铺
       </title>
+
+    <script data-ad-client="ca-pub-5604301373160422" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,29 +27,30 @@
   
   
   <meta name="description" content="fijkplayer 项目开源也有小半年了，这是我第一个开源项目，作为一个 Flutter 媒体播放插件，fijkplayer 有明确存在的实际使用场景，在项目维护上我也是费了不" />
-  <meta name="generator" content="Hugo 0.60.0 with theme pure" />
+  <meta name="generator" content="Hugo 0.80.0 with theme pure" />
   <title>ijkplayer 增加 SRT 协议指南与踩坑 - 半岛铁匠铺</title>
   
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/css/syntax.css" />
+  <link rel="stylesheet" href="https://befovy.com/css/style.css">
+  <link rel="stylesheet" href="https://befovy.com/css/syntax.css" />
 
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
   <meta property="og:title" content="ijkplayer 增加 SRT 协议指南与踩坑" />
 <meta property="og:description" content="fijkplayer 项目开源也有小半年了，这是我第一个开源项目，作为一个 Flutter 媒体播放插件，fijkplayer 有明确存在的实际使用场景，在项目维护上我也是费了不" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/" />
+<meta property="og:url" content="https://befovy.com/2020/01/add-libsrt-for-ijkplayer/" />
 <meta property="article:published_time" content="2020-01-12T10:38:03+08:00" />
 <meta property="article:modified_time" content="2020-01-12T10:38:03+08:00" />
 <meta itemprop="name" content="ijkplayer 增加 SRT 协议指南与踩坑">
 <meta itemprop="description" content="fijkplayer 项目开源也有小半年了，这是我第一个开源项目，作为一个 Flutter 媒体播放插件，fijkplayer 有明确存在的实际使用场景，在项目维护上我也是费了不">
-<meta itemprop="datePublished" content="2020-01-12T10:38:03&#43;08:00" />
-<meta itemprop="dateModified" content="2020-01-12T10:38:03&#43;08:00" />
+<meta itemprop="datePublished" content="2020-01-12T10:38:03+08:00" />
+<meta itemprop="dateModified" content="2020-01-12T10:38:03+08:00" />
 <meta itemprop="wordCount" content="2961">
 
 
 
-<meta itemprop="keywords" content="ijkplayer,ffmpeg," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="ijkplayer,ffmpeg," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ijkplayer 增加 SRT 协议指南与踩坑"/>
 <meta name="twitter:description" content="fijkplayer 项目开源也有小半年了，这是我第一个开源项目，作为一个 Flutter 媒体播放插件，fijkplayer 有明确存在的实际使用场景，在项目维护上我也是费了不"/>
 
@@ -69,7 +73,7 @@
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/befovy" target="_blank">
-            <img class="img-circle img-rotate" src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/images/avatar.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://befovy.com/images/avatar.jpg" width="200" height="200">
           </a>
           <h2 id="name" class="hidden-xs hidden-sm">半岛铁酱</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">befovy</h3>
@@ -145,19 +149,19 @@
         <ul class="tag-list">
             
             
-            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/ffmpeg/" class="tag-list-link">ffmpeg</a><span
+            <li class="tag-list-item"><a href="https://befovy.com/tags/ffmpeg/" class="tag-list-link">ffmpeg</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/flutter/" class="tag-list-link">flutter</a><span
+            <li class="tag-list-item"><a href="https://befovy.com/tags/flutter/" class="tag-list-link">flutter</a><span
                     class="tag-list-count">2</span></li>
             
             
-            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/golang/" class="tag-list-link">golang</a><span
+            <li class="tag-list-item"><a href="https://befovy.com/tags/golang/" class="tag-list-link">golang</a><span
                     class="tag-list-count">2</span></li>
             
             
-            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/ijkplayer/" class="tag-list-link">ijkplayer</a><span
+            <li class="tag-list-item"><a href="https://befovy.com/tags/ijkplayer/" class="tag-list-link">ijkplayer</a><span
                     class="tag-list-count">1</span></li>
             
         </ul>
@@ -172,7 +176,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/" class="title">ijkplayer 增加 SRT 协议指南与踩坑</a>
+                        <a href="https://befovy.com/2020/01/add-libsrt-for-ijkplayer/" class="title">ijkplayer 增加 SRT 协议指南与踩坑</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-01-12 10:38:03 &#43;0800 CST" itemprop="datePublished">2020-01-12</time>
@@ -182,7 +186,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/12/fvm-using-go/" class="title">Go 打造 Flutter 多版本管理工具：fvm</a>
+                        <a href="https://befovy.com/2019/12/fvm-using-go/" class="title">Go 打造 Flutter 多版本管理工具：fvm</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2019-12-08 18:31:23 &#43;0800 CST" itemprop="datePublished">2019-12-08</time>
@@ -192,7 +196,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/12/v2-go-modules/" class="title">Go Modules : v2 及更高版本</a>
+                        <a href="https://befovy.com/2019/12/v2-go-modules/" class="title">Go Modules : v2 及更高版本</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2019-12-04 22:04:46 &#43;0800 CST" itemprop="datePublished">2019-12-04</time>
@@ -202,7 +206,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/11/gitee-image-bed/" class="title">我的 gitee 图床，自动上传、压缩、获取图片 url</a>
+                        <a href="https://befovy.com/2019/11/gitee-image-bed/" class="title">我的 gitee 图床，自动上传、压缩、获取图片 url</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2019-11-23 19:02:45 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
@@ -212,7 +216,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/11/flutter-plugin-volume/" class="title">手把手带你写 Flutter 系统音量插件</a>
+                        <a href="https://befovy.com/2019/11/flutter-plugin-volume/" class="title">手把手带你写 Flutter 系统音量插件</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2019-11-23 16:46:38 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
@@ -243,7 +247,7 @@
       <div class="article-meta">
         <span class="article-date">
   <i class="icon icon-calendar-check"></i>
-<a href="https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/" class="article-date">
+<a href="https://befovy.com/2020/01/add-libsrt-for-ijkplayer/" class="article-date">
   <time datetime="2020-01-12 10:38:03 &#43;0800 CST" itemprop="datePublished">2020-01-12</time>
 </a>
 </span>  
@@ -269,11 +273,11 @@
       <p><a href="https://github.com/befovy/fijkplayer" title="fijkplayer">fijkplayer</a> 项目开源也有小半年了，这是我第一个开源项目，作为一个 Flutter 媒体播放插件，fijkplayer 有明确存在的实际使用场景，在项目维护上我也是费了不少心思。我为这个项目精心编写了使用文档，并维护了一个交流群。</p>
 <p>本周二第一次有用户在群里提出定制开发的需求： <strong>为 fijkplayer 提供 SRT 协议支持</strong>。恰好最近年末有点时间，没犹豫就答应了。本来想着很简单几个小时就能搞定，但结果却硬生生肝了 3 天。</p>
 <p>这篇文章总结在 ijkplayer 项目基础上为其增加 SRT 协议支持的过程并附有完整步骤，以及一些需要注意的坑。<!-- raw HTML omitted -->完整代码修改请看 <a href="https://github.com/befovy/ijkplayer/pull/14/files" title="这个github pull request">这个 github pull request</a> 。</p>
-<h2 id="srt-">SRT 协议是什么</h2>
+<h2 id="srt-协议是什么">SRT 协议是什么</h2>
 <!-- raw HTML omitted -->
 <p>SRT（Secure Reliable Transport） 是比较新的开源安全可靠网络传输协议。正如其名，特点就是安全、可靠。SRT 支持 AES 加密，保障端到端的信息传输安全，SRT 通过前向纠正技术（FEC）保证传输稳定，使用自动重传（ARQ）机制保证传输完整性。<!-- raw HTML omitted -->SRT 基于 UDT 传输协议，在 UDT 核心思想和机制的基础上做了多项改进，对于音视频流数据优化最为明显，可以用于低延迟音视频的直播业务中。</p>
 <p>SRT 是一个开源的解决方案，具有跨平台的协议实现。使用统一 API，在不同平台上可重复构建集成。SRT 已经被领先的开源项目采用，比如知名的跨平台多媒体播放器 VLC 以及音视频领域的瑞士军刀 FFmpeg。</p>
-<h2 id="ffmpeg--srt-">FFmpeg 对 SRT 协议的支持</h2>
+<h2 id="ffmpeg-对-srt-协议的支持">FFmpeg 对 SRT 协议的支持</h2>
 <p>FFmpeg 在 4.0 版本（April 20th, 2018, FFmpeg 4.0 &ldquo;Wu&rdquo;）中新增了对 SRT 的支持。</p>
 <blockquote>
 <p>Haivision SRT protocol via libsrt</p>
@@ -286,81 +290,81 @@
 <p>通过查看 bilibili/FFmpeg 最近更新，发现 bilibili 也已经跟进到 4.0 版本了。需要注意的是 bilibili/FFmpeg master 分支没有变动，需要在 release 下查看最近更新的 tag。
 或者 clone 下来使用命令  <code>git tag --list</code>  查看更新。</p>
 <p>可以看到虽然 ijkplayer 在 0.8.8 版本已经停留了很久，但是背后 FFmpeg 一直在默默更新，已经跟进到了 4.0 版本，并且 ijkplayer 也到了 0.8.20  0.8.23  0.8.25 版本，只不过还没有放出更新。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">-</span><span class="o">-</span><span class="n">20180322</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">-</span><span class="o">-</span><span class="n">20180404</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">-</span><span class="o">-</span><span class="n">20180428</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">-</span><span class="o">-</span><span class="n">20180607</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">-</span><span class="o">-</span><span class="n">20180612</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">8</span><span class="o">-</span><span class="o">-</span><span class="n">20180705</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">8</span><span class="o">-</span><span class="o">-</span><span class="n">20180706</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">8</span><span class="o">-</span><span class="o">-</span><span class="n">20191230</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">20</span><span class="o">-</span><span class="o">-</span><span class="n">20180626</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">20</span><span class="o">-</span><span class="o">-</span><span class="n">20180704</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">23</span><span class="o">-</span><span class="o">-</span><span class="n">20180712</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">23</span><span class="o">-</span><span class="o">-</span><span class="n">20180720</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">-</span><span class="o">-</span><span class="n">20180127</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">-</span><span class="o">-</span><span class="n">20180128</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">-</span><span class="o">-</span><span class="n">20180129</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">-</span><span class="o">-</span><span class="n">20180130</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">-</span><span class="o">-</span><span class="n">20180721</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">-</span><span class="o">-</span><span class="n">20180722</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
-<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">-</span><span class="o">-</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">-</span><span class="o">-</span><span class="n">20180724</span><span class="o">-</span><span class="o">-</span><span class="n">001</span>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">--</span><span class="n">20180322</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">--</span><span class="n">20180404</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">--</span><span class="n">20180428</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">--</span><span class="n">20180607</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">7</span><span class="o">--</span><span class="n">20180612</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">8</span><span class="o">--</span><span class="n">20180705</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">8</span><span class="o">--</span><span class="n">20180706</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff3</span><span class="o">.</span><span class="na">4</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">8</span><span class="o">--</span><span class="n">20191230</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">20</span><span class="o">--</span><span class="n">20180626</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">20</span><span class="o">--</span><span class="n">20180704</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">23</span><span class="o">--</span><span class="n">20180712</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">23</span><span class="o">--</span><span class="n">20180720</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">--</span><span class="n">20180127</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">--</span><span class="n">20180128</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">--</span><span class="n">20180129</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">--</span><span class="n">20180130</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">--</span><span class="n">20180721</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">--</span><span class="n">20180722</span><span class="o">--</span><span class="n">001</span>
+<span class="n">ff4</span><span class="o">.</span><span class="na">0</span><span class="o">--</span><span class="n">ijk0</span><span class="o">.</span><span class="na">8</span><span class="o">.</span><span class="na">25</span><span class="o">--</span><span class="n">20180724</span><span class="o">--</span><span class="n">001</span>
 </code></pre></div><p>在 2019 年最后一天，大佬还认真在发版本   <code>ff4.0--ijk0.8.25--20191231--001</code></p>
-<pre><code>commit cc116330834a592e544d20ea5a4472db7c32abb8 (HEAD, tag: ff4.0--ijk0.8.25--20191231--001)
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">commit cc116330834a592e544d20ea5a4472db7c32abb8 (HEAD, tag: ff4.0--ijk0.8.25--20191231--001)
 Author: zhenghanchao &lt;zhenghanchao@bilibili.com&gt;
 Date:   Mon Dec 30 11:16:47 2019 +0800
 
     tcp: add ipv6 async check
-</code></pre><p>再回到 SRT 上来，FFmpeg 怎么开启对 SRT 的支持呢？<!-- raw HTML omitted -->打开 FFmpeg，搜索 srt 找到了 <code>ff_libsrt_protocol</code> 。进一步找到 configure 文件中的  <code>libsrt_protocol_deps=&quot;libsrt&quot;</code> 以及</p>
-<pre><code>enabled libsrt            &amp;&amp; require_pkg_config libsrt &quot;srt &gt;= 1.2.0&quot; srt/srt.h srt_socket
+</code></pre></div><p>再回到 SRT 上来，FFmpeg 怎么开启对 SRT 的支持呢？<!-- raw HTML omitted -->打开 FFmpeg，搜索 srt 找到了 <code>ff_libsrt_protocol</code> 。进一步找到 configure 文件中的  <code>libsrt_protocol_deps=&quot;libsrt&quot;</code> 以及</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">enabled libsrt            &amp;&amp; require_pkg_config libsrt &#34;srt &gt;= 1.2.0&#34; srt/srt.h srt_socket
 --enable-libsrt          enable Haivision SRT protocol via libsrt [no]
-</code></pre><p>这看起来和在 FFmpeg 中启动 Openssl 类似。需要在 configure FFmpeg 项目的时候增加参数 <code>--enable-libsrt</code>  并让 pkg-config 能够找到编译好的 libsrt 库。</p>
-<h2 id="heading">行得通吗，桌面端快速尝试</h2>
+</code></pre></div><p>这看起来和在 FFmpeg 中启动 Openssl 类似。需要在 configure FFmpeg 项目的时候增加参数 <code>--enable-libsrt</code>  并让 pkg-config 能够找到编译好的 libsrt 库。</p>
+<h2 id="行得通吗桌面端快速尝试">行得通吗，桌面端快速尝试</h2>
 <p>前面简单判断了一下在 ijkplayer 中增加 srt 收流支持的可行性，答案是肯定的。<!-- raw HTML omitted -->但实际过程有没有坑呢？很难说。所以我先在 MacOS 上进行试验，在 MacOS 上进行试验不需要交叉编译，并且不需要连接手机或者开模拟器，方面快捷。</p>
 <p>你说 ijkplayer 不支持 Mac OS 桌面端？</p>
 <p>对，官方 ijkplayer 是不支持桌面端，但是我自己给 ijkplayer 增加了桌面端支持，目标是 Windows Linux MacOS 全都支持，虽然还没完成，但是目前实现的部分已经能在 MacOS 上进行播放了，所以用来验证 SRT 可行性不成问题。</p>
-<h3 id="-macos--libsrt--ffmpeg">编译 MacOS 平台的 libsrt 和 FFmpeg</h3>
+<h3 id="编译-macos-平台的-libsrt-和-ffmpeg">编译 MacOS 平台的 libsrt 和 FFmpeg</h3>
 <p>从 <a href="https://github.com/Haivision/srt" title="github">github</a> 下载 libsrt 项目，定睛一看这个库用 CMake 进行构建，并且包装了一层 configure 配置，让熟悉 linux 下 configure 、make 流程的用户也能顺利编译项目。</p>
 <p>MacOS 下编译 libsrt 的完整脚本见<a href="https://github.com/befovy/ijkplayer/pull/14/files?file-filters%5B%5D=.sh&amp;file-filters%5B%5D=dotfile#diff-9325129d8e466bea4f18e622c3e363c3" title="这里">这里</a>。很简单，基本不会遇到什么问题，主要就是 configure 参数，运行  <code>./configure --help</code>  会输出 configure 参数的帮助文档。<!-- raw HTML omitted -->主要配置的参数如下，设定安装路径，告诉去哪里找 openssl，编译静态库，去掉动态库。</p>
-<pre><code>FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --cmake-prefix-path=${FF_PREFIX}&quot;
-FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --cmake-install-prefix=${FF_PREFIX}&quot;
-FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --use-openssl-pc=on&quot;
-FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-shared=off&quot;
-FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-static=on&quot;
-FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-apps=on&quot;
-FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-c++-deps=on&quot;
-FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-cxx11=on&quot;
-</code></pre><p>然后是编译 MacOS 上启用了 srt 的 FFmpeg，参照 FFmpeg 中 enable  openssl 的脚本，加上 enable libsrt 的修改就行，具体内容<a href="https://github.com/befovy/ijkplayer/pull/14/files#diff-263e458cbb0929a6fc8f3f122705b29c" title="看这里">看这里</a>)。</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">FF_CFG_FLAGS=&#34;$FF_CFG_FLAGS --cmake-prefix-path=${FF_PREFIX}&#34;
+FF_CFG_FLAGS=&#34;$FF_CFG_FLAGS --cmake-install-prefix=${FF_PREFIX}&#34;
+FF_CFG_FLAGS=&#34;$FF_CFG_FLAGS --use-openssl-pc=on&#34;
+FF_CFG_FLAGS=&#34;$FF_CFG_FLAGS --enable-shared=off&#34;
+FF_CFG_FLAGS=&#34;$FF_CFG_FLAGS --enable-static=on&#34;
+FF_CFG_FLAGS=&#34;$FF_CFG_FLAGS --enable-apps=on&#34;
+FF_CFG_FLAGS=&#34;$FF_CFG_FLAGS --enable-c++-deps=on&#34;
+FF_CFG_FLAGS=&#34;$FF_CFG_FLAGS --enable-cxx11=on&#34;
+</code></pre></div><p>然后是编译 MacOS 上启用了 srt 的 FFmpeg，参照 FFmpeg 中 enable  openssl 的脚本，加上 enable libsrt 的修改就行，具体内容<a href="https://github.com/befovy/ijkplayer/pull/14/files#diff-263e458cbb0929a6fc8f3f122705b29c" title="看这里">看这里</a>)。</p>
 <p>这里也基本没什么坑，毕竟桌面原生编译方便，交叉编译真是太痛苦了。</p>
-<h3 id="-srt-">测试 srt 流播放</h3>
+<h3 id="测试-srt-流播放">测试 srt 流播放</h3>
 <p>用 ffmpeg 把一个本地文件以 ts 格式推到本机 udp 1234 端口</p>
-<pre><code>ffmpeg -re -i ./demo.mkv  -f mpegts &quot;udp://127.0.0.1:1234?pkt_size=1316&quot;
-</code></pre><p>用刚才编译 libsrt 时生成的可执行文件将 udp 协议转发到 srt 协议</p>
-<pre><code>./srt-live-transmit udp://:1234 srt://:4201 -v
-</code></pre><p>然后就可以使用地址 <code>srt://127.0.0.1:4201</code> 进行收流了。<br>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ffmpeg -re -i ./demo.mkv  -f mpegts &#34;udp://127.0.0.1:1234?pkt_size=1316&#34;
+</code></pre></div><p>用刚才编译 libsrt 时生成的可执行文件将 udp 协议转发到 srt 协议</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">./srt-live-transmit udp://:1234 srt://:4201 -v
+</code></pre></div><p>然后就可以使用地址 <code>srt://127.0.0.1:4201</code> 进行收流了。<br>
 到这里还都比较顺利，MacOS 版到 ijkplayer 成功收到了 srt 流。</p>
-<h2 id="-android-libsrt-">编译 Android libsrt 静态库</h2>
+<h2 id="编译-android-libsrt-静态库">编译 Android libsrt 静态库</h2>
 <p>前面在 MacOS 目标平台验证了 ijkplayer 中增加 srt 的确是可行的，并且在 MacOS 上编译还都挺顺利。但我明白，现在真正的坑在刚刚开始，尤其是对于缺乏交叉编译经验的我来说。如果参数配置不当，会出现各种各样的问题，特别是 Android NDK 还有跨版本兼容问题。</p>
-<h3 id="-no-1">坑 No. 1：目标平台识别错误</h3>
+<h3 id="坑-no-1目标平台识别错误">坑 No. 1：目标平台识别错误</h3>
 <p>我配置了 configure 的参数，加上了 android toolchain 的 path，并且增加 compiler-prefix，但是 CMake 执行输出中总是 DARWIN，而不是 Android，这样肯定没法编译了。</p>
 <p><code>./configure --help</code> 也没提示平台相关的内容，这怎么办呢？</p>
 <p>经过观察，发现 congifure 为识别的参数都会转为大写并把减号替换为下划线作为参数传递给 Cmake 命令，所以增加了参数 <code>--cmake-system-name=Android</code> ，这回 Cmake 总算成功识别目标平台了，但是却输出错误，不支持 Android。也就是坑 2.</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<h3 id="-no-2libsrt-cmake--android">坑 No. 2：libsrt CMake 文件不支持 Android</h3>
+<h3 id="坑-no-2libsrt-cmake-文件不支持-android">坑 No. 2：libsrt CMake 文件不支持 Android</h3>
 <p>这个还比较好处理，毕竟我对于 CMake 是相当的熟悉。简单改改，顺便提交一个 <a href="https://github.com/Haivision/srt/pull/1053" title="pull request">pull request</a>。</p>
 <p>成功编译处理 Android 目标平台的 libsrt 静态库。根据这个又增加 <code>--cmake-android-arch-abi=armeabi-v7a</code>  等编译不同架构的 Android 平台库。</p>
-<h2 id="-srt--android-ffmpeg">编译支持 SRT 的 Android FFmpeg</h2>
+<h2 id="编译支持-srt-的-android-ffmpeg">编译支持 SRT 的 Android FFmpeg</h2>
 <p>编译完 Android 目标平台的 libsrt，然后继续编译 FFmpeg。并打开 configure 选项 <code>--enable-libsrt</code> 。</p>
-<h3 id="-no-3srtsocket-">坑 No. 3: srt_socket 符号找不到</h3>
+<h3 id="坑-no-3srt_socket-符号找不到">坑 No. 3: srt_socket 符号找不到</h3>
 <p>&ndash;enable-libsrt 之后，ffmpeg 却找不到 libsrt，查看 ffmpeg config.log，其中出错信息为：找不到符号 srt_socket。 仔细琢磨为什么找不到符号了，明明可以用 nm 命令查看到 libsrt.a 中是有这个符号的。再仔细瞅瞅，发现 config.log 中最后这一次尝试编译一个 test 文件没有 -lsrt，没有链接 srt 库。<!-- raw HTML omitted -->到这我就怀疑是 pkg-config 出错了，没有找到 libsrt 库。<!-- raw HTML omitted -->经过一番折腾，把 openssl libsrt 以及 ffmpeg 的 build prefix 都设置为相同目录，它们输出的 pkg config 文件也都在相同目录，这个目录在脚本中设置为 PKG_CONFIG_PATH。<!-- raw HTML omitted -->总算是没有这个错了。</p>
-<h3 id="-no-4-pc-">坑 No. 4: pc 文件缺少链接参数</h3>
+<h3 id="坑-no-4-pc-文件缺少链接参数">坑 No. 4: pc 文件缺少链接参数</h3>
 <p>同样是 config.log 中给出错误，这次链接错误非常多，一看全是 C++ new 、 std::string 等等这些 C++ 标准库中的符号。在搜搜有没有遇到同样问题的。最后解决办法是要修改 libsrt 输出的 srt.pc 文件，增加额外的链接库。</p>
-<pre><code>sed -i '' 's|-lsrt   |-lsrt -lc -lm -ldl -lcrypto -lssl -lstdc++|g' ${FF_PREFIX}/lib/pkgconfig/srt.pc
-</code></pre><h3 id="-no-5-srand-">坑 No. 5: srand 找不到</h3>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">sed -i &#39;&#39; &#39;s|-lsrt   |-lsrt -lc -lm -ldl -lcrypto -lssl -lstdc++|g&#39; ${FF_PREFIX}/lib/pkgconfig/srt.pc
+</code></pre></div><h3 id="坑-no-5-srand-找不到">坑 No. 5: srand 找不到</h3>
 <p>最后这个更奇怪了，srand 符号找不到，靠着 google 找到了相关线索，可能是和 ANDROID_API 版本有关。又仔细看前面各个步骤的编译输出，发现编译 libsrt 的时候，总是输出 ANDROID_API 24。<!-- raw HTML omitted -->所以前面编译的 libsrt.a 是支持 ANDROID_API 大于等于 24 的版本的，对于我要编译的 ffmpeg ANDROID_API 14 或者 21 ，就不兼容了。<!-- raw HTML omitted -->解决办法是 configure libsrt 的时候增加参数 <code>--cmake-android-api=$CMAKE_ANDROID_API&quot;</code></p>
 <!-- raw HTML omitted -->
 <hr>
-<h2 id="heading1">总结</h2>
+<h2 id="总结">总结</h2>
 <p>上面的过程全都写在脚本里了，在合并 pull request 后的 befovy/ijkplayer 项目中，运行下面的命令。</p>
 <p>注意我用的是 Android NDK r15c。</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./init/init-android-openssl.sh
@@ -382,7 +386,7 @@ FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-cxx11=on&quot;
   <ul class="post-copyright list-unstyled">
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接: </strong>
-      <a href="https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/" title="ijkplayer 增加 SRT 协议指南与踩坑" target="_blank" rel="external">https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/</a>
+      <a href="https://befovy.com/2020/01/add-libsrt-for-ijkplayer/" title="ijkplayer 增加 SRT 协议指南与踩坑" target="_blank" rel="external">https://befovy.com/2020/01/add-libsrt-for-ijkplayer/</a>
     </li>
     <li class="post-copyright-license">
       <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
@@ -396,7 +400,7 @@ FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-cxx11=on&quot;
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/befovy" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/images/avatar.jpg" class="img-rounded w-full" alt="">
+          <img src="https://befovy.com/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -416,7 +420,7 @@ FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-cxx11=on&quot;
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://blog.befovy.com/2019/12/fvm-using-go/" title="Go 打造 Flutter 多版本管理工具：fvm"><i
+                <a href="https://befovy.com/2019/12/fvm-using-go/" title="Go 打造 Flutter 多版本管理工具：fvm"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
             </li>
@@ -436,12 +440,12 @@ FF_CFG_FLAGS=&quot;$FF_CFG_FLAGS --enable-cxx11=on&quot;
 <ul class="social-links">
     <li><a href="https://github.com/befovy" target="_blank" title="github" data-toggle=tooltip data-placement=top >
             <i class="icon icon-github"></i></a></li>
-    <li><a href="https://blog.befovy.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+    <li><a href="https://befovy.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
             <i class="icon icon-rss"></i></a></li>
 </ul>
   <div class="copyright">
     &copy;2018  -
-    2020
+    2021
     <div class="publishby">
         Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>. <br>
         Theme <a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
@@ -476,8 +480,8 @@ hljs.configure({
 })
 hljs.initHighlightingOnLoad();
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/js/application.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/js/plugin.js"></script>
+<script type="text/javascript" src="https://befovy.com/js/application.js"></script>
+<script type="text/javascript" src="https://befovy.com/js/plugin.js"></script>
 <script>
       (function (window) {
           var INSIGHT_CONFIG = {
@@ -488,13 +492,13 @@ hljs.initHighlightingOnLoad();
                   TAGS: '标签',
                   UNTITLED: '(未命名)',
               },
-              ROOT_URL: 'https:\/\/blog.befovy.com\/',
-              CONTENT_URL: 'https:\/\/cdn.jsdelivr.net\/gh\/befovy\/blogback@b28a9ea\/docs\/searchindex.json ',
+              ROOT_URL: 'https:\/\/befovy.com\/',
+              CONTENT_URL: 'https:\/\/befovy.com\/\/searchindex.json ',
           };
           window.INSIGHT_CONFIG = INSIGHT_CONFIG;
       })(window);
       </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/js/insight.js"></script>
+<script type="text/javascript" src="https://befovy.com/js/insight.js"></script>
 
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 

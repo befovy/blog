@@ -6,6 +6,9 @@
     <title>
         用 CMake 为 ijkplayer 增加 android native debug 支持 - 半岛铁匠铺
       </title>
+
+    <script data-ad-client="ca-pub-5604301373160422" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,29 +27,30 @@
   
   
   <meta name="description" content="给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端" />
-  <meta name="generator" content="Hugo 0.60.0 with theme pure" />
+  <meta name="generator" content="Hugo 0.80.0 with theme pure" />
   <title>用 CMake 为 ijkplayer 增加 android native debug 支持 - 半岛铁匠铺</title>
   
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/css/syntax.css" />
+  <link rel="stylesheet" href="https://befovy.com/css/style.css">
+  <link rel="stylesheet" href="https://befovy.com/css/syntax.css" />
 
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
   <meta property="og:title" content="用 CMake 为 ijkplayer 增加 android native debug 支持" />
 <meta property="og:description" content="给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.befovy.com/2019/06/issue_20190630_5/" />
+<meta property="og:url" content="https://befovy.com/2019/06/issue_20190630_5/" />
 <meta property="article:published_time" content="2019-06-30T15:26:52+00:00" />
 <meta property="article:modified_time" content="2019-12-09T01:43:36+00:00" />
 <meta itemprop="name" content="用 CMake 为 ijkplayer 增加 android native debug 支持">
 <meta itemprop="description" content="给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端">
-<meta itemprop="datePublished" content="2019-06-30T15:26:52&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-09T01:43:36&#43;00:00" />
+<meta itemprop="datePublished" content="2019-06-30T15:26:52+00:00" />
+<meta itemprop="dateModified" content="2019-12-09T01:43:36+00:00" />
 <meta itemprop="wordCount" content="2168">
 
 
 
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="用 CMake 为 ijkplayer 增加 android native debug 支持"/>
 <meta name="twitter:description" content="给 ijkplayer 增加了 cmake 构建方式，支持在 android studio 中进行 c 代码断点调试。 直接上手请前往 https://github.com/befovy/ijkplayer#build-android-via-cmake 如果想了解一下整个过程请继续阅读本文。 ijkplayer 简介 ijkplayer 是由 B 站开源的一款移动端"/>
 
@@ -69,7 +73,7 @@
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/befovy" target="_blank">
-            <img class="img-circle img-rotate" src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/images/avatar.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://befovy.com/images/avatar.jpg" width="200" height="200">
           </a>
           <h2 id="name" class="hidden-xs hidden-sm">半岛铁酱</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">befovy</h3>
@@ -145,19 +149,19 @@
         <ul class="tag-list">
             
             
-            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/ffmpeg/" class="tag-list-link">ffmpeg</a><span
+            <li class="tag-list-item"><a href="https://befovy.com/tags/ffmpeg/" class="tag-list-link">ffmpeg</a><span
                     class="tag-list-count">1</span></li>
             
             
-            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/flutter/" class="tag-list-link">flutter</a><span
+            <li class="tag-list-item"><a href="https://befovy.com/tags/flutter/" class="tag-list-link">flutter</a><span
                     class="tag-list-count">2</span></li>
             
             
-            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/golang/" class="tag-list-link">golang</a><span
+            <li class="tag-list-item"><a href="https://befovy.com/tags/golang/" class="tag-list-link">golang</a><span
                     class="tag-list-count">2</span></li>
             
             
-            <li class="tag-list-item"><a href="https://blog.befovy.com/tags/ijkplayer/" class="tag-list-link">ijkplayer</a><span
+            <li class="tag-list-item"><a href="https://befovy.com/tags/ijkplayer/" class="tag-list-link">ijkplayer</a><span
                     class="tag-list-count">1</span></li>
             
         </ul>
@@ -172,7 +176,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2020/01/add-libsrt-for-ijkplayer/" class="title">ijkplayer 增加 SRT 协议指南与踩坑</a>
+                        <a href="https://befovy.com/2020/01/add-libsrt-for-ijkplayer/" class="title">ijkplayer 增加 SRT 协议指南与踩坑</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2020-01-12 10:38:03 &#43;0800 CST" itemprop="datePublished">2020-01-12</time>
@@ -182,7 +186,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/12/fvm-using-go/" class="title">Go 打造 Flutter 多版本管理工具：fvm</a>
+                        <a href="https://befovy.com/2019/12/fvm-using-go/" class="title">Go 打造 Flutter 多版本管理工具：fvm</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2019-12-08 18:31:23 &#43;0800 CST" itemprop="datePublished">2019-12-08</time>
@@ -192,7 +196,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/12/v2-go-modules/" class="title">Go Modules : v2 及更高版本</a>
+                        <a href="https://befovy.com/2019/12/v2-go-modules/" class="title">Go Modules : v2 及更高版本</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2019-12-04 22:04:46 &#43;0800 CST" itemprop="datePublished">2019-12-04</time>
@@ -202,7 +206,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/11/gitee-image-bed/" class="title">我的 gitee 图床，自动上传、压缩、获取图片 url</a>
+                        <a href="https://befovy.com/2019/11/gitee-image-bed/" class="title">我的 gitee 图床，自动上传、压缩、获取图片 url</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2019-11-23 19:02:45 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
@@ -212,7 +216,7 @@
             <li>
                 <div class="item-inner">
                     <p class="item-title">
-                        <a href="https://blog.befovy.com/2019/11/flutter-plugin-volume/" class="title">手把手带你写 Flutter 系统音量插件</a>
+                        <a href="https://befovy.com/2019/11/flutter-plugin-volume/" class="title">手把手带你写 Flutter 系统音量插件</a>
                     </p>
                     <p class="item-date">
                         <time datetime="2019-11-23 16:46:38 &#43;0800 CST" itemprop="datePublished">2019-11-23</time>
@@ -243,7 +247,7 @@
       <div class="article-meta">
         <span class="article-date">
   <i class="icon icon-calendar-check"></i>
-<a href="https://blog.befovy.com/2019/06/issue_20190630_5/" class="article-date">
+<a href="https://befovy.com/2019/06/issue_20190630_5/" class="article-date">
   <time datetime="2019-06-30 15:26:52 &#43;0000 UTC" itemprop="datePublished">2019-06-30</time>
 </a>
 </span>
@@ -265,7 +269,7 @@
 直接上手请前往 <a href="https://github.com/befovy/ijkplayer#build-android-via-cmake">https://github.com/befovy/ijkplayer#build-android-via-cmake</a></p>
 <p>如果想了解一下整个过程请继续阅读本文。</p>
 <!-- raw HTML omitted -->
-<h2 id="ijkplayer-">ijkplayer 简介</h2>
+<h2 id="ijkplayer-简介">ijkplayer 简介</h2>
 <p><a href="https://github.com/Bilibili/ijkplayer">ijkplayer</a>  是由 B 站开源的一款移动端播放器。基于 ffmpeg 中 ffplay 开发，并添加 android MediaCodec、iOS VideotTolbox 视频硬解码支持以及 opengles、NativeWindow(android) 渲染，在当前的移动直播热潮中，被大量使用。
 但使用 ijkplayer 进行 android 播放器开发的过程中，调试起来稍微有些麻烦，官方提供了ndk 调试的几个patch 文件，并且有一段描述，是基于 ndk-build android.mk 工具链构建的。说实话由于没有做成开箱即用，我也没认真看过这部分内容。 由于我对 cmake 的了解更多一些，加之 google 官方也逐渐将 ndk 的工具链由 ndk-build 转向 cmake，并在 android studio 中对 cmake 提供了更好的支持。同时 cmake 也是跨平台的构建工具，方便后续将 ijkplayer 扩展至其它平台，所以我用 cmake 重新实现了 ijkplayer 的构建过程。</p>
 <p>只要不是修改 ffmpeg 的源代码，其它内容包括 ijkplayer 的 c 代码修改， java 层修改，都可以在 android studio 中一键运行、调试。</p>
@@ -273,9 +277,9 @@
 <p>题外话：ijkplayer 在 github 上的提交记录自 k0.8.8 版本之后就再也没有了，好多人评论说项目已经放弃维护了，但是细心寻找会发现在另一个项目 <a href="https://github.com/bilibili/FFmpeg/releases">Bilibili/ffmpeg</a> 中，还不断有提交记录。说明项目还是在不断开发，只是重心放在实现新的 ffmpeg protocol 上，没有及时维护 ijkplayer 项目上的 issues。</p>
 <p>下面具体说说一些具体的修改内容。</p>
 <!-- raw HTML omitted -->
-<h2 id="android-">android 工程结构调整</h2>
+<h2 id="android-工程结构调整">android 工程结构调整</h2>
 <p>ijkplayer 的项目本身具有多个 android module。</p>
-<pre><code>ijkplayer-arm64
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ijkplayer-arm64
 ijkplayer-armv5
 ijkplayer-armv7a
 ijkplayer-x86
@@ -283,7 +287,7 @@ ijkplayer-x86_64   # 上面几个都是一个module 壳，shell 命令编译好 
 ijkplayer-example  # 示例APP项目
 ijkplayer-exo      # 对 google exoplayer 的一层封装适，配合ijkplayer 定义的 mediaplyer 接口
 ijkplayer-java     # ijkplayer java 层代码，对接 native 层代码，以及硬解码器的选择
-</code></pre><p>项目中为不同的 cpu 架构都单独设置了 module，这几个 module 最大的区别就是在 Application.mk 中 <code>APP_ABI</code> 和 <code>APP_PLATFORM</code> 的值不同，其中  <code>APP_PLATFORM</code> 取值和 build.gradle 中定义的 minSdkVersion 相同。
+</code></pre></div><p>项目中为不同的 cpu 架构都单独设置了 module，这几个 module 最大的区别就是在 Application.mk 中 <code>APP_ABI</code> 和 <code>APP_PLATFORM</code> 的值不同，其中  <code>APP_PLATFORM</code> 取值和 build.gradle 中定义的 minSdkVersion 相同。
 ijkplayer 最低竟然支持 sdk version 9，确实感谢 B 站项目组初期在这方面的辛苦付出。</p>
 <p>这种 module 确实方便采用 ndk-build 工具的项目管理，但是我在使用过程中还是觉得有些不太方便之处：</p>
 <ol>
@@ -291,34 +295,34 @@ ijkplayer 最低竟然支持 sdk version 9，确实感谢 B 站项目组初期�
 <li>android studio 中的 c 代码没有语法高亮。</li>
 </ol>
 <p>对于问题1，我找到的解决方案是：</p>
-<pre><code>//NOTE:: run `./gradlew ideaModule` to apply exclude dirs
-apply plugin: 'idea'
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">//NOTE:: run `./gradlew ideaModule` to apply exclude dirs
+apply plugin: &#39;idea&#39;
 
 idea.module {
-    excludeDirs += file('ijkplayer-armv7a/src/')
-    excludeDirs += file('ijkplayer-arm64/src/')
-    excludeDirs += file('ijkplayer-armv5/src/')
-    excludeDirs += file('ijkplayer-x86/src/')
-    excludeDirs += file('ijkplayer-x86_64/src/')
+    excludeDirs += file(&#39;ijkplayer-armv7a/src/&#39;)
+    excludeDirs += file(&#39;ijkplayer-arm64/src/&#39;)
+    excludeDirs += file(&#39;ijkplayer-armv5/src/&#39;)
+    excludeDirs += file(&#39;ijkplayer-x86/src/&#39;)
+    excludeDirs += file(&#39;ijkplayer-x86_64/src/&#39;)
 }
-</code></pre><p>在工程根 build.gradle 中增加这样的配置，并执行 <code>./gradlew ideaModule</code>， 就会在搜索结果中排除来自这几个文件夹的内容。</p>
+</code></pre></div><p>在工程根 build.gradle 中增加这样的配置，并执行 <code>./gradlew ideaModule</code>， 就会在搜索结果中排除来自这几个文件夹的内容。</p>
 <p>对于问题2，我当然是用 cmake 解决了，新建一个 module, 取名 fijkplayer-full。换个名字方便和原项目进行区分，同时 f 也表示<code>full</code>, 我在这个 module 中囊括了原来 6 个 module 提供的内容。 f 还有别的含义，有机会在其它地方会提到。
 在 fijkplayer-full 的 build.gradel 中增加 cmake 的配置以及引入 ijkplayer-java module 的 java 源代码。</p>
-<pre><code>android {
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">android {
     .......
     .......
     sourceSets.main {
-        java.srcDirs = [&quot;$rootProject.rootDir/ijkplayer-java/src/main/java/&quot;]
+        java.srcDirs = [&#34;$rootProject.rootDir/ijkplayer-java/src/main/java/&#34;]
         jni.srcDirs = [] // This prevents the auto generation of Android.mk
     }
 
     externalNativeBuild {
         cmake {
-            path 'src/main/CMakeLists.txt'
+            path &#39;src/main/CMakeLists.txt&#39;
         }
     }
 }
-</code></pre><p>修改后，fijkplayer-full 就成了 &ldquo;六神合体&rdquo; 了。</p>
+</code></pre></div><p>修改后，fijkplayer-full 就成了 &ldquo;六神合体&rdquo; 了。</p>
 <p>对于不同cpu 架构区分不同的 minSdkVersion 可以通过 productFlavors 实现，这一块我还没有具体考虑充分，目前是统一设置了大家用得最多的 minSdkVersion 16。</p>
 <p>此部分修改的完整内容<a href="https://github.com/befovy/ijkplayer/blob/master/android/ijkplayer/fijkplayer-full/build.gradle">点我查看, github.com/befovy/ijkplayer</a></p>
 <!-- raw HTML omitted -->
@@ -332,14 +336,14 @@ fijkplayer-full 中 classes.jar 较大是因为包含了 ijkplayer-java module �
 <p><strong>libffmpeg.so 找不到</strong></p>
 <p>libffmpeg.so 是事先通过 shell 命令编译成的，在 ffmpeg build 文件夹中，并且几乎不会改变，除非是要修改 ffmpeg。
 在 CMake 中通过</p>
-<pre><code>add_library(ijkffmpeg SHARED IMPORTED)
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">add_library(ijkffmpeg SHARED IMPORTED)
 set_target_properties( # Specifies the target library.
     ijkffmpeg
     PROPERTIES
     IMPORTED_LOCATION ${FFMPAG_SHARED_DIR}/libijkffmpeg.so
 )
-</code></pre><p>引入预编译好的 ijkffmpeg，在编译 ijkplayer 的过程可以顺利完成链接。但是打包运行找不到 libijkffmpeg.so。分析最终的 apk 以及 fijkplayer-full.aar ，发现其中都没有 libijkffmpeg.so 文件，所以是打包 aar 的时候没有将这个文件打包进去。查看工程目录结构，发现编译好的 libijkplayer.so 和 libijksdl.so 都在文件夹 <code>/build/intermediates/cmake/debug/obj/armeabi-v7a</code> 中，所以还需要修改 CMakeLists.txt 在每次编译的时候将 libijkffmpeg.so 复制过去。最后的解决方案是</p>
-<pre><code>add_library(ijkffmpeg SHARED IMPORTED)
+</code></pre></div><p>引入预编译好的 ijkffmpeg，在编译 ijkplayer 的过程可以顺利完成链接。但是打包运行找不到 libijkffmpeg.so。分析最终的 apk 以及 fijkplayer-full.aar ，发现其中都没有 libijkffmpeg.so 文件，所以是打包 aar 的时候没有将这个文件打包进去。查看工程目录结构，发现编译好的 libijkplayer.so 和 libijksdl.so 都在文件夹 <code>/build/intermediates/cmake/debug/obj/armeabi-v7a</code> 中，所以还需要修改 CMakeLists.txt 在每次编译的时候将 libijkffmpeg.so 复制过去。最后的解决方案是</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">add_library(ijkffmpeg SHARED IMPORTED)
 set_target_properties( # Specifies the target library.
     ijkffmpeg
     PROPERTIES
@@ -352,23 +356,23 @@ add_custom_target(cpffmpeg
 )
 
 add_dependencies(ijkffmpeg cpffmpeg)
-</code></pre><p>没有找到一条命令能够解决的，所以麻烦了一点多写了点，用两个cmake 命令解决。</p>
+</code></pre></div><p>没有找到一条命令能够解决的，所以麻烦了一点多写了点，用两个cmake 命令解决。</p>
 <p><strong>cpufeatures 编译出错</strong></p>
 <p>原项目中用到了 ndk 中的 cpufeatures，我在 CMake 文件中也引入并编译了 cpufeatures，但在编译 x86 以及 x86_64 架构的时候却出现了编译错误，具体是一处未识别的汇编指令。
 最后发现是 ndk r15c 版本中 文件  $ANDROID_NDK/sources/android/cpufeatures/cpu-features.c 中少了几个换行符，补上之后（下面内容）编译就没问题了。</p>
-<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">static</span> <span class="n">__inline__</span> <span class="kt">void</span> <span class="nf">x86_cpuid</span><span class="p">(</span><span class="kt">int</span> <span class="n">func</span><span class="p">,</span> <span class="kt">int</span> <span class="n">values</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="p">)</span>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="k">static</span> <span class="n">__inline__</span> <span class="kt">void</span> <span class="nf">x86_cpuid</span><span class="p">(</span><span class="kt">int</span> <span class="n">func</span><span class="p">,</span> <span class="kt">int</span> <span class="n">values</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
 <span class="p">{</span>
     <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">;</span>
     <span class="cm">/* We need to preserve ebx since we&#39;re compiling PIC code */</span>
     <span class="cm">/* this means we can&#39;t use &#34;=b&#34; for the second output register */</span>
-    <span class="n">__asm__</span> <span class="n">__volatile__</span> <span class="p">(</span> <span class="err">\</span>
-      <span class="sa"></span><span class="s">&#34;</span><span class="s">push %%ebx</span><span class="s">&#34;</span>
-      <span class="sa"></span><span class="s">&#34;</span><span class="s">cpuid</span><span class="se">\n</span><span class="s">&#34;</span> <span class="err">\</span>
-      <span class="sa"></span><span class="s">&#34;</span><span class="s">mov %%ebx, %1</span><span class="se">\n</span><span class="s">&#34;</span>
-      <span class="sa"></span><span class="s">&#34;</span><span class="s">pop %%ebx</span><span class="se">\n</span><span class="s">&#34;</span>
-      <span class="o">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">=a</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">=r</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">=c</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">=d</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="err">\</span>
-      <span class="o">:</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">a</span><span class="s">&#34;</span> <span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="err">\</span>
-    <span class="p">)</span><span class="p">;</span>
+    <span class="n">__asm__</span> <span class="n">__volatile__</span> <span class="p">(</span> \
+      <span class="s">&#34;push %%ebx&#34;</span>
+      <span class="s">&#34;cpuid</span><span class="se">\n</span><span class="s">&#34;</span> \
+      <span class="s">&#34;mov %%ebx, %1</span><span class="se">\n</span><span class="s">&#34;</span>
+      <span class="s">&#34;pop %%ebx</span><span class="se">\n</span><span class="s">&#34;</span>
+      <span class="o">:</span> <span class="s">&#34;=a&#34;</span> <span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="s">&#34;=r&#34;</span> <span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="s">&#34;=c&#34;</span> <span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="s">&#34;=d&#34;</span> <span class="p">(</span><span class="n">d</span><span class="p">)</span> \
+      <span class="o">:</span> <span class="s">&#34;a&#34;</span> <span class="p">(</span><span class="n">func</span><span class="p">)</span> \
+    <span class="p">);</span>
     <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
     <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
     <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
@@ -382,7 +386,7 @@ add_dependencies(ijkffmpeg cpffmpeg)
 <a href="https://github.com/befovy/ijkplayer/blob/master/ijkmedia/ijkplayer/CMakeLists.txt">https://github.com/befovy/ijkplayer/blob/master/ijkmedia/ijkplayer/CMakeLists.txt</a><br>
 <a href="https://github.com/befovy/ijkplayer/blob/master/ijkmedia/ijksdl/CMakeLists.txt">https://github.com/befovy/ijkplayer/blob/master/ijkmedia/ijksdl/CMakeLists.txt</a></p>
 <!-- raw HTML omitted -->
-<h2 id="heading">结束语</h2>
+<h2 id="结束语">结束语</h2>
 <p>😄 附一张 NDK 断点调试的大图 👏</p>
 <p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/12/05/20191205232707.png" alt=""></p>
 <p>刚开始写博客，可能有些啰嗦，多多包涵。或是没有说明白的地方，请大方的前往<a href="https://github.com/befovy/befovy.github.io/issues/3">原始地址</a>进行评论。</p>
@@ -400,7 +404,7 @@ add_dependencies(ijkffmpeg cpffmpeg)
   <ul class="post-copyright list-unstyled">
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接: </strong>
-      <a href="https://blog.befovy.com/2019/06/issue_20190630_5/" title="用 CMake 为 ijkplayer 增加 android native debug 支持" target="_blank" rel="external">https://blog.befovy.com/2019/06/issue_20190630_5/</a>
+      <a href="https://befovy.com/2019/06/issue_20190630_5/" title="用 CMake 为 ijkplayer 增加 android native debug 支持" target="_blank" rel="external">https://befovy.com/2019/06/issue_20190630_5/</a>
     </li>
     <li class="post-copyright-license">
       <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN</a>
@@ -414,7 +418,7 @@ add_dependencies(ijkffmpeg cpffmpeg)
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/befovy" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/images/avatar.jpg" class="img-rounded w-full" alt="">
+          <img src="https://befovy.com/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -434,12 +438,12 @@ add_dependencies(ijkffmpeg cpffmpeg)
     <div class="bar-inner">
         <ul class="pager pull-left">
             <li class="prev">
-                <a href="https://blog.befovy.com/2019/06/issue_20190630_6/" title="使用 mirror 和 hugo 实现 github issue 的博客自动同步"><i
+                <a href="https://befovy.com/2019/06/issue_20190630_6/" title="使用 mirror 和 hugo 实现 github issue 的博客自动同步"><i
                         class="icon icon-angle-left"
                         aria-hidden="true"></i><span>&nbsp;&nbsp;下一篇</span></a>
             </li>
             <li class="next">
-                <a href="https://blog.befovy.com/2019/11/flutter-plugin-volume/"
+                <a href="https://befovy.com/2019/11/flutter-plugin-volume/"
                     title="手把手带你写 Flutter 系统音量插件"><span>上一篇&nbsp;&nbsp;</span><i
                         class="icon icon-angle-right" aria-hidden="true"></i></a>
             </li>
@@ -459,12 +463,12 @@ add_dependencies(ijkffmpeg cpffmpeg)
 <ul class="social-links">
     <li><a href="https://github.com/befovy" target="_blank" title="github" data-toggle=tooltip data-placement=top >
             <i class="icon icon-github"></i></a></li>
-    <li><a href="https://blog.befovy.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+    <li><a href="https://befovy.com/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
             <i class="icon icon-rss"></i></a></li>
 </ul>
   <div class="copyright">
     &copy;2018  -
-    2020
+    2021
     <div class="publishby">
         Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a>. <br>
         Theme <a href="https://github.com/xiaoheiAh/hugo-theme-pure" target="_blank"> pure</a>.
@@ -499,8 +503,8 @@ hljs.configure({
 })
 hljs.initHighlightingOnLoad();
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/js/application.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/js/plugin.js"></script>
+<script type="text/javascript" src="https://befovy.com/js/application.js"></script>
+<script type="text/javascript" src="https://befovy.com/js/plugin.js"></script>
 <script>
       (function (window) {
           var INSIGHT_CONFIG = {
@@ -511,13 +515,13 @@ hljs.initHighlightingOnLoad();
                   TAGS: '标签',
                   UNTITLED: '(未命名)',
               },
-              ROOT_URL: 'https:\/\/blog.befovy.com\/',
-              CONTENT_URL: 'https:\/\/cdn.jsdelivr.net\/gh\/befovy\/blogback@b28a9ea\/docs\/searchindex.json ',
+              ROOT_URL: 'https:\/\/befovy.com\/',
+              CONTENT_URL: 'https:\/\/befovy.com\/\/searchindex.json ',
           };
           window.INSIGHT_CONFIG = INSIGHT_CONFIG;
       })(window);
       </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@b28a9ea/docs/js/insight.js"></script>
+<script type="text/javascript" src="https://befovy.com/js/insight.js"></script>
 
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
