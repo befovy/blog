@@ -32,8 +32,8 @@
   <title>手把手带你写 Flutter 系统音量插件 - 西风有信</title>
   
 
-  <link rel="stylesheet" href="https://befovy.com/css/style.css">
-  <link rel="stylesheet" href="https://befovy.com/css/syntax.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@698441e/docs/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/befovy/blogback@698441e/docs/css/syntax.css" />
 
   <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.15.10/styles/github.min.css">
   <meta property="og:title" content="手把手带你写 Flutter 系统音量插件" />
@@ -86,7 +86,7 @@
       <div class="navbar-header">
         <div class="profile-block text-center">
           <a id="avatar" href="https://github.com/befovy" target="_blank">
-            <img class="img-circle img-rotate" src="https://befovy.com/images/avatar.jpg" width="200" height="200">
+            <img class="img-circle img-rotate" src="https://cdn.jsdelivr.net/gh/befovy/blogback@698441e/docs/images/avatar.jpg" width="200" height="200">
           </a>
           <h2 id="name" class="hidden-xs hidden-sm">背西风</h2>
           <h3 id="title" class="hidden-xs hidden-sm hidden-md">befovy</h3>
@@ -296,22 +296,22 @@
 <p>我在开始写 fijkplayer 的时候，默认插件语言还是 java 和 objc，现在1.9 版本，都已经默认使用 kotlin 和 swift 了。Swift 我还不太熟悉，kotlin 了解一些，并且 Android studio 的 java 转换 kotlin 很强大，我这里新的小项目 flutter_volume 就也使用 kotlin 和 objc 了。如果要修改创建 Flutter 插件使用的编程语言，可以使用参数 <code>-i</code> 和 <code>-a</code> 。<!-- raw HTML omitted -->例如 <code>flutter create -t plugin -a java -i swift flutter_volume</code></p>
 <h3 id="插件目录结构">插件目录结构</h3>
 <p>先在 Android Studio 中安装  Flutter 插件和 Dart 插件。
-<img src="https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123170737.png" alt=""></p>
+<img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123170737.png" alt=""></p>
 <p>然后使用 Android Studio 打开刚才创建的 plugin 项目目录 flutter_volume。注意是使用 Android Studio 中的 “Open an existing Android Studio project&quot; 菜单。</p>
 <p>使用 Android Studio 打开 Flutter 项目后，其结构如下。<!-- raw HTML omitted -->Flutter plugin 的功能实现基本上就是 dart 代码和 android 本地 kotlin/java 以及 iOS 本地 swift/objc 代码互相调用。<!-- raw HTML omitted -->实现这些功能的代码就在下图中 libs 目录中的 dart 源文件，android/src 目录中的 java/kotlin 源文件，以及 ios/Classes 目录中的 objc/swift 源文件。<!-- raw HTML omitted -->在这个 Android Studio 工程中随便打开一个 android 目录内的文件，都会编辑器右上角出现 “Open for Editing in Android Studio” 的可点击链接，打开 ios 文件夹的任意文件，都会出现类似 “Open for Editing in XCode” 的可点击链接。</p>
-<p><img src="https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123170812.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123170812.png" alt=""></p>
 <p>在我使用的这个版本 flutter 中，新项目直接使用 Xcode 打开会存在一些问题。解决办法是先在 example/ios 文件夹，运行 <code>pod install</code> 。之后再点击 “Open for Editing in XCode” 打开 Xcode 项目，或者使用 Xcode 打开 example/ios/Runner.xcworkspace 工程。<!-- raw HTML omitted -->划重点<!-- raw HTML omitted --><strong>先在命令后 example/ios 文件夹，运行 <code>pod install</code>，然后再打开 Xcode 项目</strong>。</p>
 <p>打开 xcode 后看到，插件的 objc/swift 代码被 pod 使用文件链接套了很长的路径，写iOS插件主要就是在这个文件夹的代码中实现功能。（截图还是 swift 的插件项目，后来为了进度改成了 objc，毕竟对 swift 不太熟悉）</p>
-<p><img src="https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123171126.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123171126.png" alt=""></p>
 <p>点击 Open for Editing in Android Studio 打开新的 Android Studio 项目，等 gradle 自动同步完成。 <!-- raw HTML omitted -->这是一个完整的 Android App 工程，flutter_volume 插件作为一个 Android 工程的 modue 存在。插件的功能实现也主要是修改这个 module 中的代码。</p>
-<p><img src="https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123171210.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123171210.png" alt=""></p>
 <p>上面的 Xcode 工程以及这个 Android Studio 工程，都是可以运行的 App 工程，这个 Flutter 工具已经帮我们打理好了，创建 Flutter plugin 的时候就默认带有 example。<!-- raw HTML omitted -->上面大图 1 中 example 文件夹中的目录结构就和一个普通的 Flutter App 目录结构一样，只是这里 Flutter App 使用相对路径依赖的外层文件夹的 flutter_volume 插件。<!-- raw HTML omitted -->大图 2 和 大图 3 打开的其实就是 example 文件中 android 和 iOS 项目。</p>
 <p>这种 Flutter 工具自动生成的插件目录结构确实对程序员非常友好，写了插件立马就能在 demo 中看到效果。</p>
 <h2 id="2flutter-native-通信方式">2、Flutter Native 通信方式</h2>
 <p>Flutter 应用可以在 iOS 和 Android 平台运行，肯定要和原生系统进行各种各样的交互。交互的部分主要是在 flutter engine 中，以及大量的 flutter 插件中。</p>
 <h3 id="methodchannel">MethodChannel</h3>
 <p>Flutter 框架提供了这样的交互方式。消息通过 Method Channel 在客户端（UI）和主机（platform）之间传递。<!-- raw HTML omitted -->官方文档这里使用的是 platform channels，翻译的时候我使用了更具体直接的表述 Method Channel<!-- raw HTML omitted -->见下图（图片来源 <a href="https://flutter.dev/docs/development/platform-integration/platform-channels">https://flutter.dev/docs/development/platform-integration/platform-channels</a>）</p>
-<p><img src="https://gitee.com/befovy/images/raw/master/images/2019/11/23/20191123171847.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/befovy/images@master/images/2019/11/23/20191123171847.png" alt=""></p>
 <p>翻译一段官方的释义</p>
 <blockquote>
 <p>在客户端，MethodChannel 可以发送与方法调用相对应的消息。 在平台方面，Android 上的 MethodChannel和 iOS 上的 FlutterMethodChannel 允许接收方法调用并发送回结果。 这些类使您可以使用很少的“样板代码”来开发平台插件。
@@ -744,7 +744,7 @@ class FlutterVolumePlugin(registrar: Registrar) : MethodCallHandler {
     <figure class="media">
       <div class="media-left">
         <a href="https://github.com/befovy" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="https://befovy.com/images/avatar.jpg" class="img-rounded w-full" alt="">
+          <img src="https://cdn.jsdelivr.net/gh/befovy/blogback@698441e/docs/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
@@ -829,8 +829,8 @@ hljs.configure({
 })
 hljs.initHighlightingOnLoad();
 </script>
-<script type="text/javascript" src="https://befovy.com/js/application.js"></script>
-<script type="text/javascript" src="https://befovy.com/js/plugin.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@698441e/docs/js/application.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@698441e/docs/js/plugin.js"></script>
 <script>
       (function (window) {
           var INSIGHT_CONFIG = {
@@ -842,12 +842,12 @@ hljs.initHighlightingOnLoad();
                   UNTITLED: '(未命名)',
               },
               ROOT_URL: 'https:\/\/befovy.com\/',
-              CONTENT_URL: 'https:\/\/befovy.com\/\/searchindex.json ',
+              CONTENT_URL: 'https:\/\/cdn.jsdelivr.net\/gh\/befovy\/blogback@698441e\/docs\/searchindex.json ',
           };
           window.INSIGHT_CONFIG = INSIGHT_CONFIG;
       })(window);
       </script>
-<script type="text/javascript" src="https://befovy.com/js/insight.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/befovy/blogback@698441e/docs/js/insight.js"></script>
 
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
