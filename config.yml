@@ -1,6 +1,6 @@
 baseURL: https://befovy.com/
 theme: pure
-title: 半岛铁匠铺
+title: 西风有信
 defaultContentLanguage: zh  # en/zh/...
 footnoteReturnLinkContents: ↩
 hasCJKLanguage: true
@@ -105,7 +105,7 @@ params:
     enabled: true # Whether to show profile bar
     avatar: images/avatar.jpg
     gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
-    author: 半岛铁酱
+    author: 背西风
     author_title: befovy
     author_description: 专注于音视频领域，Go、Rust 爱好者。
     location: Beijing, China

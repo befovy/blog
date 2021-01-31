@@ -5,18 +5,15 @@ draft: false
 layout: page
 ---
 
-#### 半岛铁酱
+####  背西风
 
-我是半岛铁酱，ID befovy，这个博客站和我的个人公众号都叫做半岛铁匠铺。  
-为啥叫半岛铁酱呢，下班路上我听着周董的“半岛铁盒”和“米兰的小铁匠”，然后就有了这么个名字。  
+我是背西风，ID befovy。博客网站 『西风有信』
 
-目前专注于移动端音视频领域，喜欢 Go，喜欢 Rust。
-
-我爱代码，但更爱老婆。
+目前专注于移动端音视频领域，喜欢开源。
 
 #### 联系方式
 
 - github: [@befovy](https://github.com/befovy)
-- 微信: befovy
+- 微信ID: befovy
 
-![](http://ghchart.rshah.org/befovy)
+![](https://ghchart.rshah.org/befovy)

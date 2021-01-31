@@ -1,6 +1,6 @@
 #!/bin/bash
 
-../../Projects/mirror/main -config ./mirror.yaml
+# ../../Projects/mirror/main -config ./mirror.yaml
 
 rm -rf docs
 
